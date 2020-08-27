@@ -1,16 +1,58 @@
-import React from "react";
-import "./App.css";
-import { InputBase } from "@material-ui/core";
-// import Car from "./images/apoc-1.jpg";
+
+import React from 'react';
+import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { InputBase } from '@material-ui/core';
+import BackgroundVideo from "./components/background/BackgroundVideo"
+import Nav from "./components/Nav";
+import Covid from "./components/Covid";
+import Input from "./components/Input";
+
+
 
 function App() {
   return (
-    <div>
-      <h1>Hello Alert App</h1>
-      <InputBase />
-      {/* <Car /> */}
-    </div>
-  );
+    <div className="App">
+    <Router>
+      <Nav />
+      <Switch>
+        <Route path="/register">
+        <div>
+         <h1>register here</h1>
+            </div>
+        </Route>
+        <Route  path="/login">
+          <div>
+          <h1>login</h1>
+            </div>
+        </Route>
+        <Route path ="/search">
+        <div>
+          <Input/>
+        </div>
+        </Route>
+        <Route path ="/main">
+        <div>
+          <Covid/>
+        </div>
+        </Route>
+        <Route  path="/other">
+        <div>
+        
+        </div>
+        </Route>
+      </Switch>
+    </Router>
+  </div>
+  )
 }
 
 export default App;
+
+
+{/* <div className={styles.container}>
+<img className={styles.image} src={image} alt="COVID-19" />
+<Cards data={data} />
+<CountryPicker handleCountryChange={this.handleCountryChange} />
+<Chart data={data} country={country} /> 
+</div> */}
