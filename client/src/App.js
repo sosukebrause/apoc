@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
 import { InputBase } from '@material-ui/core';
-import car from './images/pic.png'
+import BackgroundVideo from "./components/background/BackgroundVideo"
 
 
 function App() {
   return (
-    <div className="App" styles={{ backgroundImage:`url(${pic})` }}>
+    <div className="App">
+<BackgroundVideo/>
 <InputBase/>
     </div>
   );
