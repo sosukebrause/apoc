@@ -10,6 +10,7 @@ import UserContext from "./components/context/UserContext.js";
 import Header from "./components/Header";
 import Home from "./components/Home";
 
+//Needs to perform function to check if thre is token (user logged in in previous session); if so user is logged in in the context
 function App() {
   //use Context to use State for scope of whole app
   const [userData, setUserData] = useState({
@@ -17,7 +18,9 @@ function App() {
     user: undefined,
   });
 
+  //useEffect is having a "side effect" outside of the global scope
   useEffect(() => {
+    // this will automatically trigger when the app starts; cannot have useEffect as async therefore creating the following async method within
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
       if (token === null) {

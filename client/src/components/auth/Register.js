@@ -17,6 +17,7 @@ export default function Register() {
 
   const submit = async (e) => {
     e.preventDefault();
+    //instead of reloading the page we need to send axios request
 
     try {
       const newUser = { email, password, passwordCheck, displayName };
