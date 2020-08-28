@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header id="header">
       <Link to="/">
-        <h1 className="title">MERN auth template</h1>
+        <h1 className="title">This is the Header component</h1>
       </Link>
       <AuthButtons />
     </header>
