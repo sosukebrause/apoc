@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { InputBase } from '@material-ui/core';
 import BackgroundVideo from "./components/background/BackgroundVideo"
 import Nav from "./components/Nav";
 import Covid from "./components/Covid";
