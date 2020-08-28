@@ -15,7 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const apiRoutes = require("./routes/api-routes");
 const userRoutes = require("./routes/user-routes");
-app.use(apiRoutes, userRoutes);
+app.use(apiRoutes);
+app.use("/users", userRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
