@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
-import UserContext from ".././context/UserContext";
+import UserContext from "../context/UserContext";
 
 const AuthButtons = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -11,13 +11,13 @@ const AuthButtons = () => {
   const register = () => history.push("/register");
   const login = () => history.push("/login");
 
-  // const logout = () => {
-  //   setUserData({
-  //     token: undefined,
-  //     user: undefined,
-  //   });
-  //   localStorage.setItem("auth-token", "");
-  // };
+  const logout = () => {
+    setUserData({
+      token: undefined,
+      user: undefined,
+    });
+    localStorage.setItem("auth-token", "");
+  };
 
   return (
     <nav className="auth-options">

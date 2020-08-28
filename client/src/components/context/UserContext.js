@@ -1,3 +1,3 @@
-import { createContext } from "./node_modules/react";
+import { createContext } from "react";
 
 export default createContext(null);

@@ -54,6 +54,7 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
             </Switch>
+            <InputBase />
           </div>
         </UserContext.Provider>
       </BrowserRouter>
