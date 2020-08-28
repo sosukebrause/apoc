@@ -1,4 +1,6 @@
-const axios = require("axios");
+module.exports = {
+    findCovidData: function() {
+    const axios = require("axios");
 axios({
     "method":"GET",
     "url":"https://covid-19-statistics.p.rapidapi.com/reports",
@@ -21,3 +23,5 @@ axios({
     .catch((error)=>{
       console.log(error)
     })
+}
+}
