@@ -1,4 +1,3 @@
-
 import { InputBase } from "@material-ui/core";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -70,53 +69,43 @@ function App() {
     </>
   );
   //Sosuke commits end
-
-// import React from 'react';
-// import './App.css';
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Nav from "./components/Nav";
-// import Register from "./components/Register";
-// import Login from "./components/Login";
-// import Search from "./components/Search";
-// import Dashboard from "./components/Dashboard";
-
-
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//     <Router>
-//       <Nav />
-//       <Switch>
-//         <Route path="/register">
-//        <Register/>
-//         </Route>
-//         <Route  path="/login">
-//           <div>
-//           <Login/>
-//             </div>
-//         </Route>
-//         <Route path ="/search">
-//         <div>
-//          <Search/>
-//         </div>
-//         </Route>
-//         <Route path ="/main">
-//         <div>
-//           <Dashboard/>
-//         </div>
-//         </Route>
-//         <Route  path="/other">
-//         <div>
+  
+//Julia's commits start
+    <div className="App">
+    <Router>
+      <Nav />
+      <Switch>
+        <Route path="/register">
+        <div>
+         <h1>register here</h1>
+            </div>
+        </Route>
+        <Route  path="/login">
+          <div>
+          <h1>login</h1>
+            </div>
+        </Route>
+        <Route path ="/search">
+        <div>
+          <Input/>
+        </div>
+        </Route>
+        <Route path ="/main">
+        <div>
+          <Covid/>
+        </div>
+        </Route>
+        <Route  path="/other">
+        <div>
         
-//         </div>
-//         </Route>
-//       </Switch>
-//     </Router>
-//   </div>
-//   )
-// }
+        </div>
+        </Route>
+      </Switch>
+    </Router>
+  </div>
+  )
+//Julia's commits end
+}
 
 export default App;
 
