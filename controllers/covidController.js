@@ -1,6 +1,9 @@
 module.exports = {
     findCovidData: function() {
     const axios = require("axios");
+var date = "";
+
+
 axios({
     "method":"GET",
     "url":"https://covid-19-statistics.p.rapidapi.com/reports",
@@ -13,7 +16,7 @@ axios({
     "iso":"USA",
     "region_name":"US",
     "city_name":"San Francisco",
-    "date":"2020-04-16",
+    "date":"2020-08-28",
     "q":"US California"
     }
     })

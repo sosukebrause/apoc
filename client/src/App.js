@@ -2,10 +2,12 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import BackgroundVideo from "./components/background/BackgroundVideo"
 import Nav from "./components/Nav";
-import Covid from "./components/Covid";
-import Input from "./components/Input";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Search from "./components/Search";
+import Dashboard from "./components/Dashboard";
+
 
 
 
@@ -16,23 +18,21 @@ function App() {
       <Nav />
       <Switch>
         <Route path="/register">
-        <div>
-         <h1>register here</h1>
-            </div>
+       <Register/>
         </Route>
         <Route  path="/login">
           <div>
-          <h1>login</h1>
+          <Login/>
             </div>
         </Route>
         <Route path ="/search">
         <div>
-          <Input/>
+         <Search/>
         </div>
         </Route>
         <Route path ="/main">
         <div>
-          <Covid/>
+          <Dashboard/>
         </div>
         </Route>
         <Route  path="/other">
