@@ -1,7 +1,7 @@
 module.exports = {
     findCovidData: function() {
     const axios = require("axios");
-var date = "";
+
 
 
 axios({
@@ -16,7 +16,7 @@ axios({
     "iso":"USA",
     "region_name":"US",
     "city_name":"San Francisco",
-    "date":"2020-08-28",
+    // "date":"2020-08-28",
     "q":"US California"
     }
     })
