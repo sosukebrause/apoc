@@ -1,4 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Apocalypse App
+
+
+## Description
+
+
+## Overview
+
+
+## Team Members
+
+[![All Contributors](https://img.shields.io/badge/contributors-2-blue)](#contributors-)
+
+### `npm run build`
+- [Julia Hanlon](https://github.com/julhanlon)
+- [Sosuke Brause](https://github.com/ichoi21)
+
 
 ## Available Scripts
 
