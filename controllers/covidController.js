@@ -1,7 +1,6 @@
 
-
 module.exports = {
-    findCovidData: function () {
+    findCovidData: function (state, county) {
     const axios = require("axios");
 
 require("dotenv").config();
@@ -18,16 +17,17 @@ return new Promise((resolve, reject)=> {
     },"params":{
     "iso":"USA",
     "region_name":"US",
-    // "city_name":"San Francisco",
+    "city_name":`${county}`,
     // "date":"2020-08-28",
-    "q":"US California"
+    "q":`US ${state}`
     }
     })
     .then((response)=>{
-      console.log(response.data)
+      // console.log(response.data)
+      resolve(response.data);
     })
     .catch((error)=>{
-      console.log(error)
+      reject(error)
     });
 })
 
