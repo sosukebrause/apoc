@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 const todoSchema = new mongoose.Schema({
-  title: { type: String, required: true },
+  title: { type: String, trim: true, required: true },
   userId: { type: String, required: true },
 });
 
-module.exports = Todo = mongoose.model("todo", todoSchema);
+const Feed = mongoose.model("Feed", todoSchema);
+
+module.exports = Feed;
