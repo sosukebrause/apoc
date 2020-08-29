@@ -8,14 +8,13 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UserContext from "./components/context/UserContext.js";
 import Header from "./components/Header";
-import Home from "./components/Home";
+import Home from "./components/pages/Home";
 
 import './App.css';
 
 import BackgroundVideo from "./components/background/BackgroundVideo"
 import Nav from "./components/Nav";
-import Covid from "./components/Covid";
-import Input from "./components/Input";
+
 
 function App() {
   //use Context to use State for scope of whole app
@@ -69,50 +68,6 @@ function App() {
     </>
   );
   //Sosuke commits end
-  
-//Julia's commits start
-    <div className="App">
-    <Router>
-      <Nav />
-      <Switch>
-        <Route path="/register">
-        <div>
-         <h1>register here</h1>
-            </div>
-        </Route>
-        <Route  path="/login">
-          <div>
-          <h1>login</h1>
-            </div>
-        </Route>
-        <Route path ="/search">
-        <div>
-          <Input/>
-        </div>
-        </Route>
-        <Route path ="/main">
-        <div>
-          <Covid/>
-        </div>
-        </Route>
-        <Route  path="/other">
-        <div>
-        
-        </div>
-        </Route>
-      </Switch>
-    </Router>
-  </div>
-  )
-//Julia's commits end
 }
-
 export default App;
 
-
-{/* <div className={styles.container}>
-<img className={styles.image} src={image} alt="COVID-19" />
-<Cards data={data} />
-<CountryPicker handleCountryChange={this.handleCountryChange} />
-<Chart data={data} country={country} /> 
-</div> */}
