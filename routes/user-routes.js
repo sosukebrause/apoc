@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 
+
 router.get("/test", (req, res) => {
   res.send("express user-routes is working");
 });

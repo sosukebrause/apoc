@@ -3,6 +3,7 @@ require("dotenv").config();
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Apocalypse";
 
+console.log(MONGODB_URI);
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,

@@ -8,7 +8,13 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UserContext from "./components/context/UserContext.js";
 import Header from "./components/Header";
-import Home from "./components/Home";
+import Home from "./components/pages/Home";
+
+import './App.css';
+
+import BackgroundVideo from "./components/background/BackgroundVideo"
+import Nav from "./components/Nav";
+
 
 //Needs to perform function to check if thre is token (user logged in in previous session); if so user is logged in in the context
 function App() {
@@ -47,6 +53,7 @@ function App() {
   }, []);
 
   return (
+//Sosuke's commits
     <>
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
@@ -63,6 +70,7 @@ function App() {
       </BrowserRouter>
     </>
   );
+  //Sosuke commits end
 }
-
 export default App;
+
