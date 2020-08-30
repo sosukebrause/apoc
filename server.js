@@ -19,6 +19,7 @@ const userRoutes = require("./routes/user-routes");
 app.use(apiRoutes);
 app.use(CovidRoutes);
 app.use("/users", userRoutes);
+app.use("/feed", require("./routes/user-routes"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
