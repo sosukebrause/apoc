@@ -12,7 +12,7 @@ import Home from "./components/pages/Home";
 
 import './App.css';
 
-import BackgroundVideo from "./components/background/BackgroundVideo"
+
 import Nav from "./components/Nav";
 
 
