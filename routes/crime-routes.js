@@ -25,8 +25,14 @@ const cities = require("../models/city");
 // });
 
 router.get("/api/crimetest", async (req, res) => {
-    var data = await findCrimeData(lat, lng);
-    console.log(data)
+    try {
+        var data = await findCrimeData(req.body.lat, req.body.lng);
+        console.log(data)
+    }
+    catch(err) {
+        console.log(err)
+    }
+    
 })
 
 // router.get("/api/city", async (req, res) => {

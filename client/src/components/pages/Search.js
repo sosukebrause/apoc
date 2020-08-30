@@ -1,20 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Input } from '@material-ui/core';
+import API from "../../utils/API";
 
-const Search = () => {
+const Search = (props) => {
 
-  const [city, setCity] = useState([]);
+const [city, setCity] = useState("");
+const [state_name, setStateName] = useState("");
+const [input, setInput] = useState({city: "", state_name: ""});
+
+const handleChange = (e) => {
+  setInput({...input, [e.target.name]: e.target.value});
+}
+
+const buttonSubmit = () => {
+  console.log(input.city, input.state_name)
+  API.getCovidData(input.city, input.state_name).then((res) => {
+    console.log(res)
+  }).catch(err => console.log(err))
+}
+
+// const handleCityChange = (e) => {
+// console.log(e.target.value)
+// setCity(e.target.value);
+// }
+
+// const handleStateChange = (e) => {
+//   console.log(e.target.value)
+//   setStateName(e.target.value);
+//   }
+
   
-  useEffect(() => {
-    loadCity();
-  }, []);
+  // useEffect(() => {
+  //   loadCity();
+  // }, []);
 
-  function loadCity() {
-    //code to get Covid data
-  API.getCovidData().then((res) => {
-  setCity(res.data)
-  })
-  }
+  // function loadCity() {
+    
+  
+  // }
 
     return (
       <>
@@ -22,10 +45,11 @@ const Search = () => {
       <label htmlFor="inputState">State</label>
       <select
         id="inputState"
+        name = "state_name"
         className="form-control"
-        onChange={props.filter}
+        onChange={handleChange}
       >
-        <option>None</option>
+        <option></option>
         <option>Alabama</option>
         <option>Alaska</option>
         <option>Arizona</option>
@@ -83,10 +107,12 @@ const Search = () => {
     <input
       type="text"
       className="form-control"
+      name = "city"
       id="search"
       placeholder="Type a city"
-      onChange={props.search}
+      onChange={handleChange}
     />
+    <button onClick = {buttonSubmit}>submit</button>
     </>
     )
 }

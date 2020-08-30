@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
 import UserContext from "../context/UserContext";
 
@@ -8,13 +9,15 @@ export default function Home() {
 
   return (
     <div className="page">
-      {userData.user ? (
-        <h1>Welcome {userData.user.displayName}</h1>
-      ) : (
-        <>
+      {!userData.user ? (
+         <>
           <h2>You are not logged in</h2>
           <Link to="/login">Log in</Link>
         </>
+      ) : (<>
+         <h1>Welcome {userData.user.displayName}</h1>
+         <Search/>
+         </>
       )}
     </div>
   );

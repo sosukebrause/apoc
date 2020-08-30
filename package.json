@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
+    "@devexpress/dx-react-chart": "^2.7.1",
+    "@devexpress/dx-react-chart-material-ui": "^2.7.1",
+    "@devexpress/dx-react-core": "^2.7.1",
     "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
