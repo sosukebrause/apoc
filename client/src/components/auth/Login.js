@@ -6,6 +6,11 @@ import { Input, FormGroup } from '@material-ui/core';
 import UserContext from ".././context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 
+const divStyle = {
+  margin: '60px',
+};
+
+
 export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -33,7 +38,7 @@ export default function Login() {
     }
   };
   return (
-    <div className="page">
+    <div className="page" style = {divStyle}>
       <h2>Log in</h2>
       
       <form className="form" onSubmit={submit}>

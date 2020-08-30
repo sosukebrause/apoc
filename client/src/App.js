@@ -24,30 +24,30 @@ function App() {
   useEffect(() => {
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token") || null;
-      if (token) {
-        setUserData({
-               token,
-               user: "Julia",
-          });
-      }
-      // if (token === null) {
-      //   localStorage.setItem("auth-token", "");
-      //   token = "";
-      // }
-      // const tokenRes = await Axios.post(
-      //   "http://localhost:5000/users/tokenIsValid",
-      //   null,
-      //   { headers: { "x-auth-token": token } }
-      // );
-      // if (tokenRes.data) {
-      //   const userRes = await Axios.get("http://localhost:5000/users/", {
-      //     headers: { "x-auth-token": token },
-      //   });
+      // if (token) {
       //   setUserData({
-      //     token,
-      //     user: userRes.data,
-      //   });
+      //          token,
+      //          user: "Julia",
+      //     });
       // }
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+      const tokenRes = await Axios.post(
+        "http://localhost:5000/users/tokenIsValid",
+        null,
+        { headers: { "x-auth-token": token } }
+      );
+      if (tokenRes.data) {
+        const userRes = await Axios.get("http://localhost:5000/users/", {
+          headers: { "x-auth-token": token },
+        });
+        setUserData({
+          token,
+          user: userRes.data,
+        });
+      }
     };
 
     checkLoggedIn();

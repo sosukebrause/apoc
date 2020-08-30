@@ -5,6 +5,10 @@ import UserContext from ".././context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 import { Input } from '@material-ui/core';
 
+const divStyle = {
+  margin: '60px',
+};
+
 
 export default function Register() {
   const [email, setEmail] = useState();
@@ -12,8 +16,10 @@ export default function Register() {
   const [passwordCheck, setPasswordCheck] = useState();
   const [displayName, setDisplayName] = useState();
   const [error, setError] = useState();
+
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
+
   const submit = async (e) => {
     e.preventDefault();
     //instead of reloading the page we need to send axios request
@@ -35,7 +41,7 @@ export default function Register() {
     }
   };
   return (
-    <div className="page">
+    <div className="page" style = {divStyle}>
       <h2>Register</h2>
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />
@@ -58,7 +64,7 @@ export default function Register() {
           placeholder="Verify password"
           onChange={(e) => setPasswordCheck(e.target.value)}
         />
-        <label htmlFor="register-display-name">Display name</label>
+        <label htmlFor="register-display-name">Display Name</label>
         <Input
           id="register-display-name"
           type="text"

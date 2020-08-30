@@ -30,7 +30,7 @@ const AuthButtons = () => {
         <>
     <Button variant ="outlined" color="primary" className = "margin-left" onClick={register}>
     Register
-    </Button>git 
+    </Button>
 <Button variant="outlined" color="primary" onClick={login}>
     Log in
 </Button>

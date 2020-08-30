@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input } from '@material-ui/core';
+import { Input, Button } from '@material-ui/core';
 import API from "../../utils/API";
 
 const Search = (props) => {
@@ -42,7 +42,7 @@ const buttonSubmit = () => {
     return (
       <>
       <div className="form-group">
-      <label htmlFor="inputState">State</label>
+      <h4 htmlFor="inputState">State Search</h4>
       <select
         id="inputState"
         name = "state_name"
@@ -103,8 +103,8 @@ const buttonSubmit = () => {
       </select>
     </div>
     <br />
-    <h4>Search:</h4>
-    <input
+    <h4>City Search:</h4>
+    <Input
       type="text"
       className="form-control"
       name = "city"
@@ -112,7 +112,7 @@ const buttonSubmit = () => {
       placeholder="Type a city"
       onChange={handleChange}
     />
-    <button onClick = {buttonSubmit}>submit</button>
+    <Button variant="outlined" onClick = {buttonSubmit}>submit</Button>
     </>
     )
 }
