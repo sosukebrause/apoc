@@ -13,8 +13,6 @@ import Home from "./components/pages/Home";
 import './App.css';
 
 
-import Nav from "./components/Nav";
-
 
 function App() {
   //use Context to use State for scope of whole app
@@ -54,8 +52,9 @@ function App() {
     <>
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
-          <Header />
+          
           <div className="container">
+          <Header />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />

@@ -6,3 +6,24 @@
 #header {
     margin-bottom: 20px;
 }
+
+
+img {
+    z-index: 5;
+    right: 20%;
+    top: 25%;
+    width: 60vh;
+    height: auto;
+    position: absolute;
+    overflow: hidden;
+    /* transform: rotate(45deg); */
+    /* filter: drop-shadow(10px 10px 10px #c5c5c5); */
+    animation: swing 3s infinite ease-in-out;
+  }
+
+  @keyframes swing {
+    0%, 100% { transform: rotate(-10deg);}
+    20% {transform: scale(.98);}
+    50% {transform: rotate(15deg);}
+    80% {transform: scale(.98);}
+  }

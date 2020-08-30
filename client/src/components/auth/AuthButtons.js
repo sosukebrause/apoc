@@ -23,14 +23,16 @@ const AuthButtons = () => {
   return (
     <nav className="auth-options">
       {userData.user ? (
-        <button onClick={logout}>Log out</button>
+        <Button color="primary" onClick={logout}>
+            Log Out
+        </Button>
       ) : (
         <>
-    <Button color="primary" onClick={register}>
+    <Button variant ="outlined" color="primary" className = "margin-left" onClick={register}>
     Register
-</Button>
-<Button color="primary" onClick={login}>
-    
+    </Button>
+
+<Button variant="outlined" color="primary" onClick={login}>
     Log in
 </Button>
         </>

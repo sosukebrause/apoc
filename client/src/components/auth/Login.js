@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Input, FormGroup } from '@material-ui/core';
 
 import UserContext from ".././context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
@@ -34,19 +35,17 @@ export default function Login() {
   return (
     <div className="page">
       <h2>Log in</h2>
-      {error && (
-        <ErrorNotice message={error} clearError={() => setError(undefined)} />
-      )}
+      
       <form className="form" onSubmit={submit}>
         <label htmlFor="login-email">Email</label>
-        <input
+        <Input
           id="login-email"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <label htmlFor="login-password">Password</label>
-        <input
+        <Input
           id="login-password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
@@ -54,6 +53,9 @@ export default function Login() {
 
         <input type="submit" value="Log in" />
       </form>
+      {error && (
+        <ErrorNotice message={error} clearError={() => setError(undefined)} />
+      )}
     </div>
   );
 }
