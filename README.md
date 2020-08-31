@@ -13,7 +13,7 @@
 
 ### `npm run build`
 - [Julia Hanlon](https://github.com/julhanlon)
-- [Sosuke Brause](https://github.com/ichoi21)
+- [Sosuke Brause](https://github.com/sosukebrause)
 
 
 ## Available Scripts

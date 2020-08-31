@@ -9,6 +9,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    useCreateIndex: true,
   })
   .then(() => console.log("you are connected to mongodb"))
   .catch((err) => console.log(err));

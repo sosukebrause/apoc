@@ -8,12 +8,11 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UserContext from "./components/context/UserContext.js";
 import Header from "./components/Header";
+import Animation from "./components/Animation";
 import Home from "./components/pages/Home";
 
 import './App.css';
 
-import BackgroundVideo from "./components/background/BackgroundVideo"
-import Nav from "./components/Nav";
 
 
 function App() {
@@ -25,7 +24,13 @@ function App() {
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
+      let token = localStorage.getItem("auth-token") || null;
+      // if (token) {
+      //   setUserData({
+      //          token,
+      //          user: "Julia",
+      //     });
+      // }
       if (token === null) {
         localStorage.setItem("auth-token", "");
         token = "";
@@ -54,8 +59,10 @@ function App() {
     <>
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
-          <Header />
+        {/* <Animation/> */}
           <div className="container">
+          <Header />
+         
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />

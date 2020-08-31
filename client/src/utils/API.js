@@ -2,10 +2,16 @@ import axios from 'axios';
 
 export default {
 
+
+    
 // gets Covid data from city search
-    getCovidData: function() {
-    return axios.get("/api/covid");
+    getCovidData: function(city, state_name) {
+        console.log("This is from API.js", city, state_name);
+    // return axios.get("api/covid", {data: {city, state_name}});
+     return axios({ 
+        url: "http://localhost:5000/api/covid",
+        method: "GET",
+        params: { city, state_name}
+      })
 },
-
-
 }
