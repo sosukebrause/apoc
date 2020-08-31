@@ -7,22 +7,20 @@ import apoc1 from "../images/apoc1.PNG";
 
 
 const divStyle = {
-  margin: '60px',
+  marginLeft: '60px',
 };
 
 const Header = () => {
   return (
     <div className="container" style = {divStyle}>
     <header id="header">
-      <Link to="/">
-        <h1 id= "title" className="title">Apocalypse App</h1>
-      </Link>
-      <div>
-        <br>
-        </br>
+      {/* <Link to="/"> */}
+        <h1 id= "title" className="title blink">APOCALYPSE</h1>
+      {/* </Link> */}
+      {/* <div>
+       
       <img src = {apoc1} alt = "not working" />
-      </div>
-      
+      </div> */}
       <AuthButtons />
     </header>
     </div>

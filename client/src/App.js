@@ -8,6 +8,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UserContext from "./components/context/UserContext.js";
 import Header from "./components/Header";
+import Animation from "./components/Animation";
 import Home from "./components/pages/Home";
 
 import './App.css';
@@ -58,9 +59,10 @@ function App() {
     <>
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
-          
+        {/* <Animation/> */}
           <div className="container">
           <Header />
+         
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />

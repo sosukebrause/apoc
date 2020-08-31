@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Input, Button } from '@material-ui/core';
 import API from "../../utils/API";
 
 const divStyle = {
-  margin: '60px',
+  marginLeft: '60px',
 };
 
 
 const Search = (props) => {
 
-const [city, setCity] = useState("");
-const [state_name, setStateName] = useState("");
+// const [city, setCity] = useState("");
+// const [state_name, setStateName] = useState("");
 const [input, setInput] = useState({city: "", state_name: ""});
 
 const handleChange = (e) => {

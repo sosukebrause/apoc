@@ -1,13 +1,13 @@
 import Axios from "axios";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Input } from '@material-ui/core';
+import { Input, Button } from '@material-ui/core';
 
 import UserContext from ".././context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 
 const divStyle = {
-  margin: '60px',
+  marginLeft: '60px',
 };
 
 
@@ -39,7 +39,7 @@ export default function Login() {
   };
   return (
     <div className="page" style = {divStyle}>
-      <h2>Log in</h2>
+      {/* <h2>Log in</h2> */}
       
       <form className="form" onSubmit={submit}>
         <label htmlFor="login-email">Email</label>
@@ -56,7 +56,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <input type="submit" value="Log in" />
+        <Button variant="outlined" color="primary" type = "submit" value="Log in">Login</Button>
       </form>
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />

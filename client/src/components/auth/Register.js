@@ -3,10 +3,10 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from ".././context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
-import { Input } from '@material-ui/core';
+import { Input, Button } from '@material-ui/core';
 
 const divStyle = {
-  margin: '60px',
+  marginLeft: '60px',
 };
 
 
@@ -42,7 +42,7 @@ export default function Register() {
   };
   return (
     <div className="page" style = {divStyle}>
-      <h2>Register</h2>
+      {/* <h2>Register</h2> */}
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />
       )}
@@ -70,7 +70,7 @@ export default function Register() {
           type="text"
           onChange={(e) => setDisplayName(e.target.value)}
         />
-        <Input type="submit" value="Register" />
+        <Button variant="outlined" color="primary"type="submit" value="Register" >Register</Button>
       </form>
     </div>
   );
