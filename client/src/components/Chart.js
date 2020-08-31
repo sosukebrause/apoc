@@ -14,7 +14,7 @@ const data = [
   { argument: 3, value: 30 },
 ];
 
-export default () => (
+export default (props) => (
   <Paper>
     <Chart
       data={data}

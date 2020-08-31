@@ -5,9 +5,9 @@ const cities = require("../models/city");
 router.get("/api/covid", async (req, res) => {
   var city = req.query.city;
   var state_name = req.query.state_name;
-  console.log(city, state_name);
- cities.find({ city, state_name }).then((info) => {
-    console.log(info);
+  //console.log(city, state_name);
+  cities.find({ city, state_name }).then((info) => {
+    //console.log(info);
     if (info && info.length != 0) {
       return {county: info[0].county_name, state_name};
     } else {
@@ -15,14 +15,11 @@ router.get("/api/covid", async (req, res) => {
     }
   }).then( async(info) => {  
     if (!info.county) return res.json(info)
-
-    var data = await findCovidData(info.state_name, info.county);
-    console.log(data)
-    return  res.json({"helloooo": "helloooo"})
-    if (data.data && data.data.length != 0) {
-      res.json(data.data[0].region.cities[0]);
-    } else {
-      res.json({ msg: "no data" });
+    try {
+      var data = await findCovidData(info.state_name, info.county);
+      return res.json(data);
+    } catch(error) {
+      return res.json({ msg: "no data" });
     }
   })
 });
