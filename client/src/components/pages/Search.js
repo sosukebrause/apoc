@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Input, Button } from '@material-ui/core';
 import API from "../../utils/API";
 
+const divStyle = {
+  margin: '60px',
+};
+
+
 const Search = (props) => {
 
 const [city, setCity] = useState("");
@@ -41,7 +46,7 @@ const buttonSubmit = () => {
 
     return (
       <>
-      <div className="form-group">
+      <div className="form-group" style = {divStyle}>
       <h4 htmlFor="inputState">State Search</h4>
       <select
         id="inputState"
@@ -102,8 +107,7 @@ const buttonSubmit = () => {
         <option>Wyoming</option>
       </select>
     </div>
-    <br />
-    <h4>City Search:</h4>
+    <h4 style={divStyle} >City Search:</h4>
     <Input
       type="text"
       className="form-control"

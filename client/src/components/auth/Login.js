@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Input, FormGroup } from '@material-ui/core';
+import { Input } from '@material-ui/core';
 
 import UserContext from ".././context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
