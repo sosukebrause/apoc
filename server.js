@@ -14,17 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const apiRoutes = require("./routes/api-routes");
-<<<<<<< HEAD
-app.use(apiRoutes);
-app.use("/users", require("./routes/user-routes"));
-app.use("/feed", require("./routes/feed-routes"));
-=======
 const CovidRoutes = require("./routes/covid-routes");
 const userRoutes = require("./routes/user-routes");
 app.use(apiRoutes);
 app.use(CovidRoutes);
 app.use("/users", userRoutes);
->>>>>>> e732fc442cd0d481b05b0a0c390dfcf431d99cba
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

@@ -4,59 +4,27 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // COMPONENTS // CONTEXT //
+import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import UserContext from "./components/context/UserContext.js";
+
+//chaning above line to the following line
+import { UserProvider } from "./components/context/UserContext";
+
 import Header from "./components/Header";
-import Home from "./components/pages/Home";
 
-import './App.css';
+import "./App.css";
 
-import BackgroundVideo from "./components/background/BackgroundVideo"
+import BackgroundVideo from "./components/background/BackgroundVideo";
 import Nav from "./components/Nav";
 
-
-//Needs to perform function to check if thre is token (user logged in in previous session); if so user is logged in in the context
 function App() {
-  //use Context to use State for scope of whole app
-  const [userData, setUserData] = useState({
-    token: undefined,
-    user: undefined,
-  });
-
-  //useEffect is having a "side effect" outside of the global scope
-  useEffect(() => {
-    // this will automatically trigger when the app starts; cannot have useEffect as async therefore creating the following async method within
-    const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-      }
-      const tokenRes = await Axios.post(
-        "http://localhost:5000/users/tokenIsValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
-      if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
-          headers: { "x-auth-token": token },
-        });
-        setUserData({
-          token,
-          user: userRes.data,
-        });
-      }
-    };
-
-    checkLoggedIn();
-  }, []);
-
   return (
-//Sosuke's commits
+    // userProvider is now wrapping all logic for handling our state, updating state, and pushing out different values to all of our children.
+
     <>
-      <BrowserRouter>
-        <UserContext.Provider value={{ userData, setUserData }}>
+      <UserProvider>
+        <BrowserRouter>
           <Header />
           <div className="container">
             <Switch>
@@ -66,11 +34,10 @@ function App() {
             </Switch>
             <InputBase />
           </div>
-        </UserContext.Provider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </UserProvider>
     </>
   );
   //Sosuke commits end
 }
 export default App;
-
