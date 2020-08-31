@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+// import Form from "./card/Form";
 
-import UserContext from "../context/UserContext";
-import Form from "../feed/Form";
+import { UserProvider, useUserContext } from "../context/UserContext";
 
-export default function Home() {
-  const { userData } = useContext(UserContext);
-
+const Home = () => {
+  const { userData } = useUserContext();
+  console.log(userData);
   return (
     <div className="page">
       {userData.user ? (
@@ -22,4 +22,6 @@ export default function Home() {
       )}
     </div>
   );
-}
+};
+
+export default Home;

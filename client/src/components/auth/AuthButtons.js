@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
-import UserContext from "../context/UserContext";
+import { useUserContext } from "../context/UserContext";
 
 const AuthButtons = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useUserContext();
 
   const history = useHistory();
 
