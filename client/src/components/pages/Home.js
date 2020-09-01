@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-// import Form from "./card/Form";
+import Form from "../card/AuthPost";
 
 import { UserProvider, useUserContext } from "../context/UserContext";
 
@@ -9,7 +9,7 @@ const Home = () => {
   console.log(userData);
   return (
     <div className="page">
-      {userData.user ? (
+      {!userData.user ? (
         <>
           <h1>Welcome {userData.user.displayName}</h1>
           <Form inputName={"todoText"} />

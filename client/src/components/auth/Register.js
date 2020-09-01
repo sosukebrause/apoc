@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
+
 export default function Register() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
