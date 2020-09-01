@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Form from "../card/AuthPost";
+import Danger from "../Danger";
+import Search from "./Search";
 
 import { UserProvider, useUserContext } from "../context/UserContext";
 
@@ -9,15 +11,16 @@ const Home = () => {
   console.log(userData);
   return (
     <div className="page">
-      {userData.user ? (
+      {!userData.user ? (
         <>
-          <h1>Welcome {userData.user.displayName}</h1>
-          <Form inputName={"todoText"} />
+        
         </>
       ) : (
         <>
-          <h2>You are not logged in</h2>
-          <Link to="/login">Log in</Link>
+    <h3>Welcome {userData.user.displayName}</h3>
+        <Search/>
+        <Danger/>
+          <Form inputName={"todoText"} />
         </>
       )}
     </div>

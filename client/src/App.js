@@ -1,5 +1,4 @@
 import { InputBase } from "@material-ui/core";
-import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -14,12 +13,9 @@ import { UserProvider } from "./components/context/UserContext";
 import Header from "./components/Header";
 
 import Animation from "./components/Animation";
-import Home from "./components/pages/Home";
 
 import "./App.css";
 
-import BackgroundVideo from "./components/background/BackgroundVideo";
-import Nav from "./components/Nav";
 
 function App() {
 

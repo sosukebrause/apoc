@@ -11,23 +11,16 @@ const divStyle = {
   marginLeft: '60px',
 };
 
-import "./Header.css";
 
 const Header = () => {
   return (
     <div className="container">
       <header id="header">
-        <Link to="/">
-          <span>
-            <h1 id="title" className="title">
-              Apocalypse App
+            <h1 id="title" className="title blink">
+              Apocalypse
             </h1>
-          </span>
-          <span className="material-icons">notifications_active</span>
-        </Link>
         <AuthButtons />
       </header>
-
     </div>
   );
 };
