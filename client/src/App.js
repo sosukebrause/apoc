@@ -12,7 +12,6 @@ import { UserProvider } from "./components/context/UserContext";
 
 import Header from "./components/Header";
 
-import Animation from "./components/Animation";
 
 import "./App.css";
 

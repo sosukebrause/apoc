@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import Animation from "./Animation"
 
 import AuthButtons from "./auth/AuthButtons";
 import { Fade } from '@material-ui/core';
@@ -20,6 +21,7 @@ const Header = () => {
               Apocalypse
             </h1>
         <AuthButtons />
+        <Animation/>
       </header>
     </div>
   );
