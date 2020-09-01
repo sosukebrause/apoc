@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const auth = require("../middleware/auth");
-const Feed = require("../models/feedModel");
+const db = require("../models");
+// const Feed = require("../models/feedModel");
 
 router.post("/", auth, async (req, res) => {
   try {
@@ -10,7 +11,7 @@ router.post("/", auth, async (req, res) => {
     if (!title)
       return res.status(400).json({ msg: "Complete required fields" });
 
-    const newPost = new Feed({ title, userId: req.user });
+    const newPost = new db.Feed({ title, userId: req.user });
     const savedPost = await newPost.save();
 
     res.json(savedPost);
@@ -20,12 +21,12 @@ router.post("/", auth, async (req, res) => {
 });
 
 router.get("/all", auth, async (req, res) => {
-  const todos = await Feed.find({ userId: req.user });
+  const todos = await db.Feed.find({ userId: req.user });
   res.json(todos);
 });
 
 router.delete("/remove/:id", (req, res) => {
-  Feed.findByIdAndRemove(req.params.id).then(() => res.send("success"));
+  db.Feed.findByIdAndRemove(req.params.id).then(() => res.send("success"));
 });
 
 module.exports = router;

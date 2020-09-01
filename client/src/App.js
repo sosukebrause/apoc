@@ -11,23 +11,17 @@ import Register from "./components/auth/Register";
 import { UserProvider } from "./components/context/UserContext";
 
 import Header from "./components/Header";
-
-
 import "./App.css";
 
-
 function App() {
-
   return (
     // userProvider is now wrapping all logic for handling our state, updating state, and pushing out different values to all of our children.
 
     <>
       <UserProvider>
         <BrowserRouter>
-
           <Header />
           <div className="container">
-         
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />

@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const User = require("../models/userModel");
+const db = require("../models");
+// const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
-
 
 router.get("/test", (req, res) => {
   res.send("express user-routes is working");
@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
         .status(400)
         .json({ msg: "Enter the same password twice for verification." });
 
-    const existingUser = await User.findOne({ email: email });
+    const existingUser = await db.User.findOne({ email: email });
     if (existingUser)
       return res
         .status(400)
@@ -38,7 +38,7 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
-    const newUser = new User({
+    const newUser = new db.User({
       email,
       password: passwordHash,
       displayName,
@@ -60,7 +60,7 @@ router.post("/login", async (req, res) => {
     if (!email || !password)
       return res.status(400).json({ msg: "Not all fields have been entered." });
 
-    const user = await User.findOne({ email: email });
+    const user = await db.User.findOne({ email: email });
     if (!user)
       return res
         .status(400)
@@ -86,7 +86,7 @@ router.post("/login", async (req, res) => {
 
 router.delete("/delete", auth, async (req, res) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.user);
+    const deletedUser = await db.User.findByIdAndDelete(req.user);
     res.json(deletedUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -103,7 +103,7 @@ router.post("/tokenIsValid", async (req, res) => {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
     if (!verified) return res.json(false);
 
-    const user = await User.findById(verified.id);
+    const user = await db.User.findById(verified.id);
     if (!user) return res.json(false);
 
     return res.json(true);

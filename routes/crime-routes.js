@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { findCrimeData } = require("../controllers/crimeController");
-const cities = require("../models/city");
+// const cities = require("../models/city");
+const db = require("../models");
 
 // router.get("/api/crime", async (req, res) => {
 //   var city = req.body.city;
@@ -12,7 +13,7 @@ const cities = require("../models/city");
 //     } else {
 //       return { msg: "no data" };
 //     }
-//   }).then( async(info) => {  
+//   }).then( async(info) => {
 //     if (!info.county) return res.json(info)
 
 //     var data = await findCrimeData(info.lat, info.lng);
@@ -25,15 +26,13 @@ const cities = require("../models/city");
 // });
 
 router.get("/api/crimetest", async (req, res) => {
-    try {
-        var data = await findCrimeData(req.body.lat, req.body.lng);
-        console.log(data)
-    }
-    catch(err) {
-        console.log(err)
-    }
-    
-})
+  try {
+    var data = await findCrimeData(req.body.lat, req.body.lng);
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // router.get("/api/city", async (req, res) => {
 //   var city = req.body.city;
