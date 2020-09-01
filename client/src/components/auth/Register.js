@@ -4,12 +4,11 @@ import { useHistory } from "react-router-dom";
 
 import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
-import { Input, Button } from '@material-ui/core';
+import { Input, Button } from "@material-ui/core";
 
 const divStyle = {
-  marginLeft: '60px',
+  marginLeft: "60px",
 };
-
 
 export default function Register() {
   const [email, setEmail] = useState();
@@ -42,7 +41,7 @@ export default function Register() {
     }
   };
   return (
-    <div className="page" style = {divStyle}>
+    <div className="page" style={divStyle}>
       {/* <h2>Register</h2> */}
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />
@@ -71,7 +70,14 @@ export default function Register() {
           type="text"
           onChange={(e) => setDisplayName(e.target.value)}
         />
-        <Button variant="outlined" color="primary"type="submit" value="Register" >Register</Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          type="submit"
+          value="Register"
+        >
+          Register
+        </Button>
       </form>
     </div>
   );
