@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from '@material-ui/core';
 
-import UserContext from "../context/UserContext";
+import { useUserContext } from "../context/UserContext";
 
 
 const buttonStyle = {
@@ -11,7 +11,7 @@ const buttonStyle = {
 
 
 const AuthButtons = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useUserContext();
 
   const history = useHistory();
 

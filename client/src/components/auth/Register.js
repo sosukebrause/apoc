@@ -1,7 +1,8 @@
 import Axios from "axios";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import UserContext from ".././context/UserContext";
+
+import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 import { Input, Button } from '@material-ui/core';
 
@@ -16,8 +17,8 @@ export default function Register() {
   const [passwordCheck, setPasswordCheck] = useState();
   const [displayName, setDisplayName] = useState();
   const [error, setError] = useState();
+  const { userData, setUserData } = useUserContext();
 
-  const { setUserData } = useContext(UserContext);
   const history = useHistory();
 
   const submit = async (e) => {

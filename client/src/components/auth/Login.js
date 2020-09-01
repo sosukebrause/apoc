@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Input, Button } from '@material-ui/core';
 
-import UserContext from ".././context/UserContext";
+import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 
 const divStyle = {
@@ -16,7 +16,9 @@ export default function Login() {
   const [password, setPassword] = useState();
   const [error, setError] = useState();
 
-  const { setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useUserContext();
+
+  // const { setUserData } = useContext(UserContext);
   const history = useHistory();
 
   const submit = async (e) => {
