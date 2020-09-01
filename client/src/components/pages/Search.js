@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Input, Button } from '@material-ui/core';
 import API from "../../utils/API";
 
+
 const divStyle = {
   marginLeft: '60px',
 };
+
 
 
 const Search = (props) => {
@@ -20,7 +22,21 @@ const handleChange = (e) => {
 const buttonSubmit = () => {
   console.log(input.city, input.state_name)
   API.getCovidData(input.city, input.state_name).then((res) => {
-    console.log(res.data.data[0].confirmed, res.data.data[0].confirmed_diff, res.data.data[0].deaths, res.data.data[0].deaths_diff, res.data.data[0].date)
+    console.log(res.data.data)
+    var array = res.data.data
+    var results = array.map( item => { 
+    var covidObj = {
+        totalInfected: item.confirmed,
+       dailyInfected: item.confirmed_diff,
+       totalDeaths: item.deaths,
+       dailydeaths: item.deaths_diff,
+       date: item.date,
+     }
+     return covidObj
+    })
+   
+    props.handleCovidData(results)
+    // console.log(res.data.data[0].confirmed, res.data.data[0].confirmed_diff, res.data.data[0].deaths, res.data.data[0].deaths_diff, res.data.data[0].date)
   }).catch(err => console.log(err))
 }
 

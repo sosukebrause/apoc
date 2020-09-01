@@ -7,22 +7,22 @@ import {
   LineSeries,
 } from '@devexpress/dx-react-chart-material-ui';
 
-
-const data = [
-  { argument: 1, value: 10 },
-  { argument: 2, value: 20 },
-  { argument: 3, value: 30 },
-];
+// const data = [
+//   { argument: 1, value: 10 },
+//   { argument: 2, value: 20 },
+//   { argument: 3, value: 30 },
+// ];
 
 export default (props) => (
   <Paper>
     <Chart
-      data={data}
+      data={props.data}
     >
-      <ArgumentAxis />
+      <ArgumentAxis title = {props.title} />
       <ValueAxis />
 
-      <LineSeries valueField="value" argumentField="argument" />
+      <LineSeries valueField="dailyInfected" argumentField="date" />
+      <LineSeries valueField="dailydeaths" argumentField="date" />
     </Chart>
   </Paper>
 );
