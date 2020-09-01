@@ -15,10 +15,13 @@ app.use(express.urlencoded({ extended: true }));
 
 const apiRoutes = require("./routes/api-routes");
 const CovidRoutes = require("./routes/covid-routes");
+const CrimeRoutes = require("./routes/crime-routes");
 const userRoutes = require("./routes/user-routes");
 app.use(apiRoutes);
 app.use(CovidRoutes);
+app.use(CrimeRoutes);
 app.use("/users", userRoutes);
+app.use("/feed", require("./routes/user-routes"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

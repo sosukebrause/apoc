@@ -6,7 +6,9 @@ router.post("/", auth, async (req, res) => {
   try {
     const { title } = req.body;
     //validation
-    if (!title) return res.status(400).json({ msg: "Complete required field" });
+
+    if (!title)
+      return res.status(400).json({ msg: "Complete required fields" });
 
     const newPost = new Feed({ title, userId: req.user });
     const savedPost = await newPost.save();
