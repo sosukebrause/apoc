@@ -21,7 +21,7 @@ const Header = () => {
               Apocalypse
             </h1>
         <AuthButtons />
-        <Animation/>
+        {/* <Animation/> */}
       </header>
     </div>
   );

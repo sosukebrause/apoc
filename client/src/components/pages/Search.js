@@ -20,7 +20,7 @@ const handleChange = (e) => {
 const buttonSubmit = () => {
   console.log(input.city, input.state_name)
   API.getCovidData(input.city, input.state_name).then((res) => {
-    console.log(res)
+    console.log(res.data.data[0].confirmed, res.data.data[0].confirmed_diff, res.data.data[0].deaths, res.data.data[0].deaths_diff, res.data.data[0].date)
   }).catch(err => console.log(err))
 }
 

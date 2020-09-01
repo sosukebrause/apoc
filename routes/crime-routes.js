@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { findCrimeData } = require("../controllers/crimeController");
-const cities = require("../models/city");
+const dc = require("../models");
 
 // router.get("/api/crime", async (req, res) => {
 //   var city = req.body.city;
