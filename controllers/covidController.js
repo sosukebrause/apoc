@@ -65,8 +65,6 @@ module.exports = {
               if (data && data.length !== 0) {
                 results.push(data[0].region.cities[0]);
               }
-            } else {
-              results.push("no data");
             }
           }
           resolveAll(results);
