@@ -7,12 +7,6 @@ import Chart from "../Chart";
 
 import { useUserContext } from "../context/UserContext";
 
-const data = [
-  { argument: 1, value: 10 },
-  { argument: 2, value: 20 },
-  { argument: 3, value: 30 },
-];
-
 
 // class Home extends React.Component {
 //   constructor(props) {
@@ -61,5 +55,4 @@ const [covidData, setCovidData] = useState([]);
     </div>
   );
 };
-
 export default Home;

@@ -31,7 +31,6 @@ router.get("/api/covid", async (req, res) => {
     }
   })
 });
-
 // router.get("/api/city", async (req, res) => {
 //   var city = req.body.city;
 //   var state_name = req.body.state_name;

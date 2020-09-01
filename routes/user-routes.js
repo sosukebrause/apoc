@@ -22,6 +22,7 @@ router.post("/register", async (req, res) => {
       return res
         .status(400)
         .json({ msg: "Enter the same password twice for verification." });
+        
     const existingUser = await db.User.findOne({ email: email });
     if (existingUser)
       return res
@@ -50,6 +51,7 @@ router.post("/login", async (req, res) => {
     // validate
     if (!email || !password)
       return res.status(400).json({ msg: "Not all fields have been entered." });
+      
     const user = await db.User.findOne({ email: email });
     if (!user)
       return res

@@ -37,6 +37,7 @@ module.exports = {
             "date": dateStr,
             "q": `US ${state}`
           }
+         
         })
           .then((response) => {
             resolve(response.data);
@@ -49,7 +50,6 @@ module.exports = {
       array.push(promise);
     }
    
-    
     Promise.all(array
       .map(promise=>promise.then(ok=>{ return {"success": true, "data": ok.data}}).catch(err=>{ console.log("err from map",err); return {"success": false, "data": null}}))
     ).then((values) => {
