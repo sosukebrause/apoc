@@ -7,6 +7,7 @@ import AuthButtons from "./auth/AuthButtons";
 const divStyle = {
   marginLeft: "60px",
 };
+
 const Header = () => {
   return (
     <div className="container">

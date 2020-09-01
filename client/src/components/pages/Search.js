@@ -108,7 +108,7 @@ const buttonSubmit = () => {
       </select>
     </div>
     <h4 style={divStyle} >City Search:</h4>
-    <Input
+    <Input style = {divStyle}
       type="text"
       className="form-control"
       name = "city"

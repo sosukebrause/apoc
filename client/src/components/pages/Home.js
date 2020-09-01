@@ -10,16 +10,13 @@ const Home = () => {
   return (
     <div className="page">
       {!userData.user ? (
-        <>
-          <Search />
-          <Form inputName={"todoText"} />
-        </>
+        <></>
       ) : (
         <>
           <h3>Welcome {userData.user.displayName}</h3>
-          {/* <Search/> */}
+          <Search />
           <Danger />
-          {/* <Form inputName={"todoText"} /> */}
+          <Form inputName={"todoText"} />
         </>
       )}
     </div>
