@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import { useTodoContext } from "../utils/GlobalState";
 import Axios from "axios";
 
 const Form = (props) => {
@@ -42,7 +43,9 @@ const Form = (props) => {
           className="helper-text"
           data-error="wrong"
           data-success="submitted"
-        />
+        >
+          Press Enter to submit
+        </span>
         <button type="submit">Post Comment</button>
       </div>
     </form>
