@@ -64,7 +64,7 @@ const buttonSubmit = () => {
       <>
       <div className="form-group" style = {divStyle}>
       <h4 htmlFor="inputState">State Search</h4>
-      <select
+      {/* <select
         id="inputState"
         name = "state_name"
         className="form-control"
@@ -121,7 +121,7 @@ const buttonSubmit = () => {
         <option>West Virginia</option>
         <option>Wisconsin</option>
         <option>Wyoming</option>
-      </select>
+      </select> */}
     </div>
     <h4 style={divStyle} >City Search:</h4>
     <Input style = {divStyle}
@@ -130,6 +130,14 @@ const buttonSubmit = () => {
       name = "city"
       id="search"
       placeholder="Type a city"
+      onChange={handleChange}
+    />
+     <Input style = {divStyle}
+      type="text"
+      id="search"
+      placeholder="Type a state"
+      name = "state_name"
+      className="form-control"
       onChange={handleChange}
     />
     <Button variant="outlined" onClick = {buttonSubmit}>submit</Button>
