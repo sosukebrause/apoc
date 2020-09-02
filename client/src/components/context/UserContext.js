@@ -13,7 +13,6 @@ function UserProvider({ ...props }) {
     token: undefined,
     user: undefined,
   });
-
   //useEffect is having a "side effect" outside of the global scope
   //useEfect with empty array
   useEffect(() => {
@@ -43,23 +42,17 @@ function UserProvider({ ...props }) {
         }
       }
     };
-
     checkLoggedIn();
   }, []);
-
   return (
     // userProvider is now wrapping all logic for handling our state, updating state, and pushing out different values to all of our children and components.
-
     <UserContext.Provider value={{ userData, setUserData }} {...props} />
   );
 }
-
 const useUserContext = () => useContext(UserContext);
-
 /*
 function useUserContext() {
   return useContext(UserContext);
 }
 */
-
 export { useUserContext, UserProvider };

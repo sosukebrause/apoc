@@ -95,6 +95,8 @@ router.post("/tokenIsValid", async (req, res) => {
   }
 });
 
+
+//this route gets the user info
 router.get("/", auth, async (req, res) => {
   try {
     const user = await db.User.findById(req.user);
