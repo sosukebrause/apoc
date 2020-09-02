@@ -1,9 +1,11 @@
 import React from "react";
 import "./Header.css";
-// import Animation from "./Animation";
+// import Animation from "./Animation"
+
 import AuthButtons from "./auth/AuthButtons";
 // import { Fade } from "@material-ui/core";
 // import apoc1 from "../images/apoc1.PNG";
+
 const divStyle = {
   marginLeft: "60px",
 };
