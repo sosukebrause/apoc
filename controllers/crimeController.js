@@ -8,18 +8,8 @@ return new Promise((resolve, reject)=> {
 
     axios({
         "method":"GET",
-        "url":"https://jgentes-crime-data-v1.p.rapidapi.com/crime",
-        "headers":{
-        "content-type":"application/octet-stream",
-        "x-rapidapi-host":"jgentes-Crime-Data-v1.p.rapidapi.com",
-        "x-rapidapi-key":process.env.CRIMEKEY,
-        "useQueryString":true
-        },"params":{
-        "startdate":"9%2F19%2F2019",
-        "enddate":"9%2F25%2F2019",
-        "lat":`${lat}`,
-        "long":`${lng}`
-        }
+        "url":`https://api.usa.gov/crime/fbi/sapi/{desired_endpiont}?api_key=${CRIMEKEY}`,
+    
         })
         .then((response)=>{
           console.log(response)

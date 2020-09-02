@@ -13,7 +13,6 @@ function UserProvider({ ...props }) {
     token: undefined,
     user: undefined,
   });
-
   //useEffect is having a "side effect" outside of the global scope
   //useEfect with empty array
   useEffect(() => {
@@ -30,32 +29,30 @@ function UserProvider({ ...props }) {
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
-          headers: { "x-auth-token": token },
-        });
-        setUserData({
-          token,
-          user: userRes.data,
-        });
+        try {
+          const userRes = await Axios.get("http://localhost:5000/users/", {
+            headers: { "x-auth-token": token },
+          });
+          setUserData({
+            token,
+            user: userRes.data,
+          });
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
-
     checkLoggedIn();
   }, []);
-
   return (
     // userProvider is now wrapping all logic for handling our state, updating state, and pushing out different values to all of our children and components.
-
     <UserContext.Provider value={{ userData, setUserData }} {...props} />
   );
 }
-
 const useUserContext = () => useContext(UserContext);
-
 /*
 function useUserContext() {
   return useContext(UserContext);
 }
 */
-
 export { useUserContext, UserProvider };

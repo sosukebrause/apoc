@@ -94,4 +94,20 @@ router.post("/tokenIsValid", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
+//this route gets the user info
+router.get("/", auth, async (req, res) => {
+  try {
+    const user = await db.User.findById(req.user);
+    res.json({
+      user: {
+        id: user._id,
+        displayName: user.displayName,
+      },
+    });
+  } catch (err) {
+    res.send(err);
+  }
+});
 module.exports = router;

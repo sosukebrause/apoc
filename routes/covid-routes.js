@@ -4,12 +4,12 @@ const db = require("../models");
 router.get("/api/covid", async (req, res) => {
   var city = req.query.city;
   var state_name = req.query.state_name;
-  var numDays = Number(req.query.days) || 7;
+  var numDays = Number(req.query.days) || 30;
 
   if (!city || !state_name) {
     return res.status(400).json({msg: "query string is empty"})
   }
-  if (numDays % 1 !== 0 || !(numDays > 0 && numDays <= 60)) {
+  if (numDays % 1 !== 0 || !(numDays > 0 && numDays <= 90)) {
     return res.status(400).json({msg: "days should be an integer within 1 and 60"})
   }
   //console.log(city, state_name);
