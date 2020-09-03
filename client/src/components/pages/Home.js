@@ -8,21 +8,6 @@ import { Button } from '@material-ui/core';
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 
-
-// class Home extends React.Component {
-//   constructor(props) {
-//     state = {
-//       covidData : []
-//     }
-//   }
-
-//   handleCovidData = data => {
-//     this.setState({
-//       covidData: data
-//     })
-//   }
-// }
-
 const maxDays = 60;
 
 const buttonStyle = {
@@ -42,7 +27,6 @@ const Home = () => {
     console.log(e.currentTarget.value)
     var numberDays = parseInt(e.currentTarget.value)
   setNumDays(numberDays)
-    // buttonSubmit(numberDays);
 
   }
 
@@ -56,7 +40,7 @@ const Home = () => {
     setGettingData(true);
     API.getCovidData(input.city, input.state_name, num)
       .then((res) => {
-        console.log(res.data.data);
+        
         var array = res.data.data;
         var results = array.map((item) => {
           var covidObj = {
@@ -64,7 +48,8 @@ const Home = () => {
             dailyInfected: item.confirmed_diff,
             totalDeaths: item.deaths,
             dailydeaths: item.deaths_diff,
-            date: item.date,
+            // date: item.date,
+            date: new Date(item.date).getMonth()+"/"+new Date(item.date).getDate(),
           };
           return covidObj;
         });

@@ -13,8 +13,14 @@ import {
 //   { argument: 3, value: 30 },
 // ];
 
+
+const chartStyle = {
+  width: '50%',
+};
+
+
 export default (props) => (
-  <Paper>
+  <Paper style = {chartStyle}>
     <Chart
       data={props.data}
     >
