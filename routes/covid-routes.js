@@ -10,8 +10,9 @@ router.get("/api/covid", async (req, res) => {
     return res.status(400).json({ msg: "query string is empty" });
   }
   if (numDays % 1 !== 0 || !(numDays > 0 && numDays <= 90)) {
-    return res.status(400).json({msg: "days should be an integer within 1 and 60"})
-
+    return res
+      .status(400)
+      .json({ msg: "days should be an integer within 1 and 60" });
   }
   //console.log(city, state_name);
   db.City.find({
@@ -19,15 +20,17 @@ router.get("/api/covid", async (req, res) => {
     state_name: new RegExp(state_name, "i"),
   })
     .then((info) => {
-      //console.log(info);
-      if (info && info.length != 0) {
+      console.log(info);
+      if (info && info.length === 1) {
+        console.log(info);
         return { county: info[0].county_name, state_name };
       } else {
-        return { msg: "no data from api" };
+        return { msg: "no data" };
       }
     })
     .then(async (info) => {
-      if (!info.county) return res.json(info);
+      console.log(info);
+      if (!info.county) return res.json({ data: [] });
       try {
         var data = await findCovidData(info.state_name, info.county, numDays);
         return res.json({ data });
@@ -35,6 +38,10 @@ router.get("/api/covid", async (req, res) => {
         console.log("error", error);
         return res.json({ msg: "no data found" });
       }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ msg: "DB error" });
     });
 });
 // router.get("/api/city", async (req, res) => {
