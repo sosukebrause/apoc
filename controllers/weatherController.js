@@ -10,7 +10,7 @@ axios({
     "headers":{
     "content-type":"application/octet-stream",
     "x-rapidapi-host":"community-open-weather-map.p.rapidapi.com",
-    "x-rapidapi-key":"81e3052217msh79ee53aebbe768dp1116f8jsndc4e52bee0d0",
+    "x-rapidapi-key":process.env.WEATHERKEY,
     "useQueryString":true
     },"params":{
     "callback":"test",

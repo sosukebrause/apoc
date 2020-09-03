@@ -89,7 +89,7 @@ const buttonSubmit = (num = 7) => {
         <>
     {gettingData? null : <h3>Welcome {userData.user.displayName}</h3>}
         
-        <Search buttonSubmit = {buttonSubmit} handleChange = {handleChange}/>
+        <Search buttonSubmit = {buttonSubmit} gettingData = {gettingData} handleChange = {handleChange}/>
       {gettingData ? <h1>Loading</h1> : null} 
         {covidData.length > 0?
         <>
