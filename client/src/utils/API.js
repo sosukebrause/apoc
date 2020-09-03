@@ -14,4 +14,13 @@ export default {
         params: { city, state_name, days}
       })
 },
+
+getEarthquakeData: function(){
+
+    return axios({
+
+
+    })
+}
+
 }

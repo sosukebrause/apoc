@@ -23,6 +23,7 @@ export default (props) => (
 
       <LineSeries valueField="dailyInfected" argumentField="date" />
       <LineSeries valueField="dailydeaths" argumentField="date" />
+      <LineSeries valueField="totalDeaths" argumentField="date" />
     </Chart>
   </Paper>
 );
