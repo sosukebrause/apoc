@@ -20,7 +20,7 @@ router.get("/api/covid", async (req, res) => {
     state_name: new RegExp(state_name, "i"),
   })
     .then((info) => {
-      //console.log(info);
+      console.log(info);
       if (info && info.length === 1) {
         console.log(info);
         return { county: info[0].county_name, state_name };
