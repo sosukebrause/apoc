@@ -55,7 +55,7 @@ const Search = (props) => {
       <div className="form-group" style={divStyle}></div>
       {/* <h4 style={divStyle} >City Search:</h4> */}
       <Input
-      disabled = {props.gettingData}
+      disabled = {props.loadingInfo}
         style={divStyle}
         type="text"
         className="form-control"
@@ -65,7 +65,7 @@ const Search = (props) => {
         onChange={props.handleChange}
       />
       <Input
-        disabled = {props.gettingData}
+        disabled = {props.loadingInfo}
         style={divStyle}
         type="text"
         id="search"
@@ -74,7 +74,7 @@ const Search = (props) => {
         className="form-control"
         onChange={props.handleChange}
       />
-      <Button variant="outlined" disabled = {props.gettingData} onClick={props.buttonSubmit}>
+      <Button variant="outlined" disabled = {props.loadingInfo} onClick={props.buttonSubmit}>
         submit
       </Button>
     </>
