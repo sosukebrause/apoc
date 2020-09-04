@@ -4,7 +4,7 @@ const db = require("../models");
 router.get("/api/covid", async (req, res) => {
   var city = req.query.city;
   var state_name = req.query.state_name;
-  var numDays = Number(req.query.days) || 30;
+  var numDays = Number(req.query.days) || 60;
 
   if (!city || !state_name) {
     return res.status(400).json({ msg: "query string is empty" });

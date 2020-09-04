@@ -13,11 +13,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const apiRoutes = require("./routes/api-routes");
 const CovidRoutes = require("./routes/covid-routes");
 const WeatherRoutes = require("./routes/weather-routes");
 const userRoutes = require("./routes/user-routes");
-app.use(apiRoutes);
 app.use(CovidRoutes);
 app.use(WeatherRoutes);
 app.use("/users", userRoutes);

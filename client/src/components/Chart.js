@@ -13,8 +13,14 @@ import {
 //   { argument: 3, value: 30 },
 // ];
 
+
+const chartStyle = {
+  width: '50%',
+};
+
+
 export default (props) => (
-  <Paper>
+  <Paper style = {chartStyle}>
     <Chart
       data={props.data}
     >
@@ -23,6 +29,7 @@ export default (props) => (
 
       <LineSeries valueField="dailyInfected" argumentField="date" />
       <LineSeries valueField="dailydeaths" argumentField="date" />
+      <LineSeries valueField="totalDeaths" argumentField="date" />
     </Chart>
   </Paper>
 );
