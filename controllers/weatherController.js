@@ -1,24 +1,12 @@
 module.exports = {
-findWeatherData: function(city) {
+findWeatherData: function(lat, lng) {
 
 const axios = require("axios");
 require("dotenv").config();
 
 axios({
     "method":"GET",
-    "url":"https://community-open-weather-map.p.rapidapi.com/weather",
-    "headers":{
-    "content-type":"application/octet-stream",
-    "x-rapidapi-host":"community-open-weather-map.p.rapidapi.com",
-    "x-rapidapi-key":process.env.WEATHERKEY,
-    "useQueryString":true
-    },"params":{
-    "callback":"test",
-    "id":"2172797",
-    "units":"imperial",
-    // "mode":"",
-    "q":`${city},usa`
-    }
+    "url":`http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lng}&dt=1586468027&appid=${WEATHERKEY}`,
     })
     .then((response)=>{
       console.log(response)
@@ -29,3 +17,4 @@ axios({
 
 }
 }
+

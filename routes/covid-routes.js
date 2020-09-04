@@ -16,14 +16,14 @@ router.get("/api/covid", async (req, res) => {
   }
   //console.log(city, state_name);
   db.City.find({
-    city: new RegExp(city, "i"),
-    state_name: new RegExp(state_name, "i"),
+    city: new RegExp("^"+city, "i"),
+    state_name: new RegExp("^"+state_name, "i"),
   })
     .then((info) => {
       console.log(info);
       if (info && info.length === 1) {
         console.log(info);
-        return { county: info[0].county_name, state_name };
+        return { county: info[0].county_name, state_name: info[0].state_name };
       } else {
         return { msg: "no data" };
       }

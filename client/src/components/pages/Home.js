@@ -22,14 +22,7 @@ const Home = () => {
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [numDays, setNumDays] = useState(maxDays);
   const [input, setInput] = useState({ city: "", state_name: "" });
-  const changeNumber = (e) => {
-    // setNumDays({numDays, [e.target.name]: e.target.value});
-    console.log(e.currentTarget.value);
-    var numberDays = parseInt(e.currentTarget.value);
-    // API.getCovidData(input.city, input.state_name, numberDays).then((res) => {
-    buttonSubmit(numberDays);
-    // })
-  };
+
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -42,11 +35,6 @@ const Home = () => {
   setNumDays(numberDays)
 
   }
-
-  const handleChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-
-  };
 
   const buttonSubmit = (num = maxDays) => {
     console.log(input.city, input.state_name);
@@ -72,7 +60,10 @@ const Home = () => {
         setLoadingInfo(false);
         // console.log(res.data.data[0].confirmed, res.data.data[0].confirmed_diff, res.data.data[0].deaths, res.data.data[0].deaths_diff, res.data.data[0].date)
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err.response)
+        setLoadingInfo(false);
+     });
   };
 
 // var seven = covidData.slice(-7)

@@ -15,6 +15,16 @@ export default {
       })
 },
 
+
+   //gets Weather data from search
+   getWeatherData: function(lat, lng) {
+       return axios({
+        url: "http://localhost:5000/api/weather",
+        method: "GET",
+        params: { lat, lng}
+       })
+   }, 
+
 getEarthquakeData: function(){
 
     return axios({

@@ -18,7 +18,7 @@ const Header = () => {
         <h1 id="title" className="title blink">
           Danger Danger!
         </h1>
-        <img src = {explosion} style = {divStyle} alt="not working"/>
+        {/* <img src = {explosion} style = {divStyle} alt="not working"/> */}
         <AuthButtons />
         {/* <Animation/> */}
       </header>
