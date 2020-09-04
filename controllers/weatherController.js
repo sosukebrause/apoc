@@ -6,7 +6,8 @@ require("dotenv").config();
 
 axios({
     "method":"GET",
-    "url":`http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lng}&dt=1586468027&appid=${WEATHERKEY}`,
+    "url":`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&
+    exclude=daily&appid=${process.env.WEATHERKEY}`,
     })
     .then((response)=>{
       console.log(response)
