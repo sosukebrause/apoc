@@ -4,23 +4,36 @@ import Form from "../card/AuthPost";
 import Danger from "../Danger";
 import Search from "./Search";
 import Chart from "../Chart";
-import { Button } from '@material-ui/core';
+import { Button } from "@material-ui/core";
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 
 const maxDays = 60;
 
+
 const buttonStyle = {
-  marginLeft: '10px',
+  marginLeft: "10px",
 };
 
 const Home = () => {
+  
 
   const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [numDays, setNumDays] = useState(maxDays);
   const [input, setInput] = useState({ city: "", state_name: "" });
+  const changeNumber = (e) => {
+    // setNumDays({numDays, [e.target.name]: e.target.value});
+    console.log(e.currentTarget.value);
+    var numberDays = parseInt(e.currentTarget.value);
+    // API.getCovidData(input.city, input.state_name, numberDays).then((res) => {
+    buttonSubmit(numberDays);
+    // })
+  };
 
+  const handleChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
   const changeNumber = (e) => {
     // setNumDays({numDays, [e.target.name]: e.target.value});
@@ -54,6 +67,7 @@ const Home = () => {
           return covidObj;
         });
 
+
         setCovidData(results);
         setLoadingInfo(false);
         // console.log(res.data.data[0].confirmed, res.data.data[0].confirmed_diff, res.data.data[0].deaths, res.data.data[0].deaths_diff, res.data.data[0].date)
@@ -66,6 +80,7 @@ const Home = () => {
 
   const { userData } = useUserContext();
   // console.log(userData);
+
   // console.log("CovidData", covidData);
   return (
     <div className="page">
@@ -97,6 +112,7 @@ const Home = () => {
 
           </>
         )}
+
     </div>
   );
 };
