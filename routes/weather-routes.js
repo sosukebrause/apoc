@@ -16,9 +16,7 @@ router.get("/api/weather", async (req, res) => {
       state_name: new RegExp("^"+state_name, "i"),
     })
       .then((info) => {
-        console.log(info);
         if (info && info.length === 1) {
-          console.log(info);
           return { lat: info[0].lat, lng: info[0].lng };
         } else {
           return { msg: "no data" };
