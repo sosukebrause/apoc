@@ -25,6 +25,15 @@ export default {
        })
    }, 
 
+      //gets Air data data from search
+      getAirData: function(city, state_name) {
+        return axios({
+         url: "http://localhost:5000/api/air",
+         method: "GET",
+         params: {city, state_name}
+        })
+    }, 
+
 getEarthquakeData: function(){
 
     return axios({
