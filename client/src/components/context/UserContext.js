@@ -35,7 +35,7 @@ function UserProvider({ ...props }) {
           });
           setUserData({
             token,
-            user: userRes.data,
+            user: userRes.data.user,
           });
         } catch (err) {
           console.log(err);
