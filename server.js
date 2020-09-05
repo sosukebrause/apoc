@@ -16,8 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 const CovidRoutes = require("./routes/covid-routes");
 const WeatherRoutes = require("./routes/weather-routes");
 const userRoutes = require("./routes/user-routes");
+const airRoutes = require("./routes/air-routes");
 app.use(CovidRoutes);
 app.use(WeatherRoutes);
+app.use(airRoutes);
 app.use("/users", userRoutes);
 app.use("/feed", require("./routes/user-routes"));
 

@@ -9,6 +9,7 @@ import Loader from "react-loader"
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 import Weather from "../Weather";
+import AirQuality from "../AirQuality"
 
 const maxDays = 60;
 
@@ -31,6 +32,7 @@ const Home = () => {
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [numDays, setNumDays] = useState(maxDays);
   const [weatherData, setWeatherData] = useState(null);
+  const [airData, setAirData] = useState(null);
   // const [input, setInput] = useState({ city: "", state_name: "" });
 
 
@@ -93,10 +95,37 @@ const Home = () => {
       })
   }
 
+//Air Quality function
+const loadAirData = (city, state_name) => {
+  API.getAirData(city, state_name)
+    .then((res) => {
+      console.log(res.data)
+      var data = res.data;
+      if (data.data) {
+        var airObj = {
+          aqi: data.data.data.aqi,
+          dominentpol: data.data.data.dominentpol,
+         co: data.data.data.iaqi.co.v,
+
+          no2: data.data.data.iaqi.no2.v,
+          o3: data.data.data.iaqi.o3 ? data.data.data.iaqi.o3.v : null,
+          pm25: data.data.data.iaqi.pm25.v,
+          
+        };
+        setAirData(airObj);
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+
 
   const buttonSubmit = (city, state_name, county) => {
     loadCovidData(city, state_name, county)
     loadWeatherData(city, state_name)
+    loadAirData(city, state_name)
   };
 
 
@@ -129,10 +158,11 @@ const Home = () => {
                 <Button variant="outlined" color="secondary" disabled={loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
                 <br></br>
           
-                <Danger />
+                {/* <Danger /> */}
               </> : null
             }
               {weatherData &&  <Weather weatherObj = {weatherData}/>}
+              {airData &&  <AirQuality airObj = {airData}/>}
             {/* <Form inputName={"todoText"} /> */}
 
 
