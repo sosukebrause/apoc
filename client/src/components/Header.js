@@ -4,7 +4,7 @@ import "./Header.css";
 
 import AuthButtons from "./auth/AuthButtons";
 // import { Fade } from "@material-ui/core";
-import explosion from "../images/explosion.png";
+// import explosion from "../images/explosion.png";
 
 const divStyle = {
   // height: "80px",

@@ -7,14 +7,19 @@ const divStyle = {
 };
 
 const Search = (props) => {
-  // const [city, setCity] = useState("");
-  // const [state_name, setStateName] = useState("");
-  // const [input, setInput] = useState({ city: "", state_name: "" });
 
-  // const handleChange = (e) => {
-  //   setInput({ ...input, [e.target.name]: e.target.value });
-  // };
+  const [input, setInput] = useState({ city: "", state_name: "" });
 
+  const handleChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+
+  const buttonSubmit = () => {
+    console.log(input);
+    props.buttonSubmit(input.city, input.state_name, null)
+
+  }
   // const buttonSubmit = () => {
   //   console.log(input.city, input.state_name);
   //   props.setGettingData(true);
@@ -40,16 +45,6 @@ const Search = (props) => {
   //     .catch((err) => console.log(err));
   // };
 
-  // const handleCityChange = (e) => {
-  // console.log(e.target.value)
-  // setCity(e.target.value);
-  // }
-
-  // const handleStateChange = (e) => {
-  //   console.log(e.target.value)
-  //   setStateName(e.target.value);
-  //   }
-
   return (
     <>
       <div className="form-group" style={divStyle}></div>
@@ -62,7 +57,7 @@ const Search = (props) => {
         name="city"
         id="search"
         placeholder="Type a city"
-        onChange={props.handleChange}
+        onChange={handleChange}
       />
       <Input
         disabled = {props.loadingInfo}
@@ -72,9 +67,9 @@ const Search = (props) => {
         placeholder="Type a state"
         name="state_name"
         className="form-control"
-        onChange={props.handleChange}
+        onChange={handleChange}
       />
-      <Button variant="outlined" disabled = {props.loadingInfo} onClick={props.buttonSubmit}>
+      <Button variant="outlined" disabled = {props.loadingInfo} onClick={buttonSubmit}>
         submit
       </Button>
     </>

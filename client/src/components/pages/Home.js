@@ -16,18 +16,25 @@ const buttonStyle = {
   marginLeft: "10px",
 };
 
+
+const AuxButton = () => {
+  
+}
+
+
+
 const Home = () => {
   
 
   const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [numDays, setNumDays] = useState(maxDays);
-  const [input, setInput] = useState({ city: "", state_name: "" });
+  // const [input, setInput] = useState({ city: "", state_name: "" });
 
 
-  const handleChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e) => {
+  //   setInput({ ...input, [e.target.name]: e.target.value });
+  // };
 
   const changeNumber = (e) => {
     // setNumDays({numDays, [e.target.name]: e.target.value});
@@ -37,10 +44,9 @@ const Home = () => {
 
   }
 
-  const buttonSubmit = (num = maxDays) => {
-    console.log(input.city, input.state_name);
+  const buttonSubmit = (city, state_name, county) => {
     setLoadingInfo(true);
-    API.getCovidData(input.city, input.state_name, num)
+    API.getCovidData(city, state_name, county, maxDays)
       .then((res) => {
         
         var array = res.data.data;
@@ -84,7 +90,7 @@ const Home = () => {
           <>
             {loadingInfo ? null : <h3>Welcome {userData.user.displayName}</h3>}
 
-            <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} handleChange={handleChange} />
+            <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo}  />
             {loadingInfo ? <Loader loaded={false} lines={13} length={20} width={10} radius={30}
     corners={1} rotate={0} direction={1} color="#000" speed={1}
     trail={60} shadow={false} hwaccel={false} className="spinner"
