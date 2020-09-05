@@ -17,11 +17,11 @@ export default {
 
 
    //gets Weather data from search
-   getWeatherData: function(lat, lng) {
+   getWeatherData: function(city, state_name) {
        return axios({
         url: "http://localhost:5000/api/weather",
         method: "GET",
-        params: { lat, lng}
+        params: { city, state_name}
        })
    }, 
 
