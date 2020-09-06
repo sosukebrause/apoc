@@ -10,6 +10,7 @@ import Loader from "react-loader"
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 import Weather from "../Weather";
+import MyMap from "../MyMap";
 import "./Home.css"
 
 const maxDays = 60;
@@ -158,16 +159,13 @@ const Home = () => {
             
             {covidData.length > 0 ?
               <>
-              
                   <Chart data={covidData} loadingInfo = {loadingInfo}/>
-             
-              
+             <MyMap/>
                 <br></br>
 
                 {/* <Danger /> */}
               </> : null
             }
-          
             {/* <Form inputName={"todoText"} /> */}
 
 
