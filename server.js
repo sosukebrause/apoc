@@ -17,9 +17,11 @@ const CovidRoutes = require("./routes/covid-routes");
 const WeatherRoutes = require("./routes/weather-routes");
 const userRoutes = require("./routes/user-routes");
 const airRoutes = require("./routes/air-routes");
+const MapRoutes = require("./routes/map-routes");
 app.use(CovidRoutes);
 app.use(WeatherRoutes);
 app.use(airRoutes);
+app.use(MapRoutes);
 app.use("/users", userRoutes);
 app.use("/feed", require("./routes/user-routes"));
 
