@@ -9,26 +9,26 @@ export default (props) => {
 
 let data = [
     { pollutant: "aqi",
-    pollutantValue: props.airObj.aqi
+    aqi: props.airObj.aqi, 
     },
     { pollutant: "co",
-    pollutantValue: props.airObj.co
+    "carbon Monoxide": props.airObj.co 
     },
     { pollutant: "o3",
-    pollutantValue: props.airObj.o3
+    ozone: props.airObj.o3 
     },
     { pollutant: "pm25",
-    pollutantValue: props.airObj.pm25
+    "particle Matter": props.airObj.pm25 
     },
     { pollutant: "no2",
-    pollutantValue: props.airObj.no2
+    "nitrogen Dioxide": props.airObj.no2 
     },
 ]
 
 return (
     <ResponsiveBar
         data={data}
-        keys={[ "polluntantValue" ]}
+        keys={[ "aqi", "carbon Monoxide", "ozone", "particle Matter", "nitrogen Dioxide"]}
         indexBy="pollutant"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
@@ -53,20 +53,20 @@ return (
                 spacing: 10
             }
         ]}
-        // fill={[
-        //     {
-        //         match: {
-        //             id: 'fries'
-        //         },
-        //         id: 'dots'
-        //     },
-        //     {
-        //         match: {
-        //             id: 'sandwich'
-        //         },
-        //         id: 'lines'
-        //     }
-        // ]}
+        fill={[
+            {
+                match: {
+                    id: 'fries'
+                },
+                id: 'dots'
+            },
+            {
+                match: {
+                    id: 'sandwich'
+                },
+                id: 'lines'
+            }
+        ]}
         borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
         axisTop={null}
         axisRight={null}

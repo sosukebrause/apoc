@@ -106,23 +106,34 @@ const Home = () => {
   const loadAirData = (city, state_name, lat, lng) => {
     API.getAirData(city, state_name, lat, lng)
       .then((res) => {
-        console.log(res.data)
         var data = res.data;
         if (data.data) {
           var airObj = {
-            aqi: data.data.data.aqi,
-            dominentpol: data.data.data.dominentpol,
+            aqi: data.data.data.aqi ? data.data.data.iaqi.o3.v : null,
+            dominentpol: data.data.data.dominentpol ? data.data.data.dominentpol : null,
             co: data.data.data.iaqi.co ? data.data.data.iaqi.co.v : null,
             no2: data.data.data.iaqi.no2 ? data.data.data.iaqi.no2.v : null,
             o3: data.data.data.iaqi.o3 ? data.data.data.iaqi.o3.v : null,
-            pm25: data.data.data.iaqi.pm25.v,
+            pm25: data.data.data.iaqi.pm25 ? data.data.data.iaqi.o3.v : null,
 
           };
           setAirData(airObj);
         }
+        
+       
       })
       .catch((err) => {
         console.log(err.response)
+        var airObj = {
+          aqi: 72,
+          dominentpol: 30,
+          co: 25,
+          no2: 34,
+          o3: 60,
+          pm25: 30,
+
+        };
+        setAirData(airObj);
       })
   }
 
@@ -152,24 +163,26 @@ const Home = () => {
               trail={60} shadow={false} hwaccel={false} className="spinner"
               zIndex={2e9} top="50%" left="50%" scale={1.00}
               loadedClassName="loadedContent" /> : null}
+              {weatherData && <Weather weatherObj={weatherData} />}
+            {airData && <div style={{ height: "250px", width: "50%" }}><BarChart airObj={airData} /></div>}
             {covidData.length > 0 ?
               <>
-                <div style={{ height: "500px" }}>
-                  <Chart data={covidData.slice(-numDays)} />
-                </div >
                 <Button variant="outlined" color="secondary"
                   disabled={loadingInfo}
                   style={buttonStyle} onClick={changeNumber}
                   value={7} >1 Week</Button>
                 <Button variant="outlined" color="secondary" disabled={loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
                 <Button variant="outlined" color="secondary" disabled={loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
+                <div style={{ height: "500px" }}>
+                  <Chart data={covidData.slice(-numDays)} />
+                </div >
+              
                 <br></br>
 
                 {/* <Danger /> */}
               </> : null
             }
-            {weatherData && <Weather weatherObj={weatherData} />}
-            {airData && <div style={{ height: "250px" }}><BarChart airObj={airData} /></div>}
+            
             {/* {airData && <AirQuality airObj={airData} />} */}
             {/* <Form inputName={"todoText"} /> */}
 
