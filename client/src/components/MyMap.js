@@ -5,8 +5,8 @@ import "./MyMap.css"
 const MyMap = (props) => {
 
 const [mapData, setMapData] = useState( {
-    lat: 51.505,
-    lng: -0.09,
+    lat: props.mapObj.lat,
+    lng: props.mapObj.lng,
     zoom: 13
   }
 );

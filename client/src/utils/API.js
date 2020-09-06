@@ -34,6 +34,16 @@ export default {
         })
     }, 
 
+    getMapData: function(city, state_name, lat, lng) {
+        return axios({
+         url: "/api/map",
+         method: "GET",
+         params: {city, state_name, lat, lng}
+        })
+    }, 
+
+
+
 getEarthquakeData: function(){
 
     return axios({

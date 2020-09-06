@@ -32,6 +32,7 @@ const Home = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
+  const [mapInfo, setMapInfo] = useState(null)
   // const [input, setInput] = useState({ city: "", state_name: "" });
 
 
@@ -40,7 +41,17 @@ const Home = () => {
     buttonSubmit(value.city, value.state_name, value.county, value.lat, value.lng)
   }
 
+//map Data function
+const loadMapData = (city, state_name, lat, lng) => {
+API.getMapData(city, state_name, lat, lng).then((res) => {
+  console.log(res.data)
+  var mapObj = res.data.data[0];
+  setMapInfo(mapObj);
+})  .catch((err) => {
+  console.log(err.response)
+})
 
+}
 
   //covid function
   const loadCovidData = (city, state_name, county) => {
@@ -130,6 +141,7 @@ const Home = () => {
     loadWeatherData(city, state_name, lat, lng)
     loadAirData(city, state_name, lat, lng)
     loadCovidData(city, state_name, county)
+    loadMapData(city, state_name, lat, lng)
   };
 
 
@@ -160,7 +172,10 @@ const Home = () => {
             {covidData.length > 0 ?
               <>
                   <Chart data={covidData} loadingInfo = {loadingInfo}/>
-             <MyMap/>
+                  <div>
+            {mapInfo && <MyMap mapObj = {mapInfo}/> }
+                  </div>
+            
                 <br></br>
 
                 {/* <Danger /> */}
