@@ -129,7 +129,6 @@ const Home = () => {
 
 
   const buttonSubmit = (city, state_name, county, lat, lng) => {
-    
     loadWeatherData(city, state_name, lat, lng)
     loadAirData(city, state_name, lat, lng)
     loadCovidData(city, state_name, county)
