@@ -149,7 +149,10 @@ const loadAirData = (city, state_name) => {
               loadedClassName="loadedContent" /> : null}
             {covidData.length > 0 ?
               <>
-                <Chart data={covidData.slice(-numDays)} title={"hello"} />
+              <div style = {{height: "500px"}}>
+              <Chart data={covidData.slice(-numDays)} />
+              </div>
+                
                 <Button variant="outlined" color="secondary"
                   disabled={loadingInfo}
                   style={buttonStyle} onClick={changeNumber}

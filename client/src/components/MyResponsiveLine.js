@@ -1,53 +1,27 @@
 import React from "react";
 import { ResponsiveLine } from '@nivo/line'
+import data from "../data2.json"
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-export default (props) => {
-  //totalDeaths: item.deaths,
-  //dailydeaths: item.deaths_diff,
-  let dailyDeaths = {data: []}, totalDeaths = {data: []}, dailyInfected = {data: []};
-  props.data.map(item=>{
-    dailyDeaths.data.push({
-      "x": item.date, "y": item.dailydeaths
-    });
-    totalDeaths.data.push({
-      "x": item.date, "y": item.totalDeaths
-    });
-    dailyInfected.data.push({
-      "x": item.date, "y": item.dailyInfected
-    });
-  });
-  let data = [
-    {
-      "id": "Daily Deaths",
-      data: dailyDeaths.data
-    },
-    {
-      "id": "Total Deaths",
-      data: totalDeaths.data
-    },
-    {
-      "id": "Daily Cases",
-      data: dailyInfected.data
-    }
-  ];
-  return (
+const MyResponsiveLine = () => (
+
+    
     <ResponsiveLine
         data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
-        yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
+        yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
         axisTop={null}
         axisRight={null}
         axisBottom={{
             orient: 'bottom',
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 90,
-            //legend: 'Date',
+            tickRotation: 0,
+            legend: 'transportation',
             legendOffset: 36,
             legendPosition: 'middle'
         }}
@@ -95,5 +69,6 @@ export default (props) => {
             }
         ]}
     />
-  );
-}
+)
+
+export default MyResponsiveLine;
