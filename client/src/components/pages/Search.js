@@ -10,7 +10,6 @@ const Search = (props) => {
   // const [city, setCity] = useState("");
   // const [state_name, setStateName] = useState("");
   const [input, setInput] = useState({ city: "", state_name: "" });
-
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
