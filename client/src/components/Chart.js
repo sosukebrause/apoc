@@ -1,7 +1,26 @@
-import React from "react";
-import { ResponsiveLine } from '@nivo/line'
+import React, { useState } from "react";
+import { ResponsiveLine } from '@nivo/line';
+import { Button } from "@material-ui/core";
+
+const maxDays = 60;
+
+const buttonStyle = {
+  marginLeft: "10px",
+};
+
+
 
 export default (props) => {
+
+  const [numDays, setNumDays] = useState(maxDays);
+
+const changeNumber = (e) => {
+  // setNumDays({numDays, [e.target.name]: e.target.value});
+  console.log(e.currentTarget.value)
+  var numberDays = parseInt(e.currentTarget.value)
+  setNumDays(numberDays)
+
+}
  
   let dailyDeaths = {data: []}, totalDeaths = {data: []}, dailyInfected = {data: []};
   props.data.map(item=>{
@@ -18,18 +37,27 @@ export default (props) => {
   let data = [
     {
       "id": "Daily Deaths",
-      data: dailyDeaths.data
+      data: dailyDeaths.data.slice(-numDays)
     },
     {
       "id": "Total Deaths",
-      data: totalDeaths.data
+      data: totalDeaths.data.slice(-numDays)
     },
     {
       "id": "Daily Cases",
-      data: dailyInfected.data
+      data: dailyInfected.data.slice(-numDays)
     }
   ];
   return (
+    <>
+    <div>
+        <Button variant="outlined" color="secondary"
+                  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber}
+                  value={7} >1 Week</Button>
+                <Button variant="outlined" color="secondary" disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
+                <Button variant="outlined" color="secondary" disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
+    </div>
+     <div style={{ height: "500px" }}>
     <ResponsiveLine
         data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -55,7 +83,10 @@ export default (props) => {
             legendOffset: -40,
             legendPosition: 'middle'
         }}
+        enableGridX = {true}
+        enableGridY = {false}
         colors={{ scheme: 'nivo' }}
+        // enableArea = {true}
         pointSize={10}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}
@@ -90,5 +121,7 @@ export default (props) => {
             }
         ]}
     />
+    </div>
+    </>
   );
 }

@@ -32,7 +32,7 @@
 #img {
     display: inline;
     float: right;
-    z-index: 5;
+    z-index: -5;
     right: 50%;
     top: 28%;
     width: auto;
@@ -46,7 +46,7 @@
 
   #img2 {
     display: inline;
-    z-index: 5;
+    z-index: -5;
     left: 50%;
     top: 28%;
     width: auto;

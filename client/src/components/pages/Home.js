@@ -10,15 +10,9 @@ import Loader from "react-loader"
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 import Weather from "../Weather";
-
+import "./Home.css"
 
 const maxDays = 60;
-
-
-const buttonStyle = {
-  marginLeft: "10px",
-};
-
 
 const AuxButton = (props) => {
   var array = props.options
@@ -33,7 +27,7 @@ const Home = () => {
 
   const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
-  const [numDays, setNumDays] = useState(maxDays);
+  // const [numDays, setNumDays] = useState(maxDays);
   const [weatherData, setWeatherData] = useState(null);
   const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
@@ -45,13 +39,7 @@ const Home = () => {
     buttonSubmit(value.city, value.state_name, value.county, value.lat, value.lng)
   }
 
-  const changeNumber = (e) => {
-    // setNumDays({numDays, [e.target.name]: e.target.value});
-    console.log(e.currentTarget.value)
-    var numberDays = parseInt(e.currentTarget.value)
-    setNumDays(numberDays)
 
-  }
 
   //covid function
   const loadCovidData = (city, state_name, county) => {
@@ -163,22 +151,16 @@ const Home = () => {
               trail={60} shadow={false} hwaccel={false} className="spinner"
               zIndex={2e9} top="50%" left="50%" scale={1.00}
               loadedClassName="loadedContent" /> : null}
-              <div id = "weather">
+              <div className = "weather">
               {weatherData && <Weather weatherObj={weatherData} />}
-            {airData && <div style={{ height: "250px", width: "50%" }}><BarChart airObj={airData} /></div>}
+              {airData && <div style={{ height: "250px", width: "50%" }}><BarChart airObj={airData} /></div>}
               </div>
             
             {covidData.length > 0 ?
               <>
-                <Button variant="outlined" color="secondary"
-                  disabled={loadingInfo}
-                  style={buttonStyle} onClick={changeNumber}
-                  value={7} >1 Week</Button>
-                <Button variant="outlined" color="secondary" disabled={loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
-                <Button variant="outlined" color="secondary" disabled={loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
-                <div style={{ height: "500px" }}>
-                  <Chart data={covidData.slice(-numDays)} />
-                </div >
+              
+                  <Chart data={covidData} loadingInfo = {loadingInfo}/>
+             
               
                 <br></br>
 
