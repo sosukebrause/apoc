@@ -16,7 +16,8 @@
     "express-session": "^1.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.0",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "react-simple-maps": "^2.1.2"
   },
   "devDependencies": {},
   "scripts": {
