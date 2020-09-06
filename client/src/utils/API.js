@@ -17,20 +17,20 @@ export default {
 
 
    //gets Weather data from search
-   getWeatherData: function(city, state_name) {
+   getWeatherData: function(city, state_name, lat, lng) {
        return axios({
         url: "http://localhost:5000/api/weather",
         method: "GET",
-        params: { city, state_name}
+        params: { city, state_name, lat, lng}
        })
    }, 
 
       //gets Air data data from search
-      getAirData: function(city, state_name) {
+      getAirData: function(city, state_name, lat, lng) {
         return axios({
          url: "http://localhost:5000/api/air",
          method: "GET",
-         params: {city, state_name}
+         params: {city, state_name, lat, lng}
         })
     }, 
 

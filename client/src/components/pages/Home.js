@@ -19,11 +19,13 @@ const buttonStyle = {
 };
 
 
-const AuxButton = () => {
-
+const AuxButton = (props) => {
+  var array = props.options
+  let newItems = array.map((item, index) => {
+    return <Button onClick={props.handleAuxButton} variant="outlined" color="secondary" data-index={index} key={index}>{item.city}, {item.state_name}</Button>
+  })
+  return newItems;
 }
-
-
 
 const Home = () => {
 
@@ -33,12 +35,14 @@ const Home = () => {
   const [numDays, setNumDays] = useState(maxDays);
   const [weatherData, setWeatherData] = useState(null);
   const [airData, setAirData] = useState(null);
+  const [suggestions, setSuggestionsData] = useState(null);
   // const [input, setInput] = useState({ city: "", state_name: "" });
 
 
-  // const handleChange = (e) => {
-  //   setInput({ ...input, [e.target.name]: e.target.value });
-  // };
+  const handleAuxButton = (e) => {
+  let value = suggestions[e.currentTarget.dataset.index]
+  buttonSubmit(value.city, value.state_name, value.county, value.lat, value.lng)
+}
 
   const changeNumber = (e) => {
     // setNumDays({numDays, [e.target.name]: e.target.value});
@@ -49,16 +53,16 @@ const Home = () => {
   }
 
 
-//covid function
+  //covid function
   const loadCovidData = (city, state_name, county) => {
     setLoadingInfo(true);
+    setSuggestionsData(null)
     API.getCovidData(city, state_name, county, maxDays)
       .then((res) => {
-
         var array = res.data.data;
         var results = array.map((item) => {
           var covidObj = {
-            totalInfected: item.confirmed,
+            // totalInfected: item.confirmed,
             dailyInfected: item.confirmed_diff,
             totalDeaths: item.deaths,
             dailydeaths: item.deaths_diff,
@@ -71,14 +75,17 @@ const Home = () => {
       })
       .catch((err) => {
         console.log(err.response)
+        if (err.response.data.data) {
+          setSuggestionsData(err.response.data.data)
+        }
         setLoadingInfo(false);
       });
   }
 
 
   //Weather function
-  const loadWeatherData = (city, state_name) => {
-    API.getWeatherData(city, state_name)
+  const loadWeatherData = (city, state_name, lat, lng) => {
+    API.getWeatherData(city, state_name, lat, lng)
       .then((res) => {
         console.log(res.data)
         var data = res.data;
@@ -91,46 +98,46 @@ const Home = () => {
         setWeatherData(weatherObj);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err.response)
       })
   }
 
-//Air Quality function
-const loadAirData = (city, state_name) => {
-  API.getAirData(city, state_name)
-    .then((res) => {
-      console.log(res.data)
-      var data = res.data;
-      if (data.data) {
-        var airObj = {
-          aqi: data.data.data.aqi,
-          dominentpol: data.data.data.dominentpol,
-         co: data.data.data.iaqi.co.v,
+  //Air Quality function
+  const loadAirData = (city, state_name, lat, lng) => {
+    API.getAirData(city, state_name, lat, lng)
+      .then((res) => {
+        console.log(res.data)
+        var data = res.data;
+        if (data.data) {
+          var airObj = {
+            aqi: data.data.data.aqi,
+            dominentpol: data.data.data.dominentpol,
+            co:data.data.data.iaqi.co ? data.data.data.iaqi.co.v : null,
+            no2: data.data.data.iaqi.no2 ? data.data.data.iaqi.no2.v : null,
+            o3: data.data.data.iaqi.o3 ? data.data.data.iaqi.o3.v : null,
+            pm25: data.data.data.iaqi.pm25.v,
 
-          no2: data.data.data.iaqi.no2.v,
-          o3: data.data.data.iaqi.o3 ? data.data.data.iaqi.o3.v : null,
-          pm25: data.data.data.iaqi.pm25.v,
-          
-        };
-        setAirData(airObj);
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-}
-
+          };
+          setAirData(airObj);
+        }
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
+  }
 
 
-  const buttonSubmit = (city, state_name, county) => {
+
+  const buttonSubmit = (city, state_name, county, lat, lng) => {
+    
+    loadWeatherData(city, state_name, lat, lng)
+    loadAirData(city, state_name, lat, lng)
     loadCovidData(city, state_name, county)
-    loadWeatherData(city, state_name)
-    loadAirData(city, state_name)
   };
 
 
   const { userData } = useUserContext();
- 
+
   return (
     <div className="page">
       {!userData.user ? (
@@ -142,6 +149,7 @@ const loadAirData = (city, state_name) => {
             {loadingInfo ? null : <h3>Welcome {userData.user.displayName}</h3>}
 
             <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
+            {suggestions ? <AuxButton handleAuxButton = {handleAuxButton} options={suggestions} /> : null}
             {loadingInfo ? <Loader loaded={false} lines={13} length={20} width={10} radius={30}
               corners={1} rotate={0} direction={1} color="#000" speed={1}
               trail={60} shadow={false} hwaccel={false} className="spinner"
@@ -149,10 +157,10 @@ const loadAirData = (city, state_name) => {
               loadedClassName="loadedContent" /> : null}
             {covidData.length > 0 ?
               <>
-              <div style = {{height: "500px"}}>
-              <Chart data={covidData.slice(-numDays)} />
-              </div>
-                
+                <div style={{ height: "500px" }}>
+                  <Chart data={covidData.slice(-numDays)} />
+                </div>
+
                 <Button variant="outlined" color="secondary"
                   disabled={loadingInfo}
                   style={buttonStyle} onClick={changeNumber}
@@ -160,12 +168,12 @@ const loadAirData = (city, state_name) => {
                 <Button variant="outlined" color="secondary" disabled={loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
                 <Button variant="outlined" color="secondary" disabled={loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
                 <br></br>
-          
+
                 {/* <Danger /> */}
               </> : null
             }
-              {weatherData &&  <Weather weatherObj = {weatherData}/>}
-              {airData &&  <AirQuality airObj = {airData}/>}
+            {weatherData && <Weather weatherObj={weatherData} />}
+            {airData && <AirQuality airObj={airData} />}
             {/* <Form inputName={"todoText"} /> */}
 
 
