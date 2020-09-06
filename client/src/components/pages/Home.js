@@ -10,7 +10,7 @@ import Loader from "react-loader"
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 import Weather from "../Weather";
-import AirQuality from "../AirQuality"
+
 
 const maxDays = 60;
 
@@ -163,8 +163,11 @@ const Home = () => {
               trail={60} shadow={false} hwaccel={false} className="spinner"
               zIndex={2e9} top="50%" left="50%" scale={1.00}
               loadedClassName="loadedContent" /> : null}
+              <div id = "weather">
               {weatherData && <Weather weatherObj={weatherData} />}
             {airData && <div style={{ height: "250px", width: "50%" }}><BarChart airObj={airData} /></div>}
+              </div>
+            
             {covidData.length > 0 ?
               <>
                 <Button variant="outlined" color="secondary"
@@ -182,8 +185,7 @@ const Home = () => {
                 {/* <Danger /> */}
               </> : null
             }
-            
-            {/* {airData && <AirQuality airObj={airData} />} */}
+          
             {/* <Form inputName={"todoText"} /> */}
 
 
