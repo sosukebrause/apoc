@@ -22,10 +22,7 @@ const Header = () => {
         <img src={icon} />
         {/* <img className = "img2" src={icon} /> */}
 </div>
-     
-    
         <AuthButtons />
-     
       </header>
     </div>
   );

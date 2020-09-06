@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Danger from "../Danger";
 import Search from "./Search";
 import Chart from "../Chart";
+import BarChart from "../BarChart";
 import { Button } from "@material-ui/core";
 import Loader from "react-loader"
 import API from "../../utils/API";
@@ -40,9 +41,9 @@ const Home = () => {
 
 
   const handleAuxButton = (e) => {
-  let value = suggestions[e.currentTarget.dataset.index]
-  buttonSubmit(value.city, value.state_name, value.county, value.lat, value.lng)
-}
+    let value = suggestions[e.currentTarget.dataset.index]
+    buttonSubmit(value.city, value.state_name, value.county, value.lat, value.lng)
+  }
 
   const changeNumber = (e) => {
     // setNumDays({numDays, [e.target.name]: e.target.value});
@@ -51,7 +52,6 @@ const Home = () => {
     setNumDays(numberDays)
 
   }
-
 
   //covid function
   const loadCovidData = (city, state_name, county) => {
@@ -75,7 +75,7 @@ const Home = () => {
       })
       .catch((err) => {
         console.log(err.response)
-        if (err.response.data.data) {
+        if (err.response.data && err.response.data.data) {
           setSuggestionsData(err.response.data.data)
         }
         setLoadingInfo(false);
@@ -112,7 +112,7 @@ const Home = () => {
           var airObj = {
             aqi: data.data.data.aqi,
             dominentpol: data.data.data.dominentpol,
-            co:data.data.data.iaqi.co ? data.data.data.iaqi.co.v : null,
+            co: data.data.data.iaqi.co ? data.data.data.iaqi.co.v : null,
             no2: data.data.data.iaqi.no2 ? data.data.data.iaqi.no2.v : null,
             o3: data.data.data.iaqi.o3 ? data.data.data.iaqi.o3.v : null,
             pm25: data.data.data.iaqi.pm25.v,
@@ -125,8 +125,6 @@ const Home = () => {
         console.log(err.response)
       })
   }
-
-
 
   const buttonSubmit = (city, state_name, county, lat, lng) => {
     loadWeatherData(city, state_name, lat, lng)
@@ -148,7 +146,7 @@ const Home = () => {
             {loadingInfo ? null : <h3>Welcome {userData.user.displayName}</h3>}
 
             <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
-            {suggestions ? <AuxButton handleAuxButton = {handleAuxButton} options={suggestions} /> : null}
+            {suggestions ? <AuxButton handleAuxButton={handleAuxButton} options={suggestions} /> : null}
             {loadingInfo ? <Loader loaded={false} lines={13} length={20} width={10} radius={30}
               corners={1} rotate={0} direction={1} color="#000" speed={1}
               trail={60} shadow={false} hwaccel={false} className="spinner"
@@ -158,8 +156,7 @@ const Home = () => {
               <>
                 <div style={{ height: "500px" }}>
                   <Chart data={covidData.slice(-numDays)} />
-                </div>
-
+                </div >
                 <Button variant="outlined" color="secondary"
                   disabled={loadingInfo}
                   style={buttonStyle} onClick={changeNumber}
@@ -172,7 +169,8 @@ const Home = () => {
               </> : null
             }
             {weatherData && <Weather weatherObj={weatherData} />}
-            {airData && <AirQuality airObj={airData} />}
+            {airData && <div style={{ height: "250px" }}><BarChart airObj={airData} /></div>}
+            {/* {airData && <AirQuality airObj={airData} />} */}
             {/* <Form inputName={"todoText"} /> */}
 
 
