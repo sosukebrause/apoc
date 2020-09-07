@@ -11,6 +11,7 @@ import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 import Weather from "../Weather";
 import MyMap from "../MyMap";
+import Earthquake from "../Earthquake";
 import "./Home.css";
 
 const maxDays = 60;
@@ -41,6 +42,7 @@ const Home = () => {
   const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
   const [mapInfo, setMapInfo] = useState(null);
+  const [earthquakeInfo, setEarthquakeInfo] = useState(null);
   // const [input, setInput] = useState({ city: "", state_name: "" });
 
   const handleAuxButton = (e) => {
@@ -113,6 +115,10 @@ const Home = () => {
       .catch((err) => {
         console.log(err.response);
       });
+  };
+
+  const loadEarthquakes = () => {
+    API.getEarthquakeData(cit, state_name, lat, lng);
   };
 
   //Air Quality function
