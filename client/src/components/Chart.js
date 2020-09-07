@@ -56,11 +56,11 @@ const changeNumber = (e) => {
     <>
     <h2 style = {titleStyle}>Covid Chart</h2>
     <div style = {{marginLeft: "50px"}}>
-        <Button variant="outlined" color="secondary"
+        <Button variant="containedPrimary" 
                   disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber}
                   value={7} >1 Week</Button>
-                <Button variant="outlined" color="secondary" disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
-                <Button variant="outlined" color="secondary" disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
+                <Button variant="containedPrimary"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
+                <Button variant="containedPrimary"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
     </div>
      <div style={{ height: "500px" }}>
     <ResponsiveLine

@@ -11,7 +11,7 @@ const [mapData, setMapData] = useState( {
   }
 );
 
-const position = [mapData.lat, mapData.lng];
+const position = [props.mapObj.lat, props.mapObj.lng];
 
     return (
       <div className = "leaflet-container">

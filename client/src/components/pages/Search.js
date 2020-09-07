@@ -48,7 +48,7 @@ const Search = (props) => {
         onChange={handleChange}
         value = {input.state_name}
       />
-      <Button variant="outlined" disabled = {props.loadingInfo} onClick={buttonSubmit}>
+      <Button variant="containedPrimary" disabled = {props.loadingInfo} onClick={buttonSubmit}>
         submit
       </Button>
     </>
