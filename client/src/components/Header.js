@@ -3,7 +3,7 @@ import "./Header.css";
 // import Animation from "./Animation"
 
 import AuthButtons from "./auth/AuthButtons";
-// import { Fade } from "@material-ui/core";
+
 import icon from "../images/virus.png";
 import warning from "../images/warning.png";
 
@@ -17,11 +17,11 @@ const Header = () => {
     <div className="container">
       <header >
 <div id = "header">
-<h1 id="title" className="title blink">
+<h1 id="title" className="title">
           Danger Danger!
         </h1>
-        <img id = "img" src={icon} />
-        <img id = "img2" src={warning} />
+        {/* <img id = "img" src={icon} />
+        <img id = "img2" src={warning} /> */}
 </div>
         <AuthButtons />
       </header>

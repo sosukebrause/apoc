@@ -11,7 +11,7 @@ const buttonStyle = {
 const titleStyle = { 
   color: "orange",
   fontSize: "2rem",
-  borderTop: "1px solid red"
+  borderTop: "2px dashed red"
 }
 
 export default (props) => {
@@ -54,7 +54,7 @@ const changeNumber = (e) => {
   ];
   return (
     <>
-    <h2 style = {titleStyle}>Covid Chart</h2>
+    <h3 style = {titleStyle}>Covid Chart</h3>
     <div style = {{marginLeft: "50px"}}>
         <Button variant="containedPrimary" 
                   disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber}

@@ -155,7 +155,7 @@ API.getMapData(city, state_name, lat, lng).then((res) => {
         </>
       ) : (
           <>
-            {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>}
+            {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
 
             <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
             {suggestions ? <AuxButton handleAuxButton={handleAuxButton} options={suggestions} /> : null}
@@ -171,6 +171,7 @@ API.getMapData(city, state_name, lat, lng).then((res) => {
             
             {covidData.length > 0 ?
               <>
+              <br></br>
                   <Chart data={covidData} loadingInfo = {loadingInfo}/>
                   <div>
             {mapInfo && <MyMap mapObj = {mapInfo}/> }
