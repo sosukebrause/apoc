@@ -117,8 +117,8 @@ const Home = () => {
       });
   };
 
-  const loadEarthquakes = () => {
-    API.getEarthquakeData(cit, state_name, lat, lng);
+  const loadEarthquakes = (city, state_name, lat, lng) => {
+    API.getEarthquakeData(city, state_name, lat, lng);
   };
 
   //Air Quality function
@@ -168,74 +168,62 @@ const Home = () => {
       {!userData.user ? (
         <></>
       ) : (
-        <>
-          {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
+          <>
+            {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
 
-          <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
-          {suggestions ? (
-            <AuxButton
-              handleAuxButton={handleAuxButton}
-              options={suggestions}
-            />
-          ) : null}
-          {loadingInfo ? (
-            <Loader
-              loaded={false}
-              lines={13}
-              length={20}
-              width={10}
-              radius={30}
-              corners={1}
-              rotate={0}
-              direction={1}
-              color="#000"
-              speed={1}
-              trail={60}
-              shadow={false}
-              hwaccel={false}
-              className="spinner"
-              zIndex={2e9}
-              top="50%"
-              left="50%"
-              scale={1.0}
-              loadedClassName="loadedContent"
-            />
-          ) : null}
-          <div className="weather">
-            {weatherData && <Weather weatherObj={weatherData} />}
-            {airData && (
-              <div style={{ height: "250px", width: "50%" }}>
-                <BarChart airObj={airData} />
-              </div>
-            )}
-          </div>
+            <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
+            {suggestions ? (
+              <AuxButton
+                handleAuxButton={handleAuxButton}
+                options={suggestions}
+              />
+            ) : null}
+            {loadingInfo ? (
+              <Loader
+                loaded={false}
+                lines={13}
+                length={20}
+                width={10}
+                radius={30}
+                corners={1}
+                rotate={0}
+                direction={1}
+                color="#000"
+                speed={1}
+                trail={60}
+                shadow={false}
+                hwaccel={false}
+                className="spinner"
+                zIndex={2e9}
+                top="50%"
+                left="50%"
+                scale={1.0}
+                loadedClassName="loadedContent"
+              />
+            ) : null}
+            <div className="weather">
+              {weatherData && <Weather weatherObj={weatherData} />}
+              {airData && (
+                <div style={{ height: "250px", width: "50%" }}>
+                  <BarChart airObj={airData} />
+                </div>
+              )}
+            </div>
 
-          {covidData.length > 0 ? (
-            <>
-              <br></br>
-              <Chart data={covidData} loadingInfo={loadingInfo} />
-              <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
+            {covidData.length > 0 ? (
+              <>
+                <br></br>
+                <Chart data={covidData} loadingInfo={loadingInfo} />
+                <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
 
-              <br></br>
+                <br></br>
 
-              {/* <Danger /> */}
-            </>
-          ) : null}
-          {/* <Form inputName={"todoText"} /> */}
-
-          {covidData.length > 0 ? (
-            <>
-              <Chart data={covidData} loadingInfo={loadingInfo} />
-              <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
-
-              <br></br>
-
-              {/* <Danger /> */}
-            </>
-          ) : null}
-          {/* <Form inputName={"todoText"} /> */}
-        </>
-      )}
+                {/* <Danger /> */}
+              </>
+            ) : null}
+            {/* <Form inputName={"todoText"} /> */}
+          </>
+        )}
     </div>
   );
 };

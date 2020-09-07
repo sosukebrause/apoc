@@ -7,8 +7,7 @@ import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 //MAP COMPONENTS
-import MarkerMap from "./components/maps/MarkerMap";
-// import SimpleMap from "./components/maps/SimpleMap";
+
 
 //chaning above line to the following line
 import { UserProvider } from "./components/context/UserContext";
@@ -31,11 +30,7 @@ function App() {
               <Route path="/register" component={Register} />
             </Switch>
             <InputBase />
-            <div>
-              <MarkerMap />
-              <hr />
-              {/* <SimpleMap /> */}
-            </div>
+       
           </div>
         </BrowserRouter>
       </UserProvider>
