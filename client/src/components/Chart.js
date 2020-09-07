@@ -11,7 +11,7 @@ const buttonStyle = {
 const titleStyle = { 
   color: "orange",
   fontSize: "2rem",
-  marginLeft: "100px"
+  borderTop: "1px solid red"
 }
 
 export default (props) => {
@@ -25,7 +25,7 @@ const changeNumber = (e) => {
   setNumDays(numberDays)
 
 }
- 
+
   let dailyDeaths = {data: []}, totalDeaths = {data: []}, dailyInfected = {data: []};
   props.data.map(item=>{
     dailyDeaths.data.push({
