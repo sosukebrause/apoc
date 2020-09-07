@@ -7,10 +7,6 @@ import AuthButtons from "./auth/AuthButtons";
 import icon from "../images/virus.png";
 import warning from "../images/warning.png";
 
-const divStyle = {
-  // height: "80px",
-  // width: "55px"
-};
 
 const Header = () => {
   return (

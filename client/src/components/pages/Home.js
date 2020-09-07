@@ -202,7 +202,7 @@ const Home = () => {
               />
             ) : null}
             <div className="weather">
-              {weatherData && <Weather weatherObj={weatherData} />}
+              {weatherData && <Weather weatherObj={weatherData} style={{ height: "250px", width: "50%" }}/>}
               {airData && (
                 <div style={{ height: "250px", width: "50%" }}>
                   <BarChart airObj={airData} />
@@ -212,9 +212,9 @@ const Home = () => {
             {covidData.length > 0 ? (
               <>
                 <br></br>
-                <Chart data={covidData} loadingInfo={loadingInfo} />
+                <Chart data={covidData} loadingInfo={loadingInfo} style = {{width: "100%"}} />
                 <br></br>
-                <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
+                <div style = {{width: "50%"}}>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
 
                 <br></br>
 

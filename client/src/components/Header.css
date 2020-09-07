@@ -7,7 +7,6 @@
    
 }
 
-
 #header {
     display: flex;
     justify-content: center;
@@ -32,10 +31,9 @@
 
   .img2 {
     margin-left: 5px;
-    display: inline;
     width: auto;
     height: 90px;
-    position: absolute;
+
     overflow: hidden;
     /* transform: rotate(45deg); */
     /* filter: drop-shadow(10px 10px 10px #c5c5c5); */
