@@ -113,6 +113,12 @@ const Home = () => {
     API.getEarthquakeData(city, state_name, lat, lng)
       .then((res) => {
         console.log(res.data);
+        var eqObj = {
+          place: res.data.place,
+          time: res.data.time,
+          magnitude: res.data.current.mag,
+        };
+        setWeatherData(eqObj);
       })
       .catch((err) => {
         console.log(err);
