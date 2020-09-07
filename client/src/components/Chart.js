@@ -60,7 +60,7 @@ const changeNumber = (e) => {
                   disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber}
                   value={7} >1 Week</Button>
                 <Button variant="contained" color = "primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
-                <Button variant="contained" color ="primary"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
+                <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
     </div>
      <div style={{ height: "500px" }}>
     <ResponsiveLine

@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core";
 
 export default (props) => {
 
-const [axis, setAxis] = useState("");
+const [axis, setAxis] = useState("vertical");
 
 const changeAxis = (e) => {
 
