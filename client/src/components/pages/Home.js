@@ -159,6 +159,7 @@ const Home = () => {
     loadAirData(city, state_name, lat, lng);
     loadCovidData(city, state_name, county);
     loadMapData(city, state_name, lat, lng);
+    loadEarthquakes(city, state_name, lat, lng);
   };
 
   const { userData } = useUserContext();
@@ -202,9 +203,9 @@ const Home = () => {
               />
             ) : null}
             <div className="weather">
-              {weatherData && <Weather weatherObj={weatherData} style={{ height: "250px", width: "50%" }}/>}
+              {weatherData && <Weather weatherObj={weatherData} style={{ height: "300px", width: "50%" }}/>}
               {airData && (
-                <div style={{ height: "250px", width: "50%" }}>
+                <div style={{ height: "300px", width: "50%" }}>
                   <BarChart airObj={airData} />
                 </div>
               )}
@@ -212,9 +213,10 @@ const Home = () => {
             {covidData.length > 0 ? (
               <>
                 <br></br>
+                <div style = {{marginTop: "50px"}}>
                 <Chart data={covidData} loadingInfo={loadingInfo} style = {{width: "100%"}} />
-                <br></br>
                 <div style = {{width: "50%"}}>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
+                </div>
 
                 <br></br>
 
