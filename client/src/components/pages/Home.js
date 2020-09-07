@@ -169,7 +169,7 @@ const Home = () => {
         <></>
       ) : (
         <>
-          {loadingInfo ? null : <h3>Welcome {userData.user.displayName}</h3>}
+          {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
 
           <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
           {suggestions ? (
@@ -209,6 +209,19 @@ const Home = () => {
               </div>
             )}
           </div>
+
+          {covidData.length > 0 ? (
+            <>
+              <br></br>
+              <Chart data={covidData} loadingInfo={loadingInfo} />
+              <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
+
+              <br></br>
+
+              {/* <Danger /> */}
+            </>
+          ) : null}
+          {/* <Form inputName={"todoText"} /> */}
 
           {covidData.length > 0 ? (
             <>

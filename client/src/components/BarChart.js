@@ -26,6 +26,8 @@ let data = [
 ]
 
 return (
+    <>
+    <h3 style = {{marginLeft: "50px"}}>Air Quality Index</h3>
     <ResponsiveBar
         data={data}
         keys={[ "aqi", "carbon Monoxide", "ozone", "particle Matter", "nitrogen Dioxide"]}
@@ -117,5 +119,6 @@ return (
         motionStiffness={90}
         motionDamping={15}
     />
+    </>
 )
     }
