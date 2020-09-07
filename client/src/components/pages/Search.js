@@ -7,74 +7,48 @@ const divStyle = {
 };
 
 const Search = (props) => {
-  // const [city, setCity] = useState("");
-  // const [state_name, setStateName] = useState("");
-  // const [input, setInput] = useState({ city: "", state_name: "" });
 
-  // const handleChange = (e) => {
-  //   setInput({ ...input, [e.target.name]: e.target.value });
-  // };
+  const [input, setInput] = useState({ city: "", state_name: "" });
 
-  // const buttonSubmit = () => {
-  //   console.log(input.city, input.state_name);
-  //   props.setGettingData(true);
-  //   API.getCovidData(input.city, input.state_name)
-  //     .then((res) => {
-  //       console.log(res.data.data);
-  //       var array = res.data.data;
-  //       var results = array.map((item) => {
-  //         var covidObj = {
-  //           totalInfected: item.confirmed,
-  //           dailyInfected: item.confirmed_diff,
-  //           totalDeaths: item.deaths,
-  //           dailydeaths: item.deaths_diff,
-  //           date: item.date,
-  //         };
-  //         return covidObj;
-  //       });
+  const handleChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+    
+  };
 
-  //       props.handleCovidData(results);
-  //       props.setGettingData(false);
-  //       // console.log(res.data.data[0].confirmed, res.data.data[0].confirmed_diff, res.data.data[0].deaths, res.data.data[0].deaths_diff, res.data.data[0].date)
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  // const handleCityChange = (e) => {
-  // console.log(e.target.value)
-  // setCity(e.target.value);
-  // }
-
-  // const handleStateChange = (e) => {
-  //   console.log(e.target.value)
-  //   setStateName(e.target.value);
-  //   }
-
+  const buttonSubmit = () => {
+    console.log(input);
+    props.buttonSubmit(input.city, input.state_name, null)
+    setInput({city: "", state_name: ""});
+  }
+ 
   return (
     <>
       <div className="form-group" style={divStyle}></div>
       {/* <h4 style={divStyle} >City Search:</h4> */}
       <Input
-      disabled = {props.gettingData}
+      disabled = {props.loadingInfo}
         style={divStyle}
         type="text"
         className="form-control"
         name="city"
         id="search"
         placeholder="Type a city"
-        onChange={props.handleChange}
+        onChange={handleChange}
+        value = {input.city}
+        
       />
       <Input
-        disabled = {props.gettingData}
+        disabled = {props.loadingInfo}
         style={divStyle}
         type="text"
         id="search"
         placeholder="Type a state"
         name="state_name"
         className="form-control"
-        onChange={props.handleChange}
+        onChange={handleChange}
+        value = {input.state_name}
       />
-      <Button variant="outlined" disabled = {props.gettingData} onClick={props.buttonSubmit}>
+      <Button variant="containedPrimary" disabled = {props.loadingInfo} onClick={buttonSubmit}>
         submit
       </Button>
     </>

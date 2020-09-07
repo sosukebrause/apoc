@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Input, Button } from '@material-ui/core';
 
@@ -26,7 +26,7 @@ export default function Login() {
     try {
       const loginUser = { email, password };
       const loginRes = await Axios.post(
-        "http://localhost:5000/users/login",
+        "/users/login",
         loginUser
       );
       setUserData({
@@ -41,8 +41,7 @@ export default function Login() {
   };
   return (
     <div className="page" style = {divStyle}>
-      {/* <h2>Log in</h2> */}
-      
+   
       <form className="form" onSubmit={submit}>
         <label htmlFor="login-email">Email</label>
         <Input

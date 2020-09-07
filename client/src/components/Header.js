@@ -4,7 +4,8 @@ import "./Header.css";
 
 import AuthButtons from "./auth/AuthButtons";
 // import { Fade } from "@material-ui/core";
-import explosion from "../images/explosion.png";
+import icon from "../images/virus.png";
+import warning from "../images/warning.png";
 
 const divStyle = {
   // height: "80px",
@@ -14,13 +15,15 @@ const divStyle = {
 const Header = () => {
   return (
     <div className="container">
-      <header id="header">
-        <h1 id="title" className="title blink">
+      <header >
+<div id = "header">
+<h1 id="title" className="title blink">
           Danger Danger!
         </h1>
-        <img src = {explosion} style = {divStyle} alt="not working"/>
+        <img id = "img" src={icon} />
+        <img id = "img2" src={warning} />
+</div>
         <AuthButtons />
-        {/* <Animation/> */}
       </header>
     </div>
   );

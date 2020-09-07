@@ -1,10 +1,8 @@
-#title {
-   margin-left: 200px;
+.title {
+  display: inline;
    color: red;
    font-size: 4rem;
    font-family: 'Roboto', sans-serif;
-   width: absolute;
-
 }
 
 
@@ -25,21 +23,39 @@
 
 
 #header {
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
 
-img {
-    z-index: 5;
-    right: 10%;
-    top: 25%;
-    width: 100px;
-    height: auto;
+#img {
+    display: inline;
+    float: right;
+    z-index: -5;
+    right: 50%;
+    top: 28%;
+    width: auto;
+    height: 150px;
     position: absolute;
     overflow: hidden;
     /* transform: rotate(45deg); */
     /* filter: drop-shadow(10px 10px 10px #c5c5c5); */
-    animation: glitch 1s infinite ease-in-out;
+    animation: glitch 7s infinite ease-in-out;
+  }
+
+  #img2 {
+    display: inline;
+    z-index: -5;
+    left: 50%;
+    top: 28%;
+    width: auto;
+    height: 150px;
+    position: absolute;
+    overflow: hidden;
+    /* transform: rotate(45deg); */
+    /* filter: drop-shadow(10px 10px 10px #c5c5c5); */
+    animation: glitch2 7s infinite ease-in-out;
   }
 
   @keyframes swing {
@@ -51,14 +67,8 @@ img {
 
 
   @keyframes glitch{
-    20%,64%{
-        transform: translate(10px,-10px) skew(0deg);
-    }
-    10%,60%{
-        transform: translate(-7px, 7px) skew(0deg);
-    }
-    62%{
-        transform: translate(0,0) skew(7deg); 
+    40%,40%{
+        transform: translate(700px,-300px) skew(0deg);
     }
 }
 
@@ -74,6 +84,26 @@ img {
     clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
     }
+
+    @keyframes glitch2{
+        40%,40%{
+            transform: translate(-200px,700px) skew(0deg);
+        }
+    }
+    
+        div:before,
+        div:after{
+        content: attr(title);
+        position: absolute;
+        right: 0;
+        }
+    
+        div:before{
+        animation: glitchTop 1s linear infinite;
+        clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        }
+    
 
 @keyframes glitchTop{
     2%,64%{

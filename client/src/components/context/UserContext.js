@@ -24,18 +24,18 @@ function UserProvider({ ...props }) {
         token = "";
       }
       const tokenRes = await Axios.post(
-        "http://localhost:5000/users/tokenIsValid",
+        "/users/tokenIsValid",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
         try {
-          const userRes = await Axios.get("http://localhost:5000/users/", {
+          const userRes = await Axios.get("/users/", {
             headers: { "x-auth-token": token },
           });
           setUserData({
             token,
-            user: userRes.data,
+            user: userRes.data.user,
           });
         } catch (err) {
           console.log(err);

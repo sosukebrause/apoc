@@ -29,7 +29,7 @@ const AuthButtons = () => {
   return (
     <nav className="auth-options">
       {userData.user ? (
-        <Button variant ="outlined" color="primary" onClick={logout}>
+        <Button style = {{marginLeft: "20px"}} variant ="outlined" color="primary" onClick={logout}>
             Log Out
         </Button>
       ) : (
