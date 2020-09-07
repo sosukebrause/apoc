@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Danger from "../Danger";
 import Search from "./Search";
 import Chart from "../Chart";
-import BarChart from "../BarChart";
+import BarChart from "../maps/BarChart";
 import { Button } from "@material-ui/core";
 import Loading from "../Loading";
 import API from "../../utils/API";
@@ -172,31 +172,40 @@ const Home = () => {
         <>
           {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
 
-            <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
-            {suggestions ? (
-              <AuxButton
-                handleAuxButton={handleAuxButton}
-                options={suggestions}
+          <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
+          {suggestions ? (
+            <AuxButton
+              handleAuxButton={handleAuxButton}
+              options={suggestions}
+            />
+          ) : null}
+          {loadingInfo ? <Loading /> : null}
+          <div className="weather">
+            {weatherData && (
+              <Weather
+                weatherObj={weatherData}
+                style={{ height: "300px", width: "50%" }}
               />
-            ) : null}
-            {loadingInfo ? (
-              <Loading/>
-            ) : null}
-            <div className="weather">
-              {weatherData && <Weather weatherObj={weatherData} style={{ height: "300px", width: "50%" }}/>}
-              {airData && (
-                <div style={{ height: "300px", width: "50%" }}>
-                  <BarChart airObj={airData} />
+            )}
+            {airData && (
+              <div style={{ height: "300px", width: "50%" }}>
+                <BarChart airObj={airData} />
+              </div>
+            )}
+          </div>
+          <br></br>
+          {covidData.length > 0 ? (
+            <>
+              <div>
+                <Chart
+                  data={covidData}
+                  loadingInfo={loadingInfo}
+                  style={{ width: "100%" }}
+                />
+                <div style={{ width: "50%" }}>
+                  {mapInfo && <MyMap mapObj={mapInfo} />}
                 </div>
-              )}
-            </div>
-            <br></br>
-            {covidData.length > 0 ? (
-              <>
-                <div >
-                <Chart data={covidData} loadingInfo={loadingInfo} style = {{width: "100%"}} />
-                <div style = {{width: "50%"}}>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
-                </div>
+              </div>
 
               <br></br>
 
