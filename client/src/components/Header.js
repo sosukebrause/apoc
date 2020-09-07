@@ -17,13 +17,17 @@ const Header = () => {
     <div className="container">
       <header >
 <div id = "header">
-<h1 id="title" className="title">
+  <div className = "title">
+  <h1 id="title" className="title">
           Danger Danger!
         </h1>
-        {/* <img id = "img" src={icon} />
-        <img id = "img2" src={warning} /> */}
+        <img className = "img2 blink" src={warning} />
+  </div>
+
+        {/* <img id = "img" src={icon} /> */}
+     
 </div>
-        <AuthButtons />
+        <AuthButtons  />
       </header>
     </div>
   );

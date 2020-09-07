@@ -6,3 +6,8 @@
     margin-right: 10px;
     /* flex-direction: column; */
 }
+
+
+.page {
+    background-color: rgb(241, 241, 241);
+}

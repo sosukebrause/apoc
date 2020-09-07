@@ -19,7 +19,7 @@ function App() {
   return (
     // userProvider is now wrapping all logic for handling our state, updating state, and pushing out different values to all of our children.
 
-    <>
+    <div className="App">
       <UserProvider>
         <BrowserRouter>
           <Header />
@@ -34,7 +34,7 @@ function App() {
           </div>
         </BrowserRouter>
       </UserProvider>
-    </>
+    </div>
   );
 }
 export default App;
