@@ -23,14 +23,12 @@ function UserProvider({ ...props }) {
         localStorage.setItem("auth-token", "");
         token = "";
       }
-      const tokenRes = await Axios.post(
-        "http://localhost:5000/users/tokenIsValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
+      const tokenRes = await Axios.post("users/tokenIsValid", null, {
+        headers: { "x-auth-token": token },
+      });
       if (tokenRes.data) {
         try {
-          const userRes = await Axios.get("http://localhost:5000/users/", {
+          const userRes = await Axios.get("/users/", {
             headers: { "x-auth-token": token },
           });
           setUserData({

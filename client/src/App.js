@@ -1,5 +1,5 @@
 import { InputBase } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // COMPONENTS // CONTEXT //

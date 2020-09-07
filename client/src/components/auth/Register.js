@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useUserContext } from "../context/UserContext";
@@ -25,8 +25,8 @@ export default function Register() {
     //instead of reloading the page we need to send axios request
     try {
       const newUser = { email, password, passwordCheck, displayName };
-      await Axios.post("http://localhost:5000/users/register", newUser);
-      const loginRes = await Axios.post("http://localhost:5000/users/login", {
+      await Axios.post("/users/register", newUser);
+      const loginRes = await Axios.post("/users/login", {
         email,
         password,
       });

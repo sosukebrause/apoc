@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Form from "../card/AuthPost";
+// import { Link } from "react-router-dom";
+// import Form from "../card/AuthPost";
 import Danger from "../Danger";
 import Search from "./Search";
 import Chart from "../Chart";
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 
@@ -15,12 +15,12 @@ const buttonStyle = {
 const Home = () => {
   const [covidData, setCovidData] = useState([]);
   const [gettingData, setGettingData] = useState(false);
-  const [numDays, setNumDays] = useState(60);
+  // const [numDays, setNumDays] = useState(60);
 
   const changeNumber = (e) => {
     // setNumDays({numDays, [e.target.name]: e.target.value});
     console.log(e.target);
-    var numberDays = parseInt(e.target.value);
+    // var numberDays = parseInt(e.target.value);
     // API.getCovidData(input.city, input.state_name, numberDays).then((res) => {
     // })
   };
