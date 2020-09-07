@@ -8,7 +8,11 @@ const buttonStyle = {
   marginLeft: "10px",
 };
 
-
+const titleStyle = { 
+  color: "orange",
+  fontSize: "2rem",
+  borderTop: "1px solid red"
+}
 
 export default (props) => {
 
@@ -21,7 +25,7 @@ const changeNumber = (e) => {
   setNumDays(numberDays)
 
 }
- 
+
   let dailyDeaths = {data: []}, totalDeaths = {data: []}, dailyInfected = {data: []};
   props.data.map(item=>{
     dailyDeaths.data.push({
@@ -50,7 +54,8 @@ const changeNumber = (e) => {
   ];
   return (
     <>
-    <div>
+    <h2 style = {titleStyle}>Covid Chart</h2>
+    <div style = {{marginLeft: "50px"}}>
         <Button variant="outlined" color="secondary"
                   disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber}
                   value={7} >1 Week</Button>
