@@ -4,7 +4,6 @@ module.exports = {
     //find the API key and add to dotenv
     require("dotenv").config();
 
-    // let promise = new Promise(async (resolve, reject) => {
     try {
       const earthquake = await axios({
         method: "GET",
@@ -13,13 +12,9 @@ module.exports = {
       });
       console.log("earthquake.data");
       return earthquake.data;
-      //   resolve(earthquake);
     } catch (error) {
-      // reject(error);
       return error;
     }
-    // });
-    // return promise;
   },
 };
 
