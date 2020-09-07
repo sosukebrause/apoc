@@ -8,7 +8,11 @@ const buttonStyle = {
   marginLeft: "10px",
 };
 
-
+const titleStyle = { 
+  color: "orange",
+  fontSize: "2rem",
+  marginLeft: "100px"
+}
 
 export default (props) => {
 
@@ -50,7 +54,8 @@ const changeNumber = (e) => {
   ];
   return (
     <>
-    <div>
+    <h2 style = {titleStyle}>Covid Chart</h2>
+    <div style = {{marginLeft: "50px"}}>
         <Button variant="outlined" color="secondary"
                   disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber}
                   value={7} >1 Week</Button>

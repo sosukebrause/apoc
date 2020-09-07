@@ -41,8 +41,7 @@ export default function Login() {
   };
   return (
     <div className="page" style = {divStyle}>
-      {/* <h2>Log in</h2> */}
-      
+   
       <form className="form" onSubmit={submit}>
         <label htmlFor="login-email">Email</label>
         <Input
