@@ -125,14 +125,14 @@ const Home = () => {
         var data = res.data;
         if (data.data) {
           var airObj = {
-            aqi: data.data.data.aqi ? data.data.data.iaqi.o3.v : null,
+            aqi: data.data.data.aqi ? data.data.data.aqi : null,
             dominentpol: data.data.data.dominentpol
               ? data.data.data.dominentpol
               : null,
             co: data.data.data.iaqi.co ? data.data.data.iaqi.co.v : null,
             no2: data.data.data.iaqi.no2 ? data.data.data.iaqi.no2.v : null,
             o3: data.data.data.iaqi.o3 ? data.data.data.iaqi.o3.v : null,
-            pm25: data.data.data.iaqi.pm25 ? data.data.data.iaqi.o3.v : null,
+            pm25: data.data.data.iaqi.pm25 ? data.data.data.iaqi.pm25.v : null,
           };
           setAirData(airObj);
         }
@@ -165,6 +165,7 @@ const Home = () => {
       ) : (
         <>
           {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
+
           <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
           {suggestions ? (
             <AuxButton
@@ -207,8 +208,11 @@ const Home = () => {
             <>
               <br></br>
               <Chart data={covidData} loadingInfo={loadingInfo} />
-              <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
               <br></br>
+              <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
+
+              <br></br>
+
               {/* <Danger /> */}
             </>
           ) : null}
