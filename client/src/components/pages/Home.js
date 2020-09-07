@@ -6,7 +6,7 @@ import Search from "./Search";
 import Chart from "../Chart";
 import BarChart from "../BarChart";
 import { Button } from "@material-ui/core";
-import Loader from "react-loader";
+import Loading from "../Loading";
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 import Weather from "../Weather";
@@ -180,27 +180,7 @@ const Home = () => {
               />
             ) : null}
             {loadingInfo ? (
-              <Loader
-                loaded={false}
-                lines={13}
-                length={20}
-                width={10}
-                radius={30}
-                corners={1}
-                rotate={0}
-                direction={1}
-                color="#000"
-                speed={1}
-                trail={60}
-                shadow={false}
-                hwaccel={false}
-                className="spinner"
-                zIndex={2e9}
-                top="50%"
-                left="50%"
-                scale={1.0}
-                loadedClassName="loadedContent"
-              />
+              <Loading/>
             ) : null}
             <div className="weather">
               {weatherData && <Weather weatherObj={weatherData} style={{ height: "300px", width: "50%" }}/>}
@@ -210,10 +190,10 @@ const Home = () => {
                 </div>
               )}
             </div>
+            <br></br>
             {covidData.length > 0 ? (
               <>
-                <br></br>
-                <div style = {{marginTop: "50px"}}>
+                <div >
                 <Chart data={covidData} loadingInfo={loadingInfo} style = {{width: "100%"}} />
                 <div style = {{width: "50%"}}>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
                 </div>

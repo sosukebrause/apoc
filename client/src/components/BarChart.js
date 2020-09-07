@@ -35,11 +35,11 @@ return (
     <>
     <h3 style = {{marginLeft: "50px"}}>Air Quality Index</h3>
     <Button variant="contained" color = "primary" size = "small"
-                  onClick={changeAxis}
-                  value="horizontal" >Horizontal</Button>
-                   <Button variant="contained" color = "primary" size = "small"
-                  onClick={changeAxis}
-                  value="vertical" >Vertical</Button>
+    onClick={changeAxis}
+    value="horizontal" >Horizontal</Button>
+    <Button variant="contained" color = "primary" size = "small"
+    onClick={changeAxis} style = {{marginLeft: "10px"}}
+    value="vertical" >Vertical</Button>
     <ResponsiveBar
         layout = {axis}
         data={data}
