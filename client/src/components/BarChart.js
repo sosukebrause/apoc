@@ -1,11 +1,17 @@
-import React from "react";
-import { ResponsiveBar } from '@nivo/bar'
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
+import React, { useState } from "react";
+import { ResponsiveBar } from '@nivo/bar';
+import { Button } from "@material-ui/core";
+
 export default (props) => {
+
+const [axis, setAxis] = useState("");
+
+const changeAxis = (e) => {
+
+  console.log(e.currentTarget.value)
+  var chartAxis = (e.currentTarget.value)
+  setAxis(chartAxis)
+}
 
 let data = [
     { pollutant: "aqi",
@@ -28,7 +34,14 @@ let data = [
 return (
     <>
     <h3 style = {{marginLeft: "50px"}}>Air Quality Index</h3>
+    <Button variant="contained" color = "primary" size = "small"
+                  onClick={changeAxis}
+                  value="horizontal" >Horizontal</Button>
+                   <Button variant="contained" color = "primary" size = "small"
+                  onClick={changeAxis}
+                  value="vertical" >Vertical</Button>
     <ResponsiveBar
+        layout = {axis}
         data={data}
         keys={[ "aqi", "carbon Monoxide", "ozone", "particle Matter", "nitrogen Dioxide"]}
         indexBy="pollutant"

@@ -3,7 +3,7 @@ import { Input, Button } from "@material-ui/core";
 // import API from "../../utils/API";
 
 const divStyle = {
-  marginLeft: "60px",
+  marginBottom: "60px",
 };
 
 const Search = (props) => {
@@ -23,11 +23,9 @@ const Search = (props) => {
  
   return (
     <>
-      <div className="form-group" style={divStyle}></div>
-      {/* <h4 style={divStyle} >City Search:</h4> */}
+      <div className="form-group" style={divStyle}>
       <Input
       disabled = {props.loadingInfo}
-        style={divStyle}
         type="text"
         className="form-control"
         name="city"
@@ -39,7 +37,7 @@ const Search = (props) => {
       />
       <Input
         disabled = {props.loadingInfo}
-        style={divStyle}
+        style={{marginLeft: "50px"}}
         type="text"
         id="search"
         placeholder="Type a state"
@@ -51,6 +49,9 @@ const Search = (props) => {
       <Button variant="contained" color = "primary" size = "small" disabled = {props.loadingInfo} onClick={buttonSubmit}>
         Enter
       </Button>
+      </div>
+      {/* <h4 style={divStyle} >City Search:</h4> */}
+  
     </>
   );
 };
