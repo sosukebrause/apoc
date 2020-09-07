@@ -8,7 +8,6 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 //MAP COMPONENTS
 
-
 //chaning above line to the following line
 import { UserProvider } from "./components/context/UserContext";
 
@@ -30,7 +29,6 @@ function App() {
               <Route path="/register" component={Register} />
             </Switch>
             <InputBase />
-       
           </div>
         </BrowserRouter>
       </UserProvider>

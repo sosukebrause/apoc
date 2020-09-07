@@ -10,7 +10,7 @@ router.get("/api/weather", async (req, res) => {
     return res.status(400).json({ msg: "query string is empty" });
   }
   if (lat && lng) {
-    console.log(lat, lng)
+    console.log(lat, lng);
     try {
       var data = await controller.weather.findWeatherData(lat, lng);
       return res.json({ data });
@@ -19,12 +19,17 @@ router.get("/api/weather", async (req, res) => {
       return res.status(404).json({ msg: "no data found" });
     }
   }
-  controller.db.findInfoFromCity(city, state_name)
+  controller.db
+    .findInfoFromCity(city, state_name)
     .then(async (info) => {
-      if (info.data.length !== 1) return res.status(400).json({ data: info.data })
-      console.log(info);
+      if (info.data.length !== 1)
+        return res.status(400).json({ data: info.data });
+      // console.log(info);
       try {
-        var data = await controller.weather.findWeatherData(info.data[0].lat, info.data[0].lng);
+        var data = await controller.weather.findWeatherData(
+          info.data[0].lat,
+          info.data[0].lng
+        );
         return res.json({ data });
       } catch (error) {
         console.log("error", error);

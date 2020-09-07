@@ -3,6 +3,10 @@ module.exports = {
     const axios = require("axios");
     //find the API key and add to dotenv
     require("dotenv").config();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 827dcc338a7cff7b0ff3c3f7dc1609c2d0c66754
     try {
       const earthquake = await axios({
         method: "GET",
