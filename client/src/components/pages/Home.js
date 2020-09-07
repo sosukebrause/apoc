@@ -209,7 +209,9 @@ const Home = () => {
               <br></br>
               <Chart data={covidData} loadingInfo={loadingInfo} />
               <br></br>
-              <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
+              <div style={{ width: "50%", margin: "0 auto" }}>
+                {mapInfo && <MyMap mapObj={mapInfo} />}
+              </div>
 
               <br></br>
 
