@@ -6,5 +6,5 @@ module.exports = {
     map: require('./mapController'),
   
     //crime: require('./crimeController'),
-    //earthquake: require('./earthquakeController'),
+    earthquake: require('./earthquakeController'),
   }
