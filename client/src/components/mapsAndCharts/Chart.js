@@ -61,13 +61,14 @@ const addArea = (e) => {
     <>
     <h3 style = {titleStyle}>Covid Chart</h3>
     <div style = {{marginLeft: "50px"}}>
-        <Button variant="contained" color = "primary" size = "small"
-                  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber}
-                  value={7} >1 Week</Button>
-                <Button variant="contained" color = "primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
-                <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
-                <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} onClick={addArea} value="true">Area</Button>
-                <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} onClick={addArea} value="false">Line</Button>
+        <Button variant="contained" color = "primary" size = "small"disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={7} >1 Week</Button>
+        <Button variant="contained" color = "primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
+        <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
+        <div style = {{float: "right", marginRight: "10px"}}>
+        <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} onClick={addArea} value="true">Area</Button>
+        <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} onClick={addArea} value="false">Line</Button>
+        </div>
+      
     </div>
 
      <div style={{ height: "500px" }}>
