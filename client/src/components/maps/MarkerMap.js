@@ -29,7 +29,7 @@ const MarkerMap = () => {
           <circle r={8} fill="#F50" />
         </Marker>
 
-        {/* {markers.map(({ name, coordinates, markerOffset }) => (
+        {markers.map(({ name, coordinates, markerOffset }) => (
           <Marker>
             key={name}, coordinates={coordinates}
             <circle r={8} fill="#F50" />
@@ -41,7 +41,7 @@ const MarkerMap = () => {
               {name}
             </text>
           </Marker>
-        ))} */}
+        ))}
       </ComposableMap>
     </div>
   );
