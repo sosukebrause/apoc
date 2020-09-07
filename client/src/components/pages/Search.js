@@ -48,7 +48,7 @@ const Search = (props) => {
         onChange={handleChange}
         value = {input.state_name}
       />
-      <Button variant="containedPrimary" size = "small" disabled = {props.loadingInfo} onClick={buttonSubmit}>
+      <Button variant="contained" color = "primary" size = "small" disabled = {props.loadingInfo} onClick={buttonSubmit}>
         Enter
       </Button>
     </>

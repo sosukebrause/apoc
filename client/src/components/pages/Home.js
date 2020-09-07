@@ -209,11 +209,11 @@ const Home = () => {
                 </div>
               )}
             </div>
-
             {covidData.length > 0 ? (
               <>
                 <br></br>
                 <Chart data={covidData} loadingInfo={loadingInfo} />
+                <br></br>
                 <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
 
                 <br></br>
