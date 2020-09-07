@@ -24,9 +24,11 @@ function App() {
           <Header />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+            <ProtectedRoute path="/search" component={Home} />
+            <ProtectedRoute path="/saved" component={Saved} />
+            <PublicRoute path="/" component={Landing} />
+            <PublicRoute path="/login" component={Login} />
+            <PublicRoute path="/register" component={Register} />
             </Switch>
             <InputBase />
           </div>
