@@ -5,7 +5,7 @@ import { Button } from "@material-ui/core";
 const maxDays = 60;
 
 const buttonStyle = {
-  marginLeft: "10px",
+  marginRight: "10px",
 };
 
 const titleStyle = { 
@@ -56,11 +56,11 @@ const changeNumber = (e) => {
     <>
     <h3 style = {titleStyle}>Covid Chart</h3>
     <div style = {{marginLeft: "50px"}}>
-        <Button variant="contained" color = "primary" 
+        <Button variant="contained" color = "primary" size = "small"
                   disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber}
                   value={7} >1 Week</Button>
-                <Button variant="contained" color = "primary"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
-                <Button variant="contained" color ="primary"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
+                <Button variant="contained" color = "primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
+                <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
     </div>
      <div style={{ height: "500px" }}>
     <ResponsiveLine

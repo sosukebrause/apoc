@@ -29,7 +29,6 @@ module.exports = {
     const axios = require("axios");
     //find the API key and add to dotenv
     require("dotenv").config();
-
     try {
       const earthquake = await axios({
         method: "GET",
@@ -71,5 +70,4 @@ module.exports = {
     }
   },
 };
-
 //https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp

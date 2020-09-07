@@ -11,7 +11,7 @@ const Weather = (props) => {
     
     return (
         <>
-        <div style = {{width: "400px", height: "250px"}}>
+        <div >
         <h3 style = {{marginLeft: "50px"}}>Current Weather</h3>
         <Card variant = "outlined" >
             <h4> Temp: {tempConversion(props.weatherObj.temp)}°F</h4>

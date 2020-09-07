@@ -7,27 +7,24 @@ import AuthButtons from "./auth/AuthButtons";
 import icon from "../images/virus.png";
 import warning from "../images/warning.png";
 
-const divStyle = {
-  // height: "80px",
-  // width: "55px"
-};
 
 const Header = () => {
   return (
     <div >
       <header >
+      <AuthButtons  />
 <div id = "header">
   <div className = "title">
-  <h1 id="title" className="title">
+  <h1 id="title" className="title blink">
           ALERT
         </h1>
-        <img className = "img2 blink" src={warning} />
+        <img className = "img2" src={warning} />
   </div>
 
         {/* <img id = "img" src={icon} /> */}
      
 </div>
-        <AuthButtons  />
+       
       </header>
     </div>
   );

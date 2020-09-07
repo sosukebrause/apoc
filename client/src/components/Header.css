@@ -7,6 +7,20 @@
    
 }
 
+.blink{
+  /* width:200px; */
+  height: 50px;
+  padding: 15px;	
+  text-align: center;
+  line-height: 50px;
+  animation: blink 2s linear infinite;
+}
+@keyframes blink{
+0%{opacity: 0;}
+50%{opacity: .5;}
+100%{opacity: 1;}
+}
+
 
 #header {
     display: flex;
@@ -32,10 +46,9 @@
 
   .img2 {
     margin-left: 5px;
-    display: inline;
     width: auto;
     height: 90px;
-    position: absolute;
+
     overflow: hidden;
     /* transform: rotate(45deg); */
     /* filter: drop-shadow(10px 10px 10px #c5c5c5); */
