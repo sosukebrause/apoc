@@ -39,7 +39,7 @@ const Home = () => {
   const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
   const [mapInfo, setMapInfo] = useState(null);
-  const [earthquakeInfo, setEarthquakeInfo] = useState(null);
+  const [eqData, setEqData] = useState(null);
   // const [input, setInput] = useState({ city: "", state_name: "" });
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
@@ -116,9 +116,9 @@ const Home = () => {
         var eqObj = {
           place: res.data.place,
           time: res.data.time,
-          magnitude: res.data.current.mag,
+          magnitude: res.data.properties.mag,
         };
-        setWeatherData(eqObj);
+        setEqData(eqObj);
       })
       .catch((err) => {
         console.log(err);
