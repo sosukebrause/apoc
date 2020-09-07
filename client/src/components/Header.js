@@ -14,12 +14,12 @@ const divStyle = {
 
 const Header = () => {
   return (
-    <div className="container">
+    <div >
       <header >
 <div id = "header">
   <div className = "title">
   <h1 id="title" className="title">
-          Danger Danger!
+          ALERT
         </h1>
         <img className = "img2 blink" src={warning} />
   </div>
