@@ -4,11 +4,28 @@ const controller = require("../controllers");
 router.get("/api/earthquake", async (req, res) => {
   var city = req.query.city;
   var state_name = req.query.state_name;
+  var lat = req.query.lat;
+  var lng = req.query.lng;
 
   if (!city || !state_name) {
     return res.status(400).json({ msg: "query string is empty" });
   }
 
-  const cityInfo = await controller.db.findInfoFromCity(city, state_name);
-  console.log(cityInfo);
+  controller.db.findInfoFromCity(city, state_name).then(async (info) => {
+    if (info.data.length !== 1)
+      return res.status(400).json({ data: info.data });
+    console.log(info);
+    try {
+      var data = await controller.earthquake.findEqData(
+        info.data[0].lat,
+        info.data[0].lng
+      );
+      res.json(data);
+    } catch (error) {
+      console.log("error", error);
+      return res.status(404).json({ msg: "no data found" });
+    }
+  });
 });
+
+module.exports = router;

@@ -38,7 +38,7 @@ export default {
     });
   },
 
-  getEarthquakeData: function () {
+  getEarthquakeData: function (city, state_name, lat, lng) {
     return axios({
       url: "/api/earthquake",
       method: "GET",

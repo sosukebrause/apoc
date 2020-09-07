@@ -13,9 +13,7 @@ import Weather from "../Weather";
 import MyMap from "../MyMap";
 import Earthquake from "../Earthquake";
 import "./Home.css";
-
 const maxDays = 60;
-
 const AuxButton = (props) => {
   var array = props.options;
   let newItems = array.map((item, index) => {
@@ -33,7 +31,6 @@ const AuxButton = (props) => {
   });
   return newItems;
 };
-
 const Home = () => {
   const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
@@ -44,7 +41,6 @@ const Home = () => {
   const [mapInfo, setMapInfo] = useState(null);
   const [earthquakeInfo, setEarthquakeInfo] = useState(null);
   // const [input, setInput] = useState({ city: "", state_name: "" });
-
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     buttonSubmit(
@@ -55,12 +51,11 @@ const Home = () => {
       value.lng
     );
   };
-
   //map Data function
   const loadMapData = (city, state_name, lat, lng) => {
     API.getMapData(city, state_name, lat, lng)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         var mapObj = res.data.data[0];
         setMapInfo(mapObj);
       })
@@ -68,7 +63,6 @@ const Home = () => {
         console.log(err.response);
       });
   };
-
   //covid function
   const loadCovidData = (city, state_name, county) => {
     setLoadingInfo(true);
@@ -97,12 +91,11 @@ const Home = () => {
         setLoadingInfo(false);
       });
   };
-
   //Weather function
   const loadWeatherData = (city, state_name, lat, lng) => {
     API.getWeatherData(city, state_name, lat, lng)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         var data = res.data;
         var weatherObj = {
           temp: data.data.current.temp,
@@ -116,11 +109,15 @@ const Home = () => {
         console.log(err.response);
       });
   };
-
-  const loadEarthquakes = () => {
-    API.getEarthquakeData(cit, state_name, lat, lng);
+  const loadEarthquakes = (city, state_name, lat, lng) => {
+    API.getEarthquakeData(city, state_name, lat, lng)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
   //Air Quality function
   const loadAirData = (city, state_name, lat, lng) => {
     API.getAirData(city, state_name, lat, lng)
@@ -153,16 +150,14 @@ const Home = () => {
         setAirData(airObj);
       });
   };
-
   const buttonSubmit = (city, state_name, county, lat, lng) => {
     loadWeatherData(city, state_name, lat, lng);
     loadAirData(city, state_name, lat, lng);
     loadCovidData(city, state_name, county);
     loadMapData(city, state_name, lat, lng);
+    loadEarthquakes(city, state_name, lat, lng);
   };
-
   const { userData } = useUserContext();
-
   return (
     <div className="page">
       {!userData.user ? (
@@ -170,7 +165,6 @@ const Home = () => {
       ) : (
         <>
           {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
-
           <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
           {suggestions ? (
             <AuxButton
@@ -209,27 +203,12 @@ const Home = () => {
               </div>
             )}
           </div>
-
           {covidData.length > 0 ? (
             <>
               <br></br>
               <Chart data={covidData} loadingInfo={loadingInfo} />
               <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
-
               <br></br>
-
-              {/* <Danger /> */}
-            </>
-          ) : null}
-          {/* <Form inputName={"todoText"} /> */}
-
-          {covidData.length > 0 ? (
-            <>
-              <Chart data={covidData} loadingInfo={loadingInfo} />
-              <div>{mapInfo && <MyMap mapObj={mapInfo} />}</div>
-
-              <br></br>
-
               {/* <Danger /> */}
             </>
           ) : null}

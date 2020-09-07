@@ -24,7 +24,7 @@ app.use(airRoutes);
 app.use(MapRoutes);
 app.use("/users", userRoutes);
 app.use("/feed", require("./routes/user-routes"));
-app.use("/earthquake", require("./routes/earthquake-routes"));
+app.use(require("./routes/earthquake-routes"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
