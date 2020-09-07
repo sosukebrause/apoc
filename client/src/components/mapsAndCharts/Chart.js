@@ -17,13 +17,18 @@ const titleStyle = {
 export default (props) => {
 
   const [numDays, setNumDays] = useState(maxDays);
+  const [showArea, setshowArea] = useState("false");
 
 const changeNumber = (e) => {
   // setNumDays({numDays, [e.target.name]: e.target.value});
   console.log(e.currentTarget.value)
   var numberDays = parseInt(e.currentTarget.value)
   setNumDays(numberDays)
+}
 
+const addArea = (e) => {
+  var areaChart =(e.currentTarget.value)
+  setshowArea(areaChart)
 }
 
   let dailyDeaths = {data: []}, totalDeaths = {data: []}, dailyInfected = {data: []};
@@ -61,10 +66,14 @@ const changeNumber = (e) => {
                   value={7} >1 Week</Button>
                 <Button variant="contained" color = "primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
                 <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
+                <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} onClick={addArea} value="true">Area</Button>
+                <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} onClick={addArea} value="false">Line</Button>
     </div>
+
      <div style={{ height: "500px" }}>
     <ResponsiveLine
         data={data}
+        enableArea = {showArea === "true"}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}

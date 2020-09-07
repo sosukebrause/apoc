@@ -4,6 +4,7 @@ import { Input, Button } from "@material-ui/core";
 
 const divStyle = {
   marginBottom: "60px",
+  marginLeft: "20px",
 };
 
 const Search = (props) => {

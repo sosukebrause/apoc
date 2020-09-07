@@ -172,7 +172,11 @@ const Home = () => {
         <>
           {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
 
-          <Search buttonSubmit={buttonSubmit} loadingInfo={loadingInfo} />
+          <Search
+            className="search"
+            buttonSubmit={buttonSubmit}
+            loadingInfo={loadingInfo}
+          />
           {suggestions ? (
             <AuxButton
               handleAuxButton={handleAuxButton}
@@ -193,9 +197,11 @@ const Home = () => {
               </div>
             )}
           </div>
-          <br></br>
+
           {covidData.length > 0 ? (
             <>
+              <br></br>
+              <br></br>
               <div>
                 <Chart
                   data={covidData}
