@@ -11,7 +11,7 @@ const buttonStyle = {
 const titleStyle = { 
   color: "orange",
   fontSize: "2rem",
-  borderTop: "2px dashed red"
+  borderTop: "2px dashed light-red"
 }
 
 export default (props) => {

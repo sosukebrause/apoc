@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { Button, Slider } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import "./MyMap.css";
 
 
@@ -11,7 +12,24 @@ const useStyles = makeStyles({
   },
 });
 
-
+const marks = [
+  {
+    value: 0,
+    label: '2.5',
+  },
+  {
+    value: 33,
+    label: '5.0',
+  },
+  {
+    value: 66,
+    label: '7.5',
+  },
+  {
+    value: 100,
+    label: '10',
+  },
+];
 
 
 const MyMap = (props) => {
@@ -34,7 +52,10 @@ const MyMap = (props) => {
   return (
     <>
     <div className={classes.root}>
-      <Slider color="primary" value={value} onChange={handleChange} aria-labelledby="continuous-slider" />
+    <Typography id="discrete-slider-small-steps" gutterBottom>
+  Earthquake Magnitude
+</Typography>
+      <Slider style = {{marginLeft: "20px"}} color="primary" value={value} onChange={handleChange} marks={marks} aria-labelledby="continuous-slider" />
     </div>
     <div className="leaflet-container">
       <Map center={position} zoom={mapData.zoom}>
