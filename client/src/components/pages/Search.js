@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Input, Button } from "@material-ui/core";
-// import API from "../../utils/API";
 
 const divStyle = {
-  marginBottom: "60px",
+  marginBottom: "90px",
   marginLeft: "20px",
 };
 
@@ -51,8 +50,6 @@ const Search = (props) => {
         Enter
       </Button>
       </div>
-      {/* <h4 style={divStyle} >City Search:</h4> */}
-  
     </>
   );
 };
