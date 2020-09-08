@@ -32,7 +32,7 @@ const marks = [
 
 const MyMap = (props) => {
   const classes = useStyles();
-  const [value, setValue] = useState(10);
+  const [value, setValue] = useState(2.5);
   const [mapData, setMapData] = useState({
     lat: props.mapObj.lat,
     lng: props.mapObj.lng,
@@ -65,6 +65,7 @@ const MyMap = (props) => {
           value={value}
           onChange={handleChange}
           marks={marks}
+          track="inverted"
           aria-labelledby="continuous-slider"
         />
       </div>
