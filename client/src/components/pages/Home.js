@@ -112,12 +112,7 @@ const Home = () => {
   const loadEarthquakes = (city, state_name, lat, lng) => {
     API.getEarthquakeData(city, state_name, lat, lng)
       .then((res) => {
-        console.log(res.data);
-        // var eqObj = {
-        //   place: res.data.place,
-        //   time: res.data.time,
-        //   magnitude: res.data.properties.mag,
-        // };
+        // console.log(res.data);
         setEqData(res.data);
       })
       .catch((err) => {
