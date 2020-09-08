@@ -166,61 +166,57 @@ const Home = () => {
   const { userData } = useUserContext();
   return (
     <div className="page">
-      {!userData.user ? (
+      <>
+        {/*{!userData.user ? (
         <></>
-      ) : (
-        <>
-          {/* {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
+      ) : ( {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
 
-          <Search
-            className="search"
-            buttonSubmit={buttonSubmit}
-            loadingInfo={loadingInfo}
-          />
-          {suggestions ? (
-            <AuxButton
-              handleAuxButton={handleAuxButton}
-              options={suggestions}
+        <Search
+          className="search"
+          buttonSubmit={buttonSubmit}
+          loadingInfo={loadingInfo}
+        />
+        {suggestions ? (
+          <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
+        ) : null}
+        {loadingInfo ? <Loading /> : null}
+        <div className="weather">
+          {weatherData && (
+            <Weather
+              weatherObj={weatherData}
+              style={{ height: "300px", width: "50%" }}
             />
-          ) : null}
-          {loadingInfo ? <Loading /> : null}
-          <div className="weather">
-            {weatherData && (
-              <Weather
-                weatherObj={weatherData}
-                style={{ height: "300px", width: "50%" }}
+          )}
+          {airData && (
+            <div style={{ height: "300px", width: "50%" }}>
+              <BarChart airObj={airData} />
+            </div>
+          )}
+        </div>
+
+        {covidData.length > 0 ? (
+          <>
+            <br></br>
+            <br></br>
+            <div>
+              <Chart
+                data={covidData}
+                loadingInfo={loadingInfo}
+                style={{ width: "100%" }}
               />
-            )}
-            {airData && (
-              <div style={{ height: "300px", width: "50%" }}>
-                <BarChart airObj={airData} />
+              <div style={{ width: "50%" }}>
+                {mapInfo && <MyMap mapObj={mapInfo} />}
               </div>
-            )}
-          </div>
+            </div>
 
-          {covidData.length > 0 ? (
-            <>
-              <br></br>
-              <br></br>
-              <div>
-                <Chart
-                  data={covidData}
-                  loadingInfo={loadingInfo}
-                  style={{ width: "100%" }}
-                />
-                <div style={{ width: "50%" }}>
-                  {mapInfo && <MyMap mapObj={mapInfo} />}
-                </div>
-              </div>
+            <br></br>
 
-              <br></br>
-
-              {/* <Danger /> */}
-            </>
-          ) : null}
-          {/* <Form inputName={"todoText"} /> */}
-        </>
-      )}
+            {/* <Danger /> */}
+          </>
+        ) : null}
+        {/* <Form inputName={"todoText"} /> */}
+      </>
+      {/* )} */}
     </div>
   );
 };

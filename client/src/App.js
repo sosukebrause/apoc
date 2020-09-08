@@ -6,13 +6,20 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-//MAP COMPONENTS
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
 
 //chaning above line to the following line
 import { UserProvider } from "./components/context/UserContext";
 
 import Header from "./components/Header";
 import "./App.css";
+
+const NotFound = () => (
+  <div style={{ display: "flex", justifyContent: "center" }}>
+    <h1> 404: Invalid endpoint </h1>
+  </div>
+);
 
 function App() {
   return (
@@ -24,11 +31,12 @@ function App() {
           <Header />
           <div className="container">
             <Switch>
-              <Route path="/search" component={Home} />
+              <ProtectedRoute path="/search" component={Home} />
               {/* <ProtectedRoute path="/saved" component={Saved} /> */}
               {/* <PublicRoute path="/" component={Landing} /> */}
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+              <PublicRoute path="/login" component={Login} />
+              <PublicRoute path="/register" component={Register} />
+              <Route path="/*" component={NotFound} />
             </Switch>
             <InputBase />
           </div>
