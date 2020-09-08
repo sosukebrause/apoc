@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { Button, Slider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import "./MyMap.css";
 
 const useStyles = makeStyles({
@@ -9,6 +10,25 @@ const useStyles = makeStyles({
     width: 200,
   },
 });
+
+const marks = [
+  {
+    value: 0,
+    label: "2.5",
+  },
+  {
+    value: 33,
+    label: "5.0",
+  },
+  {
+    value: 66,
+    label: "7.5",
+  },
+  {
+    value: 100,
+    label: "10",
+  },
+];
 
 const MyMap = (props) => {
   const classes = useStyles();
@@ -36,14 +56,20 @@ const MyMap = (props) => {
   return (
     <>
       <div className={classes.root}>
+        <Typography id="discrete-slider-small-steps" gutterBottom>
+          Earthquake Magnitude
+        </Typography>
         <Slider
+          style={{ marginLeft: "20px" }}
           color="primary"
           value={value}
           onChange={handleChange}
+          marks={marks}
           aria-labelledby="continuous-slider"
         />
       </div>
       <div className="leaflet-container">
+        Collapse
         <Map center={position} zoom={mapData.zoom}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
