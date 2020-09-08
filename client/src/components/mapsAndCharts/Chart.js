@@ -65,7 +65,7 @@ const addArea = (e) => {
         <Button variant="contained" color = "primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={30} >1 Month</Button>
         <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} style={buttonStyle} onClick={changeNumber} value={60}>2 Months</Button>
         <div style = {{float: "right", marginRight: "10px"}}>
-        <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} onClick={addArea} value="true">Area</Button>
+        <Button variant="contained" color ="primary" size = "small" style = {{marginRight: "10px"}}  disabled={props.loadingInfo} onClick={addArea} value="true">Area</Button>
         <Button variant="contained" color ="primary" size = "small"  disabled={props.loadingInfo} onClick={addArea} value="false">Line</Button>
         </div>
       
