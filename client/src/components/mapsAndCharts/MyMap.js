@@ -9,6 +9,7 @@ const MyMap = (props) => {
     zoom: 8,
   });
 
+  var data = props.eqData;
   const position = [props.mapObj.lat, props.mapObj.lng];
 
   return (

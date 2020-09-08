@@ -15,7 +15,7 @@ router.get("/api/earthquake", async (req, res) => {
       var data = (await controller.earthquake.findEqData(lat, lng, d)) || [];
 
       console.log("earthquake route", data);
-      res.json(data);
+      return res.json(data);
     } catch (error) {
       console.log("error", error);
       return res.status(404).json({ msg: "no data found" });
@@ -24,7 +24,7 @@ router.get("/api/earthquake", async (req, res) => {
 
   const info = await controller.db.findInfoFromCity(city, state_name);
   if (info.data.length !== 1) return res.status(400).json({ data: info.data });
-  console.log(info);
+  console.log(info, "from our db");
   try {
     var data =
       (await controller.earthquake.findEqData(
