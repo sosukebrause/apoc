@@ -21,6 +21,8 @@ const NotFound = () => (
   </div>
 );
 
+const Landing = () => <div> landing </div>;
+
 function App() {
   return (
     // userProvider is now wrapping all logic for handling our state, updating state, and pushing out different values to all of our children.
@@ -31,6 +33,7 @@ function App() {
           <Header />
           <div className="container">
             <Switch>
+              <Route exact path="/" component={Landing} />
               <ProtectedRoute path="/search" component={Home} />
               {/* <ProtectedRoute path="/saved" component={Saved} /> */}
               {/* <PublicRoute path="/" component={Landing} /> */}
