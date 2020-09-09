@@ -102,6 +102,11 @@ const Home = () => {
           humidity: data.data.current.humidity,
           uvi: data.data.current.uvi,
           wind_speed: data.data.current.wind_speed,
+          weather2: data.data.daily[0].temp.day,
+          weather3: data.data.daily[1].temp.day,
+          weather4: data.data.daily[2].temp.day,
+          weather5: data.data.daily[3].temp.day,
+          weather6: data.data.daily[4].temp.day,
         };
         setWeatherData(weatherObj);
       })
@@ -175,6 +180,30 @@ const Home = () => {
           <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
         ) : null}
         {loadingInfo ? <Loading /> : null}
+
+        <div style={{ width: "50%" }}>
+                {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
+              </div>
+
+
+
+
+        {covidData.length > 0 ? (
+          <>
+            <br></br>
+            <br></br>
+            <div>
+              <Chart
+                data={covidData}
+                loadingInfo={loadingInfo}
+                style={{ width: "100%" }}
+              />
+            </div>
+            <br></br>
+            {/* <Danger /> */}
+          </>
+        ) : null}
+        {/* <Form inputName={"todoText"} /> */}
         <div className="weather">
           {weatherData && (
             <Weather
@@ -188,29 +217,6 @@ const Home = () => {
             </div>
           )}
         </div>
-
-        {covidData.length > 0 ? (
-          <>
-            <br></br>
-            <br></br>
-            <div>
-              <Chart
-                data={covidData}
-                loadingInfo={loadingInfo}
-                style={{ width: "100%" }}
-              />
-              <div style={{ width: "50%" }}>
-                {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
-                {/* <MyMap /> */}
-              </div>
-            </div>
-
-            <br></br>
-
-            {/* <Danger /> */}
-          </>
-        ) : null}
-        {/* <Form inputName={"todoText"} /> */}
       </>
       {/* )} */}
     </div>
