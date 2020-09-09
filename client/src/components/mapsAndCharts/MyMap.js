@@ -32,11 +32,7 @@ const marks = [
 
 const MyMap = (props) => {
   const classes = useStyles();
-<<<<<<< HEAD
   const [sliderValue, setSliderValue] = useState(0);
-=======
-  const [value, setValue] = useState(10);
->>>>>>> d7d1a1030540d4081d64485ce57e0e93de9a90ad
   const [magValue, setMag] = useState(2.5);
   const [mapData, setMapData] = useState({
     lat: props.mapObj.lat,
