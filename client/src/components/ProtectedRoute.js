@@ -4,8 +4,6 @@ import { useUserContext } from "./context/UserContext";
 
 export default ({ component: Component, ...rest }) => {
   const { userData, isAuthLoading } = useUserContext();
-  console.log("isAuthLoading", isAuthLoading);
-  //console.log(userData)
   if (isAuthLoading) return <p> Loading page... </p>;
   return (
     <Route

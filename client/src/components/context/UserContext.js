@@ -28,27 +28,29 @@ function UserProvider({ ...props }) {
       }
       Axios.post("/users/tokenIsValid", null, {
         headers: { "x-auth-token": token },
-      }).then(async tokenRes=>{
-        if (!tokenRes.data) return setAuthLoading(false);
-        if (tokenRes.data) {
-          try {
-            const userRes = await Axios.get("/users/", {
-              headers: { "x-auth-token": token },
-            });
-            setUserData({
-              token,
-              user: userRes.data.user,
-            });
-          } catch (err) {
-            console.log(err);
-          } finally {
-            setAuthLoading(false);
-          }
-        } 
-      }).catch(err=>{
-        console.log("tokenValid err",err)
-        setAuthLoading(false);
       })
+        .then(async (tokenRes) => {
+          if (!tokenRes.data) return setAuthLoading(false);
+          if (tokenRes.data) {
+            try {
+              const userRes = await Axios.get("/users/", {
+                headers: { "x-auth-token": token },
+              });
+              setUserData({
+                token,
+                user: userRes.data.user,
+              });
+            } catch (err) {
+              console.log(err);
+            } finally {
+              setAuthLoading(false);
+            }
+          }
+        })
+        .catch((err) => {
+          console.log("tokenValid err", err);
+          setAuthLoading(false);
+        });
     };
     checkLoggedIn();
   }, []);
