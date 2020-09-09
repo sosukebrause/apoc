@@ -102,11 +102,16 @@ const Home = () => {
           humidity: data.data.current.humidity,
           uvi: data.data.current.uvi,
           wind_speed: data.data.current.wind_speed,
-          weather2: data.data.daily[0].temp.day,
-          weather3: data.data.daily[1].temp.day,
-          weather4: data.data.daily[2].temp.day,
-          weather5: data.data.daily[3].temp.day,
-          weather6: data.data.daily[4].temp.day,
+          weather2: data.data.daily[1].temp.day,
+          day2: (data.data.daily[1].dt) * 1000,
+          weather3: data.data.daily[2].temp.day,
+          day3: (data.data.daily[2].dt) * 1000,
+          weather4: data.data.daily[3].temp.day,
+          day4: (data.data.daily[3].dt) * 1000,
+          weather5: data.data.daily[4].temp.day,
+          day5: (data.data.daily[4].dt) * 1000,
+          weather6: data.data.daily[5].temp.day,
+          day6: (data.data.daily[5].dt) * 1000,
         };
         setWeatherData(weatherObj);
       })
@@ -182,8 +187,8 @@ const Home = () => {
         {loadingInfo ? <Loading /> : null}
 
         <div style={{ width: "50%" }}>
-                {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
-              </div>
+          {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
+        </div>
 
 
 
