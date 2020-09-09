@@ -8,7 +8,7 @@ router.get("/api/feed/all", auth, async (req, res) => {
   res.json(feedList);
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/api/feed/new", auth, async (req, res) => {
   try {
     const { title } = req.body;
     //validation

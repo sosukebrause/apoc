@@ -26,28 +26,31 @@ function UserProvider({ ...props }) {
         setAuthLoading(false);
         return;
       }
-      // if (token === null) {
-      //   localStorage.setItem("auth-token", "");
-      //   token = "";
-      // }
-      const tokenRes = await Axios.post("/users/tokenIsValid", null, {
+      Axios.post("/users/tokenIsValid", null, {
         headers: { "x-auth-token": token },
-      });
-      if (tokenRes.data) {
-        try {
-          const userRes = await Axios.get("/users/", {
-            headers: { "x-auth-token": token },
-          });
-          setUserData({
-            token,
-            user: userRes.data.user,
-          });
+      })
+        .then(async (tokenRes) => {
+          if (!tokenRes.data) return setAuthLoading(false);
+          if (tokenRes.data) {
+            try {
+              const userRes = await Axios.get("/users/", {
+                headers: { "x-auth-token": token },
+              });
+              setUserData({
+                token,
+                user: userRes.data.user,
+              });
+            } catch (err) {
+              console.log(err);
+            } finally {
+              setAuthLoading(false);
+            }
+          }
+        })
+        .catch((err) => {
+          console.log("tokenValid err", err);
           setAuthLoading(false);
-        } catch (err) {
-          console.log(err);
-          setAuthLoading(false);
-        }
-      }
+        });
     };
     checkLoggedIn();
   }, []);
