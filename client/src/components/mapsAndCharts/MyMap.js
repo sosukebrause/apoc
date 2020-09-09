@@ -32,7 +32,7 @@ const marks = [
 
 const MyMap = (props) => {
   const classes = useStyles();
-  const [value, setValue] = useState(10);
+  const [sliderValue, setSliderValue] = useState(0);
   const [magValue, setMag] = useState(2.5);
   const [mapData, setMapData] = useState({
     lat: props.mapObj.lat,
@@ -41,10 +41,10 @@ const MyMap = (props) => {
   });
 
   const handleChange = (event, newValue) => {
-    let sliderValue = event.target.getAttribute("aria-valuenow");
-    const newMagValue = (7.5 * sliderValue + 250) / 100;
+    // let newValue = event.target.getAttribute("aria-valuenow");
+    const newMagValue = (7.5 * newValue + 250) / 100;
     setMag(newMagValue);
-    setValue(newValue);
+    setSliderValue(newValue);
   };
 
   const eqColor = (value) => {
@@ -61,13 +61,6 @@ const MyMap = (props) => {
   props.eqData.map((element, index) => {
     if (element.mag >= magValue) {
       markers.push(
-        // <Marker key={index} position={[element.lat, element.lng]}>
-        //   <Popup>{element.title}</Popup>
-        // </Marker>
-
-        // <CircleMarker center={position} color="red" radius={element}>
-        //     <Popup>Popup in CircleMarker</Popup>
-        //   </CircleMarker>
         <CircleMarker
           key={index}
           center={[element.lat, element.lng]}
@@ -91,7 +84,7 @@ const MyMap = (props) => {
         <Slider
           style={{ marginLeft: "20px" }}
           color="primary"
-          value={value}
+          value={sliderValue}
           onChange={handleChange}
           marks={marks}
           track="inverted"
@@ -108,7 +101,7 @@ const MyMap = (props) => {
 
           <Marker position={position}>
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              {props.mapObj.city}, {props.mapObj.state_name}
             </Popup>
           </Marker>
           {markers}
