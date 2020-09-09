@@ -32,12 +32,8 @@ const marks = [
 
 const MyMap = (props) => {
   const classes = useStyles();
-<<<<<<< HEAD
-  const [value, setValue] = useState(2.5);
-=======
   const [value, setValue] = useState(10);
   const [magValue, setMag] = useState(2.5);
->>>>>>> 28ba45418690ad3bcce2c3e5594777a7f353e35b
   const [mapData, setMapData] = useState({
     lat: props.mapObj.lat,
     lng: props.mapObj.lng,
