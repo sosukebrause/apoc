@@ -1,7 +1,13 @@
 const router = require("express").Router();
 const auth = require("../middleware/auth");
 const db = require("../models");
-// const Feed = require("../models/feedModel");
+const controller = require("../controllers");
+
+router.get("/api/feed/all", auth, async (req, res) => {
+  const feedList = await db.Feed.find({ userId: req.user });
+  res.json(feedList);
+});
+
 router.post("/", auth, async (req, res) => {
   try {
     const { title } = req.body;
@@ -15,10 +21,7 @@ router.post("/", auth, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-router.get("/all", auth, async (req, res) => {
-  const todos = await db.Feed.find({ userId: req.user });
-  res.json(todos);
-});
+
 router.delete("/remove/:id", (req, res) => {
   db.Feed.findByIdAndRemove(req.params.id).then(() => res.send("success"));
 });
