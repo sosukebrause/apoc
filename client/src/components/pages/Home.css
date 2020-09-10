@@ -4,6 +4,12 @@
     align-items: center;
 }
 
+#loader {
+    display: flex;
+    justify-content: center;
+}
+
+
 /* 
 .page {
     background-color: rgb(241, 241, 241);

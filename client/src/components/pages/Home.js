@@ -95,7 +95,6 @@ const Home = () => {
   const loadWeatherData = (city, state_name, lat, lng) => {
     API.getWeatherData(city, state_name, lat, lng)
       .then((res) => {
-        // console.log(res.data);
         var data = res.data;
         var weatherObj = {
           temp: data.data.current.temp,
@@ -103,14 +102,24 @@ const Home = () => {
           uvi: data.data.current.uvi,
           wind_speed: data.data.current.wind_speed,
           weather2: data.data.daily[1].temp.day,
+          main2: data.data.daily[1].weather[0].main,
+          icon2: data.data.daily[1].weather[0].icon,
           day2: (data.data.daily[1].dt) * 1000,
           weather3: data.data.daily[2].temp.day,
+          main3: data.data.daily[2].weather[0].main,
+          icon3: data.data.daily[2].weather[0].icon,
           day3: (data.data.daily[2].dt) * 1000,
           weather4: data.data.daily[3].temp.day,
+          main4: data.data.daily[3].weather[0].main,
+          icon4: data.data.daily[3].weather[0].icon,
           day4: (data.data.daily[3].dt) * 1000,
           weather5: data.data.daily[4].temp.day,
+          main5: data.data.daily[4].weather[0].main,
+          icon5: data.data.daily[4].weather[0].icon,
           day5: (data.data.daily[4].dt) * 1000,
           weather6: data.data.daily[5].temp.day,
+          main6: data.data.daily[5].weather[0].main,
+          icon6: data.data.daily[5].weather[0].icon,
           day6: (data.data.daily[5].dt) * 1000,
         };
         setWeatherData(weatherObj);
@@ -184,7 +193,10 @@ const Home = () => {
         {suggestions ? (
           <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
         ) : null}
+        <div id = "loader">
         {loadingInfo ? <Loading /> : null}
+        </div>
+       
 
         <div style={{ width: "50%" }}>
           {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
