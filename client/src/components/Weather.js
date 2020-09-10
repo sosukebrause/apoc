@@ -63,18 +63,15 @@ const Weather = (props) => {
             <div>
                 <br></br>
                 <h3>5 Day Forecast</h3>
-                <br></br>
                 <div id = "fiveDay">
                 <Typography variant="caption" component="h4" size = "1.3rem" color="textSecondary">
-                <h4>{convertDateFormat(new Date(props.weatherObj.day2))}: {tempConversion(props.weatherObj.weather2)}°F , {weatherIcon(props.weatherObj.main2)}</h4>
-                <h4>{convertDateFormat(new Date(props.weatherObj.day3))}: {tempConversion(props.weatherObj.weather3)}°F , {weatherIcon(props.weatherObj.main3)}</h4>
-                <h4>{convertDateFormat(new Date(props.weatherObj.day4))}: {tempConversion(props.weatherObj.weather4)}°F , {weatherIcon(props.weatherObj.main4)}</h4>
-                <h4>{convertDateFormat(new Date(props.weatherObj.day5))}: {tempConversion(props.weatherObj.weather5)}°F , {weatherIcon(props.weatherObj.main5)}</h4>         
-                <h4>{convertDateFormat(new Date(props.weatherObj.day6))}: {tempConversion(props.weatherObj.weather6)}°F , {weatherIcon(props.weatherObj.main6)}</h4>
+                <h4>{convertDateFormat(new Date(props.weatherObj.day2))}: {tempConversion(props.weatherObj.weather2)}°F  {weatherIcon(props.weatherObj.main2)}</h4>
+                <h4>{convertDateFormat(new Date(props.weatherObj.day3))}: {tempConversion(props.weatherObj.weather3)}°F  {weatherIcon(props.weatherObj.main3)}</h4>
+                <h4>{convertDateFormat(new Date(props.weatherObj.day4))}: {tempConversion(props.weatherObj.weather4)}°F  {weatherIcon(props.weatherObj.main4)}</h4>
+                <h4>{convertDateFormat(new Date(props.weatherObj.day5))}: {tempConversion(props.weatherObj.weather5)}°F  {weatherIcon(props.weatherObj.main5)}</h4>         
+                <h4>{convertDateFormat(new Date(props.weatherObj.day6))}: {tempConversion(props.weatherObj.weather6)}°F s {weatherIcon(props.weatherObj.main6)}</h4>
                 </Typography>
-
                 </div>
-           
             </div>
         </>
     )

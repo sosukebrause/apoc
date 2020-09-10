@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { Button } from "@material-ui/core";
+import Modal from "../Modal";
 
 export default (props) => {
   const [axis, setAxis] = useState("vertical");
@@ -22,6 +23,7 @@ export default (props) => {
   return (
     <>
       <h3 style={{ marginLeft: "50px" }}>Air Quality Index</h3>
+      <Modal/>
       <Button
         variant="contained"
         color="primary"
