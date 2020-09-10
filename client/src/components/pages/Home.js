@@ -11,6 +11,7 @@ import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 import Weather from "../Weather";
 import MyMap from "../mapsAndCharts/MyMap";
+import CityName from "../CityName"
 // import Earthquake from "../Earthquake";
 import "./Home.css";
 const maxDays = 60;
@@ -39,6 +40,7 @@ const Home = () => {
   const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
   const [mapInfo, setMapInfo] = useState(null);
+  const [cityInfo, setCityInfo] = useState(null);
   const [eqData, setEqData] = useState([]);
   // const [input, setInput] = useState({ city: "", state_name: "" });
   const handleAuxButton = (e) => {
@@ -51,6 +53,21 @@ const Home = () => {
       value.lng
     );
   };
+
+
+  // const loadCity = (city, state_name, lat, lng) => {
+  //  API.getMapData(city, state_name, lat, lng)
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       var cityName = res.data.data[0];
+  //       setCityInfo(cityName);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response);
+  //     });
+  // }
+
+
   //map Data function
   const loadMapData = (city, state_name, lat, lng) => {
     API.getMapData(city, state_name, lat, lng)
@@ -101,25 +118,21 @@ const Home = () => {
           humidity: data.data.current.humidity,
           uvi: data.data.current.uvi,
           wind_speed: data.data.current.wind_speed,
+          todayIcon: data.data.current.weather[0].main,
           weather2: data.data.daily[1].temp.day,
           main2: data.data.daily[1].weather[0].main,
-          icon2: data.data.daily[1].weather[0].icon,
           day2: (data.data.daily[1].dt) * 1000,
           weather3: data.data.daily[2].temp.day,
           main3: data.data.daily[2].weather[0].main,
-          icon3: data.data.daily[2].weather[0].icon,
           day3: (data.data.daily[2].dt) * 1000,
           weather4: data.data.daily[3].temp.day,
           main4: data.data.daily[3].weather[0].main,
-          icon4: data.data.daily[3].weather[0].icon,
           day4: (data.data.daily[3].dt) * 1000,
           weather5: data.data.daily[4].temp.day,
           main5: data.data.daily[4].weather[0].main,
-          icon5: data.data.daily[4].weather[0].icon,
           day5: (data.data.daily[4].dt) * 1000,
           weather6: data.data.daily[5].temp.day,
           main6: data.data.daily[5].weather[0].main,
-          icon6: data.data.daily[5].weather[0].icon,
           day6: (data.data.daily[5].dt) * 1000,
         };
         setWeatherData(weatherObj);
@@ -176,6 +189,7 @@ const Home = () => {
     loadCovidData(city, state_name, county);
     loadMapData(city, state_name, lat, lng);
     loadEarthquakes(city, state_name, lat, lng);
+   
   };
   const { userData } = useUserContext();
   return (
@@ -193,6 +207,7 @@ const Home = () => {
         {suggestions ? (
           <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
         ) : null}
+       {mapInfo && <CityName id = "cityName" mapObj={mapInfo}/> }
         <div id = "loader">
         {loadingInfo ? <Loading /> : null}
         </div>
@@ -225,11 +240,11 @@ const Home = () => {
           {weatherData && (
             <Weather
               weatherObj={weatherData}
-              style={{ height: "300px", width: "50%" }}
+              style={{ height: "350px", width: "50%" }}
             />
           )}
           {airData && (
-            <div style={{ height: "300px", width: "50%" }}>
+            <div style={{ height: "350px", width: "50%" }}>
               <BarChart airObj={airData} />
             </div>
           )}
