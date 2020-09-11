@@ -35,7 +35,7 @@ module.exports = {
         url:
           "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojson",
       });
-      console.log("earthquake.data");
+      // console.log("earthquake.data");
       let result = [];
       let array = earthquake.data.features || [];
       array.map((feature) => {
@@ -63,7 +63,7 @@ module.exports = {
           result.push(eqObj);
         }
       });
-      console.log("n=", result.length);
+      console.log("n=", result.length, "eq objects");
       return result;
     } catch (error) {
       console.log(error);
