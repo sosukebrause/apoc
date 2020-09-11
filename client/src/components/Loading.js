@@ -1,32 +1,50 @@
 import React from 'react';
-import Loader from "react-loader";
+import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-const Loading = () => {
-    return (
-        <div>
-                  <Loader
-                loaded={false}
-                lines={13}
-                length={20}
-                width={10}
-                radius={30}
-                corners={1}
-                rotate={0}
-                direction={1}
-                color="#000"
-                speed={1}
-                trail={60}
-                shadow={false}
-                hwaccel={false}
-                className="spinner"
-                zIndex={2e9}
-                top="50%"
-                left="50%"
-                scale={1.0}
-                loadedClassName="loadedContent"
-              />
-        </div>
-    )
+function CircularProgressWithLabel(props) {
+  return (
+    <Box position="relative" display="inline-flex">
+      <CircularProgress size="12rem" variant="static" {...props} />
+      <Box
+        top={0}
+        left={0}
+        bottom={0}
+        right={0}
+        position="absolute"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Typography variant="caption" component="div" color="textSecondary">{`${Math.round(
+          props.value,
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
 }
 
-export default Loading
+CircularProgressWithLabel.propTypes = {
+  /**
+   * The value of the progress indicator for the determinate and static variants.
+   * Value between 0 and 100.
+   */
+  value: PropTypes.number.isRequired,
+};
+
+export default function CircularStatic() {
+  const [progress, setProgress] = React.useState(10);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
+    }, 800);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  return <CircularProgressWithLabel value={progress} />;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { Button } from "@material-ui/core";
+import Modal from "../Modal";
 
 export default (props) => {
   const [axis, setAxis] = useState("vertical");
@@ -22,11 +23,14 @@ export default (props) => {
   return (
     <>
       <h3 style={{ marginLeft: "50px" }}>Air Quality Index</h3>
+      <div style = {{display: "flex"}}>
+      <Modal />
       <Button
         variant="contained"
         color="primary"
         size="small"
         onClick={changeAxis}
+        style={{ marginLeft: "10px" }}
         value="horizontal"
       >
         Horizontal
@@ -41,6 +45,8 @@ export default (props) => {
       >
         Vertical
       </Button>
+      </div>
+
       <ResponsiveBar
         layout={axis}
         data={data}

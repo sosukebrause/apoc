@@ -1,0 +1,23 @@
+#good {
+color: green
+}
+
+#moderate {
+    color: yellow;
+}
+
+#unhealthyForSensitive {
+    color: orange;
+}
+
+#unhealthy {
+    color: red;
+}
+
+#veryUnhealthy {
+    color: purple;
+}
+
+#hazardous{
+    color: maroon;
+}

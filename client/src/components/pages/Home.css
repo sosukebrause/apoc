@@ -4,8 +4,17 @@
     align-items: center;
 }
 
-
-.page {
-    background-color: rgb(241, 241, 241);
+#loader {
+    display: flex;
+    justify-content: center;
 }
 
+
+/* 
+.page {
+    background-color: rgb(241, 241, 241);
+} */
+
+#cityName {
+    text-align: center;
+}
