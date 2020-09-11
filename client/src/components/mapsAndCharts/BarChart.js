@@ -13,7 +13,7 @@ export default (props) => {
   };
 
   let data = [
-    { pollutant: "aqi", aqi: props.airObj.aqi },
+    { pollutant: "aqi", "air Quality": props.airObj.aqi },
     { pollutant: "co", "carbon Monoxide": props.airObj.co },
     { pollutant: "o3", ozone: props.airObj.o3 },
     { pollutant: "pm25", "particle Matter": props.airObj.pm25 },
@@ -22,7 +22,7 @@ export default (props) => {
 
   return (
     <>
-      <h3 style={{ marginLeft: "50px" }}>Air Quality Index</h3>
+      <h3 style={{ marginLeft: "20px" }}>Air Quality Index</h3>
       <div style = {{display: "flex"}}>
       <Modal />
       <Button
@@ -51,7 +51,7 @@ export default (props) => {
         layout={axis}
         data={data}
         keys={[
-          "aqi",
+          "air Quality",
           "carbon Monoxide",
           "ozone",
           "particle Matter",

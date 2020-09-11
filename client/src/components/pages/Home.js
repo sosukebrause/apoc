@@ -55,19 +55,6 @@ const Home = () => {
   };
 
 
-  // const loadCity = (city, state_name, lat, lng) => {
-  //  API.getMapData(city, state_name, lat, lng)
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       var cityName = res.data.data[0];
-  //       setCityInfo(cityName);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response);
-  //     });
-  // }
-
-
   //map Data function
   const loadMapData = (city, state_name, lat, lng) => {
     API.getMapData(city, state_name, lat, lng)
@@ -208,7 +195,9 @@ const Home = () => {
         </div>
         {covidData.length > 0 ? (
           <>
-            {mapInfo && <CityName id="cityName" mapObj={mapInfo} style={{ marginLeft: "60px" }} />}
+          <div style = {{marginLeft: "70px" }}>
+          {mapInfo && <CityName id="cityName" mapObj={mapInfo} />}
+          </div>
             <div style={{ width: "50%", marginLeft: "40px" }}>
               {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
             </div>

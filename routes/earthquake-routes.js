@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const controller = require("../controllers");
 router.get("/api/earthquake", async (req, res) => {
-  const d = 1000.0;
+  const d = Number(req.query.d) || 1000.0;
   var city = req.query.city;
   var state_name = req.query.state_name;
   var lat = req.query.lat;

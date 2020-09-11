@@ -33,11 +33,23 @@ const marks = [
 const marks2 = [
   {
     value: 0,
-    label: "200 miles",
+    label: "200",
+  },
+  {
+    value: 25,
+    label: "400",
+  },
+  {
+    value: 50,
+    label: "600",
+  },
+  {
+    value: 75,
+    label: "800",
   },
   {
     value: 100,
-    label: "1000 miles",
+    label: "1000",
   },
 ];
 
@@ -46,18 +58,28 @@ const marks2 = [
 const MyMap = (props) => {
   const classes = useStyles();
   const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue2, setSliderValue2] = useState(100);
   const [magValue, setMag] = useState(2.5);
+  const [radiusValue, setRadius] = useState(1000);
   const [mapData, setMapData] = useState({
     lat: props.mapObj.lat,
     lng: props.mapObj.lng,
-    zoom: 8,
+    zoom: 5,
   });
 
-  const handleChange = (event, newValue) => {
+  const handleChangeMag = (event, newValue) => {
     // let newValue = event.target.getAttribute("aria-valuenow");
     const newMagValue = (7.5 * newValue + 250) / 100;
     setMag(newMagValue);
     setSliderValue(newValue);
+  };
+
+  const handleChangeRadius = (event, newValue) => {
+    // let newValue = event.target.getAttribute("aria-valuenow");
+    const newRadiusValue = 200.0 + (8 * newValue)
+    //(1/8 * newValue) - 25;;
+    setRadius(newRadiusValue);
+    setSliderValue2(newValue);
   };
 
   const eqColor = (value) => {
@@ -72,7 +94,7 @@ const MyMap = (props) => {
 
   const markers = [];
   props.eqData.map((element, index) => {
-    if (element.mag >= magValue) {
+    if (element.mag >= magValue && element.distance <= radiusValue) {
       markers.push(
         <CircleMarker
           key={index}
@@ -87,6 +109,7 @@ const MyMap = (props) => {
   });
 
   const position = [props.mapObj.lat, props.mapObj.lng];
+  
 
   return (
     <>
@@ -99,7 +122,7 @@ const MyMap = (props) => {
           style={{ marginLeft: "20px" }}
           color="primary"
           value={sliderValue}
-          onChange={handleChange}
+          onChange={handleChangeMag}
           marks={marks}
           track="inverted"
           aria-labelledby="continuous-slider"
@@ -107,13 +130,13 @@ const MyMap = (props) => {
       </div>
       <div className={classes.root}>
         <Typography id="discrete-slider-small-steps" gutterBottom>
-          Earthquake Radius
+          Earthquake Radius in Miles
         </Typography>
         <Slider
           style={{ marginLeft: "50px" }}
           color="primary"
-          value={sliderValue}
-          onChange={handleChange}
+          value={sliderValue2}
+          onChange={handleChangeRadius}
           marks={marks2}
           aria-labelledby="continuous-slider"
         />
@@ -121,7 +144,7 @@ const MyMap = (props) => {
     </div>
       <div className="leaflet-container">
         Collapse
-        <Map center={position} zoom={mapData.zoom}>
+        <Map center={position} zoom={mapData.zoom} >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
