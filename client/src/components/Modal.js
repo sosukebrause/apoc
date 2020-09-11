@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Button } from "@material-ui/core";
+import "./Modal.css";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    // border: '2px solid #000',
+    border: '1px solid #000',
     boxShadow: theme.shadows[2],
     padding: theme.spacing(2, 4, 3),
   },
@@ -33,8 +34,10 @@ export default function TransitionsModal() {
 
   return (
     <div>
-      <Button type="button" onClick={handleOpen}>
-        Info
+      <Button variant="contained"
+        color="primary"
+        size="small" onClick={handleOpen}>
+        AQI Index
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -50,8 +53,13 @@ export default function TransitionsModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Air Quality Info</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+            <h2 id="transition-modal-title">Air Quality Index</h2>
+            <p id="good">Good: 0 - 50</p>
+            <p id="moderate">Moderate: 51 - 100</p>
+            <p id="unhealthyForSensitive">Unhealthy for Sensitive Groups: 101 - 150</p>
+            <p id="unhealthy">Unhealthy: 151 - 200</p>
+            <p id="veryUnhealthy">Very Unhealthy: 201 - 300</p>
+            <p id="hazardous">Hazardous: 301 - 500</p>
           </div>
         </Fade>
       </Modal>

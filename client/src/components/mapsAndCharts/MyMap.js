@@ -30,6 +30,19 @@ const marks = [
   },
 ];
 
+const marks2 = [
+  {
+    value: 0,
+    label: "200 miles",
+  },
+  {
+    value: 100,
+    label: "1000 miles",
+  },
+];
+
+
+
 const MyMap = (props) => {
   const classes = useStyles();
   const [sliderValue, setSliderValue] = useState(0);
@@ -77,7 +90,8 @@ const MyMap = (props) => {
 
   return (
     <>
-      <div className={classes.root}>
+    <div style = {{display: "flex", justifyContent: "space-around"}}>
+    <div className={classes.root}>
         <Typography id="discrete-slider-small-steps" gutterBottom>
           Earthquake Magnitude
         </Typography>
@@ -91,6 +105,20 @@ const MyMap = (props) => {
           aria-labelledby="continuous-slider"
         />
       </div>
+      <div className={classes.root}>
+        <Typography id="discrete-slider-small-steps" gutterBottom>
+          Earthquake Radius
+        </Typography>
+        <Slider
+          style={{ marginLeft: "50px" }}
+          color="primary"
+          value={sliderValue}
+          onChange={handleChange}
+          marks={marks2}
+          aria-labelledby="continuous-slider"
+        />
+      </div>
+    </div>
       <div className="leaflet-container">
         Collapse
         <Map center={position} zoom={mapData.zoom}>
