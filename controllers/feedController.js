@@ -16,7 +16,7 @@ module.exports = {
     try {
       const myComment = await db.Feed.create({
         text: req.body.text,
-        displayName: req.user.displayName,
+        // displayName: req.user.displayName,
         // location: req.query.city?
       });
       res.send(myComment);
