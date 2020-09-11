@@ -22,7 +22,7 @@ router.get("/api/earthquake", async (req, res) => {
 
   const info = await controller.db.findInfoFromCity(city, state_name);
   if (info.data.length !== 1) return res.status(400).json({ data: info.data });
-  console.log(info, ": location match from our db");
+  console.log(info, ": location query match w/ city-db");
   try {
     var data =
       (await controller.earthquake.findEqData(
