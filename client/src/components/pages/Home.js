@@ -189,16 +189,12 @@ const Home = () => {
     loadCovidData(city, state_name, county);
     loadMapData(city, state_name, lat, lng);
     loadEarthquakes(city, state_name, lat, lng);
-   
+
   };
   const { userData } = useUserContext();
   return (
     <div className="page">
       <>
-        {/*{!userData.user ? (
-        <></>
-      ) : ( {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
-
         <Search
           className="search"
           buttonSubmit={buttonSubmit}
@@ -207,22 +203,15 @@ const Home = () => {
         {suggestions ? (
           <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
         ) : null}
-       {mapInfo && <CityName id = "cityName" mapObj={mapInfo}/> }
-        <div id = "loader">
-        {loadingInfo ? <Loading /> : null}
+        <div id="loader">
+          {loadingInfo ? <Loading /> : null}
         </div>
-       
-
-        <div style={{ width: "50%" }}>
-          {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
-        </div>
-
-
-
-
         {covidData.length > 0 ? (
           <>
-            <br></br>
+            {mapInfo && <CityName id="cityName" mapObj={mapInfo} style={{ marginLeft: "60px" }} />}
+            <div style={{ width: "50%", marginLeft: "40px" }}>
+              {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
+            </div>
             <br></br>
             <div>
               <Chart
@@ -232,11 +221,7 @@ const Home = () => {
               />
             </div>
             <br></br>
-            {/* <Danger /> */}
-          </>
-        ) : null}
-        {/* <Form inputName={"todoText"} /> */}
-        <div className="weather">
+            <div className="weather">
           {weatherData && (
             <Weather
               weatherObj={weatherData}
@@ -249,8 +234,10 @@ const Home = () => {
             </div>
           )}
         </div>
+          </>
+        ) : null}
+      
       </>
-      {/* )} */}
     </div>
   );
 };
