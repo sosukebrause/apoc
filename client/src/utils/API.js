@@ -38,11 +38,20 @@ export default {
     });
   },
 
-  getEarthquakeData: function (city, state_name, lat, lng, d) {
+  getEarthquakeData: function (city, state_name, lat, lng) {
     return axios({
       url: "/api/earthquake",
       method: "GET",
-      params: { city, state_name, lat, lng, d},
+      params: { city, state_name, lat, lng },
+    });
+  },
+
+  getFeedData: function (city, state_name, county) {
+    return axios({
+      url: "/feed/city",
+      method: "GET",
+      params: { city, state_name, county },
+      headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
   },
 };

@@ -9,7 +9,6 @@ router.get("/feed/user", auth, async (req, res) => {
   try {
     const feedList = await db.Feed.find({
       author: {
-        // displayName: req.user.displayName,
         id: mongoose.Types.ObjectId(req.user),
       },
     });
@@ -19,24 +18,48 @@ router.get("/feed/user", auth, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //get all posts based on location
 router.get("/feed/city", auth, async (req, res) => {
+  const { city, state_name, county } = req.query;
+
+  if (!city || !state_name)
+    return res.status(400).json({ msg: "Please enter city and state" });
+
+  if (city && state_name)
+    //this try catch checks for query string city/state with exact match
+    try {
+      const feedListData = await db.Feed.find({
+        location: {
+          city: city,
+          state_name: state_name,
+        },
+      }).populate({ path: "author.id", select: "displayName -_id" });
+      return res.json(feedListData);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  //this obj finds city/state query matching similar strings in citydb
+  // const dbCityInfo = await controller.db.findInfoFromCity(city, state_name);
+  const dbCityInfo = await controller.db.findInfoFromCity(city, state_name);
+  const cityMatch = await dbCityInfo.data[0].city;
+  const stateMatch = await dbCityInfo.data[0].state_name;
+  console.log("typeof:", typeof cityMatch, stateMatch);
+  //return err if 1 not found
+  if (dbCityInfo.data.length !== 1)
+    return res.status(400).json({ feedListData: dbCityInfo.data });
   try {
-    // const { text } = req.body;
-    const { city, state_name } = req.query;
-
-    if (!city || !state_name)
-      return res.status(400).json({ msg: "Please enter city and state" });
-
-    const feedList = await db.Feed.find({
+    const feedListData = await db.Feed.find({
       location: {
-        city: city,
-        state_name: state_name,
+        city: `${dbCityInfo.data[0].city}`,
+        state_name: `${dbCityInfo.data[0].state_name}`,
       },
     }).populate({ path: "author.id", select: "displayName -_id" });
-    res.json(feedList);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.log("feedlist data from feeroutes: ", { feedListData });
+    return res.json({ feedListData });
+  } catch (error) {
+    console.log("error", error);
+    return res.json({ msg: "no data found" });
   }
 });
 
