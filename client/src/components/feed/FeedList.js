@@ -1,67 +1,31 @@
-import React from "react";
-import { useTodoContext } from "../context/FeedContext";
-import TodoItemWithEdit from "./ItemEdit";
-import TodoItemInlineEdit from "./ItemInlineEdit";
-import "../css/TodoItem.css";
+import React, { useState } from "react";
 
-/*** ToDo Item*/
-const TodoItem = ({ item, dispatch, index }) => {
-  const editTodoItem = (id, editType) =>
-    dispatch({
-      type:
-        editType === "setRemove"
-          ? "TODO_REMOVE"
-          : editType === "setTodo"
-          ? "TODO_PRIORITIZE"
-          : "",
-      id,
-    });
-
-  return (
-    <li>
-      <h4 style={item.priority ? { textDecoration: "line-through" } : {}}>
-        {item.name}
-      </h4>
-      <button onClick={() => editTodoItem(item.id, "setTodo")}>
-        {item.priority ? "set UNDO" : "set TODO"}
-      </button>
-      <button onClick={() => editTodoItem(item.id, "setRemove")}>delete</button>
-    </li>
-  );
+const convertDate = (date) => {
+  let d = date;
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
 };
 
-/** ToDo List */
-const TodoList = () => {
-  const { state, dispatch } = useTodoContext();
-  const [withEdit, setTodoListMode] = React.useState(true);
-  const toggleTodoListMode = () => setTodoListMode(!withEdit);
-  /**
-   * added update by index
-   */
-  return (
-    <section className="render-todos">
-      <h3> List of Tasks </h3>
-      <button onClick={toggleTodoListMode} disabled={state.length === 0}>
-        {!withEdit ? "inline Editing" : "button Editing"}
-      </button>
-      <ul className="todo-list">
-        {
-          state.map((item) =>
-            withEdit ? (
-              <TodoItemInlineEdit
-                key={item.id}
-                item={item}
-                dispatch={dispatch}
-              />
-            ) : (
-              <TodoItemWithEdit key={item.id} item={item} dispatch={dispatch} />
-            )
-          )
-          //state.map((item, index) => <TodoItem key={index} index={index} item={item} dispatch={dispatch} />)
-        }
-      </ul>
-    </section>
-  );
+const styles = {
+  border: "1px solid",
+  padding: "10px",
+  margin: "10px",
 };
 
-export default TodoList;
+const FeedList = (props) => {
+  const [feedItem, setFeedItem] = useState(props.feedData);
+
+  let titleArr = props.feedData.map((item, index) => (
+    <div key={index} style={styles}>
+      <h3>
+        {item.location.city}, {item.location.state_name}
+      </h3>
+      <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
+      <p style={styles}>{item.text}</p>
+      <p>{item.date}</p>
+    </div>
+  ));
+
+  return <div style={styles}>{titleArr}</div>;
+};
+
+export default FeedList;

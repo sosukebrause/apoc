@@ -9,6 +9,7 @@ import { Button } from "@material-ui/core";
 import Loading from "../Loading";
 import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
+import FeedList from "../feed/FeedList";
 import Weather from "../Weather";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
@@ -181,8 +182,8 @@ const Home = () => {
 
   const loadFeedData = (city, state_name, county) => {
     API.getFeedData(city, state_name, county).then((res) => {
-      console.log(res);
-      // setFeed(res)
+      console.log("feed", res.data.data);
+      setFeed(res.data.data);
     });
   };
   const { userData } = useUserContext();
@@ -194,6 +195,7 @@ const Home = () => {
           buttonSubmit={buttonSubmit}
           loadingInfo={loadingInfo}
         />
+
         {suggestions ? (
           <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
         ) : null}
@@ -227,6 +229,7 @@ const Home = () => {
                   <BarChart airObj={airData} />
                 </div>
               )}
+              {feedData.length > 0 && <FeedList feedData={feedData} />}
             </div>
           </>
         ) : null}
