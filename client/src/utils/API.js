@@ -38,11 +38,11 @@ export default {
     });
   },
 
-  getEarthquakeData: function (city, state_name, lat, lng) {
+  getEarthquakeData: function (city, state_name, lat, lng, d) {
     return axios({
       url: "/api/earthquake",
       method: "GET",
-      params: { city, state_name, lat, lng },
+      params: { city, state_name, lat, lng, d},
     });
   },
 };

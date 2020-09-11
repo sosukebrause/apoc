@@ -11,6 +11,7 @@ import API from "../../utils/API";
 import { useUserContext } from "../context/UserContext";
 import Weather from "../Weather";
 import MyMap from "../mapsAndCharts/MyMap";
+import CityName from "../CityName"
 // import Earthquake from "../Earthquake";
 import "./Home.css";
 const maxDays = 60;
@@ -39,6 +40,7 @@ const Home = () => {
   const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
   const [mapInfo, setMapInfo] = useState(null);
+  const [cityInfo, setCityInfo] = useState(null);
   const [eqData, setEqData] = useState([]);
   // const [input, setInput] = useState({ city: "", state_name: "" });
   const handleAuxButton = (e) => {
@@ -51,6 +53,8 @@ const Home = () => {
       value.lng
     );
   };
+
+
   //map Data function
   const loadMapData = (city, state_name, lat, lng) => {
     API.getMapData(city, state_name, lat, lng)
@@ -95,13 +99,28 @@ const Home = () => {
   const loadWeatherData = (city, state_name, lat, lng) => {
     API.getWeatherData(city, state_name, lat, lng)
       .then((res) => {
-        // console.log(res.data);
         var data = res.data;
         var weatherObj = {
           temp: data.data.current.temp,
           humidity: data.data.current.humidity,
           uvi: data.data.current.uvi,
           wind_speed: data.data.current.wind_speed,
+          todayIcon: data.data.current.weather[0].main,
+          weather2: data.data.daily[1].temp.day,
+          main2: data.data.daily[1].weather[0].main,
+          day2: (data.data.daily[1].dt) * 1000,
+          weather3: data.data.daily[2].temp.day,
+          main3: data.data.daily[2].weather[0].main,
+          day3: (data.data.daily[2].dt) * 1000,
+          weather4: data.data.daily[3].temp.day,
+          main4: data.data.daily[3].weather[0].main,
+          day4: (data.data.daily[3].dt) * 1000,
+          weather5: data.data.daily[4].temp.day,
+          main5: data.data.daily[4].weather[0].main,
+          day5: (data.data.daily[4].dt) * 1000,
+          weather6: data.data.daily[5].temp.day,
+          main6: data.data.daily[5].weather[0].main,
+          day6: (data.data.daily[5].dt) * 1000,
         };
         setWeatherData(weatherObj);
       })
@@ -157,15 +176,12 @@ const Home = () => {
     loadCovidData(city, state_name, county);
     loadMapData(city, state_name, lat, lng);
     loadEarthquakes(city, state_name, lat, lng);
+
   };
   const { userData } = useUserContext();
   return (
     <div className="page">
       <>
-        {/*{!userData.user ? (
-        <></>
-      ) : ( {loadingInfo ? null : <h3 style = {{marginLeft: "20px"}}>Welcome {userData.user.displayName}</h3>} */}
-
         <Search
           className="search"
           buttonSubmit={buttonSubmit}
@@ -174,24 +190,17 @@ const Home = () => {
         {suggestions ? (
           <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
         ) : null}
-        {loadingInfo ? <Loading /> : null}
-        <div className="weather">
-          {weatherData && (
-            <Weather
-              weatherObj={weatherData}
-              style={{ height: "300px", width: "50%" }}
-            />
-          )}
-          {airData && (
-            <div style={{ height: "300px", width: "50%" }}>
-              <BarChart airObj={airData} />
-            </div>
-          )}
+        <div id="loader">
+          {loadingInfo ? <Loading /> : null}
         </div>
-
         {covidData.length > 0 ? (
           <>
-            <br></br>
+          <div style = {{marginLeft: "70px" }}>
+          {mapInfo && <CityName id="cityName" mapObj={mapInfo} />}
+          </div>
+            <div style={{ width: "50%", marginLeft: "40px" }}>
+              {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
+            </div>
             <br></br>
             <div>
               <Chart
@@ -199,20 +208,25 @@ const Home = () => {
                 loadingInfo={loadingInfo}
                 style={{ width: "100%" }}
               />
-              <div style={{ width: "50%" }}>
-                {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
-                {/* <MyMap /> */}
-              </div>
             </div>
-
             <br></br>
-
-            {/* <Danger /> */}
+            <div className="weather">
+          {weatherData && (
+            <Weather
+              weatherObj={weatherData}
+              style={{ height: "350px", width: "50%" }}
+            />
+          )}
+          {airData && (
+            <div style={{ height: "350px", width: "50%" }}>
+              <BarChart airObj={airData} />
+            </div>
+          )}
+        </div>
           </>
         ) : null}
-        {/* <Form inputName={"todoText"} /> */}
+      
       </>
-      {/* )} */}
     </div>
   );
 };
