@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 // import Form from "../card/AuthPost";
+import Header from "../Header"
 import Danger from "../Danger";
 import Search from "./Search";
 import Chart from "../mapsAndCharts/Chart";
@@ -12,7 +13,7 @@ import FeedList from "../feed/FeedList";
 import Weather from "../Weather";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
-// import Earthquake from "../Earthquake";
+
 import "./Home.css";
 const maxDays = 60;
 const AuxButton = (props) => {
@@ -192,6 +193,7 @@ const Home = () => {
   return (
     <div className="page">
       <>
+      <Header/>
         <Search
           className="search"
           buttonSubmit={buttonSubmit}
@@ -204,16 +206,16 @@ const Home = () => {
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {covidData.length > 0 ? (
           <>
-            <div style={{ marginLeft: "70px" }}>
+            <div style={{ display: "flex", justifyContent: "center"}}>
               {mapInfo && <CityName id="cityName" mapObj={mapInfo} />}
             </div>
-            <div className = "weather">
-            <div style={{ width: "50%", marginLeft: "40px" }}>
-              {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
+            <div className="weather">
+              <div style={{ width: "50%", marginLeft: "40px" }}>
+                {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
+              </div>
+              {mapInfo && <FeedList mapInfo={mapInfo} feedData={feedData} />}
             </div>
-            {mapInfo && <FeedList mapInfo={mapInfo} feedData={feedData} />}
-            </div>
-            
+
             <br></br>
             <div>
               <Chart

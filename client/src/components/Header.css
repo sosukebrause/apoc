@@ -1,5 +1,4 @@
 .title {
-  display: inline;
    color: rgb(223, 76, 8);
    font-size: 4rem;
    /* font-family: 'Roboto', sans-serif; */
@@ -9,10 +8,8 @@
 
 .blink{
   /* width:200px; */
-  height: 50px;
   padding: 15px;	
   text-align: center;
-  line-height: 50px;
   animation: blink 2s linear infinite;
 }
 @keyframes blink{
@@ -25,7 +22,7 @@
 #header {
     display: flex;
     justify-content: center;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 }
 
 
@@ -36,12 +33,10 @@
     right: 50%;
     top: 28%;
     width: auto;
-    height: 120px;
-    position: absolute;
     overflow: hidden;
     /* transform: rotate(45deg); */
     /* filter: drop-shadow(10px 10px 10px #c5c5c5); */
-    animation: glitch 7s infinite ease-in-out;
+    /* animation: glitch 7s infinite ease-in-out; */
   }
 
   .img2 {
@@ -55,7 +50,7 @@
     /* animation: glitch2 7s infinite ease-in-out; */
   }
 
-    @media (prefers-reduced-motion: no-preference) {
+    /* @media (prefers-reduced-motion: no-preference) {
         .img2 {
           animation: App-logo-spin infinite 6s linear;
         }
@@ -147,5 +142,5 @@ div:after{
     62%{
         transform: translate(-22px,5px) skew(21deg); 
     }
-}
+} */
 

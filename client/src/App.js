@@ -13,7 +13,7 @@ import PublicRoute from "./components/PublicRoute";
 //chaning above line to the following line
 import { UserProvider } from "./components/context/UserContext";
 
-import Header from "./components/Header";
+import AuthButtons from "./components/auth/AuthButtons";
 import "./App.css";
 
 const NotFound = () => (
@@ -31,7 +31,7 @@ function App() {
     <div className="App">
       <UserProvider>
         <BrowserRouter>
-          <Header />
+        <AuthButtons  />
           <div className="container">
             <Switch>
               <Route exact path="/" component={Landing} />

@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 const CityName = (props) => {
     return (
         <div>
-            <h2>{props.mapObj.city}, {props.mapObj.state_name}</h2>
+            <h1 style = {{marginBottom: "50px"}}>{props.mapObj.city}, {props.mapObj.state_name}</h1>
         </div>
     )
 }
