@@ -17,6 +17,8 @@ const AuthButtons = () => {
 
   const register = () => history.push("/register");
   const login = () => history.push("/login");
+  const profile = () => history.push("/profile");
+  const main = () => history.push("/search");
 
   const logout = () => {
     setUserData({
@@ -29,20 +31,28 @@ const AuthButtons = () => {
   return (
     <nav className="auth-options">
       {userData.user ? (
-        <Button style = {{float: 'right', marginRight: "20px"}} variant ="outlined" size = "small" color="primary" onClick={logout}>
+        <>
+          <Button style={{ float: 'right', marginRight: "20px" }} variant="outlined" size="small" color="primary" onClick={profile}>
+            Profile
+     </Button>
+          <Button style={{ float: 'right', marginRight: "20px" }} variant="outlined" size="small" color="primary" onClick={main}>
+            Dashboard
+     </Button>
+          <Button style={{ float: 'right', marginRight: "20px" }} variant="outlined" size="small" color="primary" onClick={logout}>
             Log Out
         </Button>
-      ) : (
-        <>
-    <Button variant ="outlined" color="secondary" style = {buttonStyle} onClick={register}>
-    Register
-    </Button>
-    
-    <Button variant="outlined" color="secondary" style = {buttonStyle} onClick={login}>
-    Log in
-    </Button>
         </>
-      )}
+      ) : (
+          <>
+            <Button variant="outlined" color="secondary" style={buttonStyle} onClick={register}>
+              Register
+    </Button>
+
+            <Button variant="outlined" color="secondary" style={buttonStyle} onClick={login}>
+              Log in
+    </Button>
+          </>
+        )}
     </nav>
   );
 };
