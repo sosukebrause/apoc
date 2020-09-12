@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { Button } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import Modal from "../Modal";
 
 export default (props) => {
@@ -22,7 +23,10 @@ export default (props) => {
 
   return (
     <>
-      <h3 style={{ marginLeft: "20px" }}>Air Quality Index</h3>
+     <Typography variant="h4" component="h4">
+     <p style={{ marginLeft: "20px" }}>Air Quality Index</p>
+     </Typography>
+     
       <div style = {{display: "flex"}}>
       <Modal />
       <Button

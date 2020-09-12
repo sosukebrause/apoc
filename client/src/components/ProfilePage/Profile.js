@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
-import { InputLabel } from '@material-ui/core';
+import { InputLabel, Container } from '@material-ui/core';
 import Fire from "./images/fire.png";
 import Skull from "./images/skull.png";
 import Error from "./images/error.png";
@@ -71,8 +71,8 @@ const Profile = () => {
 
   return (
     <div>
-
-      <div style = {{display: "flex", justifyContent: "center"}}>
+<Container>
+<div style = {{display: "flex", justifyContent: "center"}}>
         <img src={Fire} id="profileImage" alt="not working" onClick = {changeImage}/>
       </div>
 
@@ -97,6 +97,8 @@ const Profile = () => {
 
 
       <p>Email: {profileInfo.email}</p>
+</Container>
+   
     </div>
   )
 }

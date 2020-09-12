@@ -16,7 +16,7 @@ import CityName from "../CityName";
 
 import "./Home.css";
 const maxDays = 60;
-const AuxButton = (props) => {
+const SuggestionsButton = (props) => {
   var array = props.options;
   let newItems = array.map((item, index) => {
     return (
@@ -43,6 +43,16 @@ const Home = () => {
   const [mapInfo, setMapInfo] = useState(null);
   const [feedData, setFeed] = useState([]);
   const [eqData, setEqData] = useState([]);
+  const [dangerData, setDangerData] = useState(null);
+
+  React.useEffect(() => {
+    let mapStorage = localStorage.getItem("mapStorage")
+    if (mapStorage) {
+      mapStorage = JSON.parse(mapStorage)
+      console.log(mapStorage)
+      buttonSubmit(mapStorage.city, mapStorage.state_name, mapStorage.county, mapStorage.lat, mapStorage.lng);
+    }
+  }, [])
 
   // const [input, setInput] = useState({ city: "", state_name: "" });
   const handleAuxButton = (e) => {
@@ -62,6 +72,7 @@ const Home = () => {
       .then((res) => {
         // console.log(res.data);
         var mapObj = res.data.data[0];
+        localStorage.setItem("mapStorage", JSON.stringify(mapObj))
         setMapInfo(mapObj);
       })
       .catch((err) => {
@@ -193,7 +204,7 @@ const Home = () => {
   return (
     <div className="page">
       <>
-      <Header/>
+        <Header />
         <Search
           className="search"
           buttonSubmit={buttonSubmit}
@@ -201,15 +212,16 @@ const Home = () => {
         />
 
         {suggestions ? (
-          <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
+          <SuggestionsButton handleAuxButton={handleAuxButton} options={suggestions} />
         ) : null}
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
-        {covidData.length > 0 ? (
+        {(!loadingInfo) ? (
           <>
-            <div style={{ display: "flex", justifyContent: "center"}}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               {mapInfo && <CityName id="cityName" mapObj={mapInfo} />}
+              {/* <Danger danger = {dangerData}/> */}
             </div>
-            <div className="weather">
+            <div className="mapAndFeed">
               <div style={{ width: "50%", marginLeft: "40px" }}>
                 {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
               </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { Button } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const maxDays = 60;
 
@@ -12,6 +13,7 @@ const titleStyle = {
   color: "orange",
   fontSize: "2rem",
   borderTop: "2px dashed light-red",
+  marginLeft: "60px"
 };
 
 export default (props) => {
@@ -63,7 +65,9 @@ export default (props) => {
   ];
   return (
     <>
-      <h3 style={titleStyle}>Covid Chart</h3>
+     <Typography variant="h5" component="h5">
+     <p style={titleStyle}>Covid Chart</p>
+     </Typography>
       <div style={{ marginLeft: "50px" }}>
         <Button
           variant="contained"

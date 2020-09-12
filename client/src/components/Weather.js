@@ -50,8 +50,10 @@ const Weather = (props) => {
     return (
         <>
             <div >
-                <h3 style={{ marginLeft: "50px" }}>Current Weather</h3>
-                <Card variant="outlined" >
+            <Typography variant="h4" component="h4">
+                <p style={{ marginLeft: "50px" }}>Current Weather</p>
+                </Typography>
+                <Card style = {{width: "200px"}} variant="outlined" >
                     <h4> Temp: {tempConversion(props.weatherObj.temp)}°F</h4>
                     <h4> UVI: {props.weatherObj.uvi}</h4>
                     <h4> Humidity: {props.weatherObj.humidity}</h4>
@@ -61,8 +63,9 @@ const Weather = (props) => {
                 </Card>
             </div>
             <div>
-                <br></br>
-                <h3>5 Day Forecast</h3>
+                <Typography variant="h4" component="h4">
+                <p>5 Day Forecast</p>
+                </Typography>
                 <div id = "fiveDay">
                 <Typography variant="caption" component="h4" size = "1.3rem" color="textSecondary">
                 {convertDateFormat(new Date(props.weatherObj.day2))}: {tempConversion(props.weatherObj.weather2)}°F  {weatherIcon(props.weatherObj.main2)}
