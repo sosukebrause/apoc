@@ -28,7 +28,7 @@ router.post("/register", async (req, res) => {
       return res
         .status(400)
         .json({ msg: "An account with this email already exists." });
-    if (!displayName) displayName = email;
+    if (!displayName) displayName = "Anonymous";
     //validate//
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
@@ -94,7 +94,6 @@ router.post("/tokenIsValid", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 //this route gets the user info
 router.get("/", auth, async (req, res) => {

@@ -54,4 +54,13 @@ export default {
       headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
   },
+  postFeedData: function (city, state_name, text) {
+    return axios({
+      url: "/feed/new",
+      method: "POST",
+      params: { city, state_name },
+      data: { text: text },
+      headers: { "x-auth-token": localStorage.getItem("auth-token") },
+    });
+  },
 };

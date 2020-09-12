@@ -8,7 +8,6 @@ import BarChart from "../mapsAndCharts/BarChart";
 import { Button } from "@material-ui/core";
 import Loading from "../Loading";
 import API from "../../utils/API";
-import { useUserContext } from "../context/UserContext";
 import FeedList from "../feed/FeedList";
 import Weather from "../Weather";
 import MyMap from "../mapsAndCharts/MyMap";
@@ -181,12 +180,15 @@ const Home = () => {
   };
 
   const loadFeedData = (city, state_name, county) => {
-    API.getFeedData(city, state_name, county).then((res) => {
-      console.log("feed", res.data.data);
-      setFeed(res.data.data);
-    });
+    API.getFeedData(city, state_name, county)
+      .then((res) => {
+        console.log("feed", res.data.data);
+        setFeed(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-  const { userData } = useUserContext();
   return (
     <div className="page">
       <>
@@ -229,7 +231,7 @@ const Home = () => {
                   <BarChart airObj={airData} />
                 </div>
               )}
-              {feedData.length > 0 && <FeedList feedData={feedData} />}
+              {mapInfo && <FeedList mapInfo={mapInfo} feedData={feedData} />}
             </div>
           </>
         ) : null}

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import API from "../../utils/API";
 
 const convertDate = (date) => {
   let d = date;
@@ -12,9 +14,41 @@ const styles = {
 };
 
 const FeedList = (props) => {
-  const [feedItem, setFeedItem] = useState(props.feedData);
+  const [feedItems, setFeedItems] = useState([]);
 
-  let titleArr = props.feedData.map((item, index) => (
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    setFeedItems(props.feedData);
+  }, [props.feedData]);
+
+  function changeText(e) {
+    setText(e.target.value);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (text.trim() === "") return;
+    let { city, state_name, county } = props.mapInfo;
+
+    console.log(city, state_name, text);
+    try {
+      const newComment = await API.postFeedData(city, state_name, text);
+      console.log(newComment.data);
+    } catch (error) {
+      return console.log(error);
+    }
+    try {
+      const allComments = await API.getFeedData(city, state_name, county);
+      setFeedItems(allComments.data.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setText("");
+    }
+  }
+
+  let titleArr = feedItems.map((item, index) => (
     <div key={index} style={styles}>
       <h3>
         {item.location.city}, {item.location.state_name}
@@ -25,7 +59,22 @@ const FeedList = (props) => {
     </div>
   ));
 
-  return <div style={styles}>{titleArr}</div>;
+  return (
+    <div style={{ border: "1px solid", height: "250px", overflow: "scroll" }}>
+      {titleArr}
+      <input
+        name="text"
+        type="text"
+        placeholder="add comment"
+        onChange={changeText}
+        value={text}
+      />
+
+      <button type="submit" onClick={handleSubmit}>
+        Submit
+      </button>
+    </div>
+  );
 };
 
 export default FeedList;
