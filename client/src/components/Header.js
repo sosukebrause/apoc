@@ -17,7 +17,7 @@ const Header = () => {
             APOCALYPSE
         </span>
           <span className="title blink">
-            ....?
+            . . . ?
         </span>
         </Typography>
           {/* <img id = "img" src={icon} /> */}

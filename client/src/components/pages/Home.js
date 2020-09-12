@@ -51,6 +51,13 @@ const Home = () => {
     }
   }, [])
 
+
+  React.useEffect(() => {
+    if (covidData.data) {
+      dangerLevel()
+    }
+  }, [covidData])
+
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     buttonSubmit(
@@ -94,6 +101,7 @@ const Home = () => {
         });
         setCovidData(results);
         setLoadingInfo(false);
+        dangerLevel();
       })
       .catch((err) => {
         // console.log(err.response);
@@ -192,7 +200,6 @@ const Home = () => {
     loadMapData(city, state_name, lat, lng);
     loadEarthquakes(city, state_name, lat, lng);
     loadFeedData(city, state_name, county);
-    dangerLevel();
   })
 
   const loadFeedData = (city, state_name, county) => {

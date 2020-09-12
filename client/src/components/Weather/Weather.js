@@ -1,12 +1,12 @@
 import React from "react";
 import { Card, Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import Sun from "../images/sun.png";
-import Cloud from "../images/cloud.png"
-import Rain from "../images/rain.png";
-import Snow from "../images/snow.png";
-import Haze from "../images/haze.png";
-import Smog from "../images/smog.png";
+import Sun from "./images/sun.png";
+import Cloud from "./images/cloud.png";
+import Rain from "./images/rain.png";
+import Snow from "./images/snow.png";
+import Haze from "./images/haze.png";
+import Smog from "./images/smog.png";
 import "./Weather.css";
 
 

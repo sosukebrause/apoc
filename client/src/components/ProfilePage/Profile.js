@@ -94,9 +94,10 @@ const Profile = () => {
           <InputLabel placeholder="Type Last Name" onClick={() => changeToEdit("lastName")}>{profileInfo.lastName}</InputLabel>
         </div>
       }
+ <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+ <p>Email: {profileInfo.email}</p>
+ </div>
 
-
-      <p>Email: {profileInfo.email}</p>
 </Container>
    
     </div>
