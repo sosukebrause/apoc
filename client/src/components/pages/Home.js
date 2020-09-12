@@ -207,9 +207,13 @@ const Home = () => {
             <div style={{ marginLeft: "70px" }}>
               {mapInfo && <CityName id="cityName" mapObj={mapInfo} />}
             </div>
+            <div className = "weather">
             <div style={{ width: "50%", marginLeft: "40px" }}>
               {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
             </div>
+            {mapInfo && <FeedList mapInfo={mapInfo} feedData={feedData} />}
+            </div>
+            
             <br></br>
             <div>
               <Chart
@@ -231,7 +235,6 @@ const Home = () => {
                   <BarChart airObj={airData} />
                 </div>
               )}
-              {mapInfo && <FeedList mapInfo={mapInfo} feedData={feedData} />}
             </div>
           </>
         ) : null}

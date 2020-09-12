@@ -16,7 +16,7 @@ const Header = () => {
 <div id = "header">
   <div className = "title">
   <h1 id="title" className="title blink">
-          ALERT
+          APOCALYPSE....?
         </h1>
         <img className = "img2" src={warning} />
   </div>
