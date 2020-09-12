@@ -10,6 +10,9 @@ const userSchema = new mongoose.Schema({
 
   password: { type: String, required: true, minlength: 5 },
   displayName: { type: String },
+  firstName: {type: String, default: ""},
+  lastName: {type: String, default: ""},
+  profilePic: {type: String, default: ""}
 });
 
 module.exports = User = mongoose.model("User", userSchema);

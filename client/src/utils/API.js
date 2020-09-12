@@ -63,4 +63,12 @@ export default {
       headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
   },
+  editProfile: function (attribute, value) {
+    return axios({
+      url: "/users/profile/edit",
+      method: "PATCH",
+      data: { attribute, value },
+      headers: { "x-auth-token": localStorage.getItem("auth-token") },
+    });
+  },
 };

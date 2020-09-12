@@ -189,10 +189,6 @@ const Home = () => {
         console.log(err);
       });
   };
-<<<<<<< HEAD
-  // const { userData } = useUserContext();
-=======
->>>>>>> 89098ccd07f338ea3a5705e76dfe890dbd855ff4
   return (
     <div className="page">
       <>
