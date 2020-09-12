@@ -31,16 +31,16 @@ const AuthButtons = () => {
   return (
     <nav className="auth-options">
       {userData.user ? (
-        <>
+        <>     <Button style={{ float: 'right', marginRight: "20px" }} variant="outlined" size="small" color="primary" onClick={logout}>
+          Log Out
+    </Button>
           <Button style={{ float: 'right', marginRight: "20px" }} variant="outlined" size="small" color="primary" onClick={profile}>
             Profile
      </Button>
           <Button style={{ float: 'right', marginRight: "20px" }} variant="outlined" size="small" color="primary" onClick={main}>
             Dashboard
      </Button>
-          <Button style={{ float: 'right', marginRight: "20px" }} variant="outlined" size="small" color="primary" onClick={logout}>
-            Log Out
-        </Button>
+
         </>
       ) : (
           <>

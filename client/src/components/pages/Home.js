@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import Form from "../card/AuthPost";
 import Header from "../Header"
-import Danger from "../Danger";
+import DangerChart from "../mapsAndCharts/DangerChart";
 import Search from "./Search";
 import Chart from "../mapsAndCharts/Chart";
 import BarChart from "../mapsAndCharts/BarChart";
@@ -10,7 +8,7 @@ import { Button } from "@material-ui/core";
 import Loading from "../Loading";
 import API from "../../utils/API";
 import FeedList from "../feed/FeedList";
-import Weather from "../Weather";
+import Weather from "../Weather/Weather";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
 
@@ -36,7 +34,6 @@ const SuggestionsButton = (props) => {
 const Home = () => {
   const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
-  // const [numDays, setNumDays] = useState(maxDays);
   const [weatherData, setWeatherData] = useState(null);
   const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
@@ -54,7 +51,6 @@ const Home = () => {
     }
   }, [])
 
-  // const [input, setInput] = useState({ city: "", state_name: "" });
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     buttonSubmit(
@@ -182,14 +178,22 @@ const Home = () => {
         setAirData(airObj);
       });
   };
-  const buttonSubmit = (city, state_name, county, lat, lng) => {
+
+  const dangerLevel = () => {
+    let danger = covidData.data
+    console.log(danger)
+    setDangerData(danger)
+  }
+
+  const buttonSubmit = ((city, state_name, county, lat, lng) => {
     loadWeatherData(city, state_name, lat, lng);
     loadAirData(city, state_name, lat, lng);
     loadCovidData(city, state_name, county);
     loadMapData(city, state_name, lat, lng);
     loadEarthquakes(city, state_name, lat, lng);
     loadFeedData(city, state_name, county);
-  };
+    dangerLevel();
+  })
 
   const loadFeedData = (city, state_name, county) => {
     API.getFeedData(city, state_name, county)
@@ -219,15 +223,14 @@ const Home = () => {
           <>
             <div style={{ display: "flex", justifyContent: "center" }}>
               {mapInfo && <CityName id="cityName" mapObj={mapInfo} />}
-              {/* <Danger danger = {dangerData}/> */}
+              <DangerChart danger= {dangerData}/>
             </div>
             <div className="mapAndFeed">
-              <div style={{ width: "50%", marginLeft: "40px" }}>
+              <div style={{ width: "50%", marginLeft: "20px" }}>
                 {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
               </div>
               {mapInfo && <FeedList mapInfo={mapInfo} feedData={feedData} />}
             </div>
-
             <br></br>
             <div>
               <Chart

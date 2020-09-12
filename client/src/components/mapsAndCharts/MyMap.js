@@ -130,7 +130,7 @@ const MyMap = (props) => {
       </div>
       <div className={classes.root}>
         <Typography id="discrete-slider-small-steps" gutterBottom>
-          Earthquake Radius in Miles
+          Earthquake Radius mi
         </Typography>
         <Slider
           style={{ marginLeft: "50px" }}
