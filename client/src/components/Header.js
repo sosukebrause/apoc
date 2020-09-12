@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography } from '@material-ui/core';
 import "./Header.css";
 // import Animation from "./Animation"
 
@@ -8,20 +9,19 @@ import warning from "../images/warning.png";
 
 const Header = () => {
   return (
-    <div style = {{text: "center"}} >
+    <div style={{ text: "center" }} >
       <header >
-<div id = "header">
-  <div className = "title">
-  <h1 id="title" className="title blink">
-          APOCALYPSE....?
-        </h1>
-        {/* <img className = "img2" src={warning} /> */}
-  </div>
-
-        {/* <img id = "img" src={icon} /> */}
-     
-</div>
-       
+        <div id="header">
+        <Typography variant="h1" component="h1">
+          <span className="title">
+            APOCALYPSE
+        </span>
+          <span className="title blink">
+            ....?
+        </span>
+        </Typography>
+          {/* <img id = "img" src={icon} /> */}
+        </div>
       </header>
     </div>
   );
