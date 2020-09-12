@@ -178,7 +178,7 @@ const Home = () => {
     loadEarthquakes(city, state_name, lat, lng);
 
   };
-  const { userData } = useUserContext();
+  // const { userData } = useUserContext();
   return (
     <div className="page">
       <>
