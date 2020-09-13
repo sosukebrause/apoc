@@ -7,6 +7,7 @@ import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 
 const divStyle = {
+  marginTop: "60px",
   marginLeft: "60px",
 };
 
@@ -52,7 +53,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button variant="outlined" color="primary" type="submit" value="Log in">
+        <Button variant="contained" color="primary" size = "small" type="submit" value="Log in">
           Login
         </Button>
       </form>

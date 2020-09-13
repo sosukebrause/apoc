@@ -5,11 +5,11 @@ const mongoose = require("mongoose");
 router.get("/api/fires", (req, res) => {
 const d = 1000
 const { city, state_name, lat, lng } = req.query;
+
   if (!city || !state_name)
     return res.status(400).json({ msg: "Please enter city and state" });
 
     if (lat && lng) {
-
     try {
       var data = await controller.fire.findFireData(lat, lng, d) || [];
 
@@ -20,6 +20,7 @@ const { city, state_name, lat, lng } = req.query;
       return res.status(404).json({ msg: "no data found" });
     }
   }
+  
   let dbCityInfo = { data: [] };
 
   try {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import Form from "../card/AuthPost";
-import Danger from "../Danger";
+import Header from "../Header"
+import DangerChart from "../mapsAndCharts/DangerChart";
 import Search from "./Search";
 import Chart from "../mapsAndCharts/Chart";
 import BarChart from "../mapsAndCharts/BarChart";
@@ -9,13 +8,13 @@ import { Button } from "@material-ui/core";
 import Loading from "../Loading";
 import API from "../../utils/API";
 import FeedList from "../feed/FeedList";
-import Weather from "../Weather";
+import Weather from "../Weather/Weather";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
-// import Earthquake from "../Earthquake";
+
 import "./Home.css";
 const maxDays = 60;
-const AuxButton = (props) => {
+const SuggestionsButton = (props) => {
   var array = props.options;
   let newItems = array.map((item, index) => {
     return (
@@ -35,15 +34,30 @@ const AuxButton = (props) => {
 const Home = () => {
   const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
-  // const [numDays, setNumDays] = useState(maxDays);
   const [weatherData, setWeatherData] = useState(null);
   const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
   const [mapInfo, setMapInfo] = useState(null);
   const [feedData, setFeed] = useState([]);
   const [eqData, setEqData] = useState([]);
+  const [dangerData, setDangerData] = useState(null);
 
-  // const [input, setInput] = useState({ city: "", state_name: "" });
+  React.useEffect(() => {
+    let mapStorage = localStorage.getItem("mapStorage")
+    if (mapStorage) {
+      mapStorage = JSON.parse(mapStorage)
+      console.log(mapStorage)
+      buttonSubmit(mapStorage.city, mapStorage.state_name, mapStorage.county, mapStorage.lat, mapStorage.lng);
+    }
+  }, [])
+
+
+  React.useEffect(() => {
+    if (covidData.data) {
+      dangerLevel()
+    }
+  }, [covidData])
+
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     buttonSubmit(
@@ -61,6 +75,7 @@ const Home = () => {
       .then((res) => {
         // console.log(res.data);
         var mapObj = res.data.data[0];
+        localStorage.setItem("mapStorage", JSON.stringify(mapObj))
         setMapInfo(mapObj);
       })
       .catch((err) => {
@@ -86,6 +101,7 @@ const Home = () => {
         });
         setCovidData(results);
         setLoadingInfo(false);
+        dangerLevel();
       })
       .catch((err) => {
         // console.log(err.response);
@@ -170,14 +186,21 @@ const Home = () => {
         setAirData(airObj);
       });
   };
-  const buttonSubmit = (city, state_name, county, lat, lng) => {
+
+  const dangerLevel = () => {
+    let danger = covidData.data
+    console.log(danger)
+    setDangerData(danger)
+  }
+
+  const buttonSubmit = ((city, state_name, county, lat, lng) => {
     loadWeatherData(city, state_name, lat, lng);
     loadAirData(city, state_name, lat, lng);
     loadCovidData(city, state_name, county);
     loadMapData(city, state_name, lat, lng);
     loadEarthquakes(city, state_name, lat, lng);
     loadFeedData(city, state_name, county);
-  };
+  })
 
   const loadFeedData = (city, state_name, county) => {
     API.getFeedData(city, state_name, county)
@@ -192,6 +215,7 @@ const Home = () => {
   return (
     <div className="page">
       <>
+        <Header />
         <Search
           className="search"
           buttonSubmit={buttonSubmit}
@@ -199,16 +223,20 @@ const Home = () => {
         />
 
         {suggestions ? (
-          <AuxButton handleAuxButton={handleAuxButton} options={suggestions} />
+          <SuggestionsButton handleAuxButton={handleAuxButton} options={suggestions} />
         ) : null}
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
-        {covidData.length > 0 ? (
+        {(!loadingInfo) ? (
           <>
-            <div style={{ marginLeft: "70px" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               {mapInfo && <CityName id="cityName" mapObj={mapInfo} />}
+              <DangerChart danger= {dangerData}/>
             </div>
-            <div style={{ width: "50%", marginLeft: "40px" }}>
-              {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
+            <div className="mapAndFeed">
+              <div style={{ width: "50%", marginLeft: "20px" }}>
+                {mapInfo && <MyMap mapObj={mapInfo} eqData={eqData} />}
+              </div>
+              {mapInfo && <FeedList mapInfo={mapInfo} feedData={feedData} />}
             </div>
             <br></br>
             <div>
@@ -231,7 +259,6 @@ const Home = () => {
                   <BarChart airObj={airData} />
                 </div>
               )}
-              {mapInfo && <FeedList mapInfo={mapInfo} feedData={feedData} />}
             </div>
           </>
         ) : null}

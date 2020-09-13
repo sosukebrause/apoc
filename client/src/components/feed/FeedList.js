@@ -60,7 +60,7 @@ const FeedList = (props) => {
   ));
 
   return (
-    <div style={{ border: "1px solid", height: "250px", overflow: "scroll" }}>
+    <div style={{ border: "1px solid", height: "400px", width: "450px", overflow: "scroll" }}>
       {titleArr}
       <input
         name="text"

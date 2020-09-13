@@ -54,6 +54,7 @@ export default {
       headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
   },
+
   postFeedData: function (city, state_name, text) {
     return axios({
       url: "/feed/new",
@@ -68,6 +69,14 @@ export default {
       url: "/api/fires",
       method: "GET",
       params: { city, state_name, zip, lat, lng },
+    });
+  },
+  editProfile: function (attribute, value) {
+    return axios({
+      url: "/users/profile/edit",
+      method: "PATCH",
+      data: { attribute, value },
+      headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
   },
 };

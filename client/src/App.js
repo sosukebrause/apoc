@@ -6,13 +6,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Profile from "./components/ProfilePage/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 
 //chaning above line to the following line
 import { UserProvider } from "./components/context/UserContext";
 
-import Header from "./components/Header";
+import AuthButtons from "./components/auth/AuthButtons";
 import "./App.css";
 
 const NotFound = () => (
@@ -30,12 +31,12 @@ function App() {
     <div className="App">
       <UserProvider>
         <BrowserRouter>
-          <Header />
+        <AuthButtons  />
           <div className="container">
             <Switch>
               <Route exact path="/" component={Landing} />
               <ProtectedRoute path="/search" component={Home} />
-              {/* <ProtectedRoute path="/saved" component={Saved} /> */}
+              <ProtectedRoute path="/profile" component={Profile} />
               {/* <PublicRoute path="/" component={Landing} /> */}
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/register" component={Register} />

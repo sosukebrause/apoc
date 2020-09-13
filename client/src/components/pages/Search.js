@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input, Button } from "@material-ui/core";
 
 const divStyle = {
-  marginBottom: "90px",
+  marginBottom: "30px",
   marginLeft: "20px",
 };
 
