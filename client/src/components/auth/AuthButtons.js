@@ -17,6 +17,8 @@ const AuthButtons = () => {
 
   const register = () => history.push("/register");
   const login = () => history.push("/login");
+  const profile = () => history.push("/profile");
+  const main = () => history.push("/search");
 
   const logout = () => {
     setUserData({
@@ -27,22 +29,30 @@ const AuthButtons = () => {
   };
 
   return (
-    <nav className="auth-options">
+    <nav className="auth-options" style = {{marginTop: "10px"}}>
       {userData.user ? (
-        <Button style = {{float: 'right'}} variant ="outlined" size = "small" color="primary" onClick={logout}>
-            Log Out
-        </Button>
-      ) : (
-        <>
-    <Button variant ="outlined" color="secondary" style = {buttonStyle} onClick={register}>
-    Register
+        <>     <Button style={{ float: 'right', marginRight: "20px" }} variant="contained" size="small" color="primary" onClick={logout}>
+          Log Out
     </Button>
-    
-    <Button variant="outlined" color="secondary" style = {buttonStyle} onClick={login}>
-    Log in
-    </Button>
+          <Button style={{ float: 'right', marginRight: "20px" }} variant="contained" size="small" color="primary" onClick={profile}>
+            Profile
+     </Button>
+          <Button style={{ float: 'right', marginRight: "20px" }} variant="contained" size="small" color="primary" onClick={main}>
+            Dashboard
+     </Button>
+
         </>
-      )}
+      ) : (
+          <>
+            <Button variant="contained" color="secondary" size = "small" style={buttonStyle} onClick={register}>
+              Register
+    </Button>
+
+            <Button variant="contained" color="secondary" size = "small" style={buttonStyle} onClick={login}>
+              Log in
+    </Button>
+          </>
+        )}
     </nav>
   );
 };

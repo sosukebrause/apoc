@@ -1,67 +1,80 @@
-import React from "react";
-import { useTodoContext } from "../context/FeedContext";
-import TodoItemWithEdit from "./ItemEdit";
-import TodoItemInlineEdit from "./ItemInlineEdit";
-import "../css/TodoItem.css";
+import React, { useState, useEffect } from "react";
 
-/*** ToDo Item*/
-const TodoItem = ({ item, dispatch, index }) => {
-  const editTodoItem = (id, editType) =>
-    dispatch({
-      type:
-        editType === "setRemove"
-          ? "TODO_REMOVE"
-          : editType === "setTodo"
-          ? "TODO_PRIORITIZE"
-          : "",
-      id,
-    });
+import API from "../../utils/API";
+
+const convertDate = (date) => {
+  let d = date;
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+};
+
+const styles = {
+  border: "1px solid",
+  padding: "10px",
+  margin: "10px",
+};
+
+const FeedList = (props) => {
+  const [feedItems, setFeedItems] = useState([]);
+
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    setFeedItems(props.feedData);
+  }, [props.feedData]);
+
+  function changeText(e) {
+    setText(e.target.value);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (text.trim() === "") return;
+    let { city, state_name, county } = props.mapInfo;
+
+    console.log(city, state_name, text);
+    try {
+      const newComment = await API.postFeedData(city, state_name, text);
+      console.log(newComment.data);
+    } catch (error) {
+      return console.log(error);
+    }
+    try {
+      const allComments = await API.getFeedData(city, state_name, county);
+      setFeedItems(allComments.data.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setText("");
+    }
+  }
+
+  let titleArr = feedItems.map((item, index) => (
+    <div key={index} style={styles}>
+      <h3>
+        {item.location.city}, {item.location.state_name}
+      </h3>
+      <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
+      <p style={styles}>{item.text}</p>
+      <p>{item.date}</p>
+    </div>
+  ));
 
   return (
-    <li>
-      <h4 style={item.priority ? { textDecoration: "line-through" } : {}}>
-        {item.name}
-      </h4>
-      <button onClick={() => editTodoItem(item.id, "setTodo")}>
-        {item.priority ? "set UNDO" : "set TODO"}
+    <div style={{ border: "1px solid", height: "400px", width: "450px", overflow: "scroll" }}>
+      {titleArr}
+      <input
+        name="text"
+        type="text"
+        placeholder="add comment"
+        onChange={changeText}
+        value={text}
+      />
+
+      <button type="submit" onClick={handleSubmit}>
+        Submit
       </button>
-      <button onClick={() => editTodoItem(item.id, "setRemove")}>delete</button>
-    </li>
+    </div>
   );
 };
 
-/** ToDo List */
-const TodoList = () => {
-  const { state, dispatch } = useTodoContext();
-  const [withEdit, setTodoListMode] = React.useState(true);
-  const toggleTodoListMode = () => setTodoListMode(!withEdit);
-  /**
-   * added update by index
-   */
-  return (
-    <section className="render-todos">
-      <h3> List of Tasks </h3>
-      <button onClick={toggleTodoListMode} disabled={state.length === 0}>
-        {!withEdit ? "inline Editing" : "button Editing"}
-      </button>
-      <ul className="todo-list">
-        {
-          state.map((item) =>
-            withEdit ? (
-              <TodoItemInlineEdit
-                key={item.id}
-                item={item}
-                dispatch={dispatch}
-              />
-            ) : (
-              <TodoItemWithEdit key={item.id} item={item} dispatch={dispatch} />
-            )
-          )
-          //state.map((item, index) => <TodoItem key={index} index={index} item={item} dispatch={dispatch} />)
-        }
-      </ul>
-    </section>
-  );
-};
-
-export default TodoList;
+export default FeedList;

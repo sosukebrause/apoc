@@ -10,7 +10,7 @@ router.get("/test", (req, res) => {
 //////////////////// REGISTER ///////////////////////////
 router.post("/register", async (req, res) => {
   try {
-    let { email, password, displayName, passwordCheck } = req.body;
+    let { email, password, displayName, passwordCheck, firstName, lastName, profilePic } = req.body;
     //validate//
     if (!email || !password || !passwordCheck)
       return res.status(400).json({ msg: "Not all fields have been entered." });
@@ -28,7 +28,8 @@ router.post("/register", async (req, res) => {
       return res
         .status(400)
         .json({ msg: "An account with this email already exists." });
-    if (!displayName) displayName = email;
+    if (!displayName) displayName = "Anonymous";
+    if (!profilePic) profilePic = "";
     //validate//
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
@@ -36,6 +37,9 @@ router.post("/register", async (req, res) => {
       email,
       password: passwordHash,
       displayName,
+      firstName,
+      lastName,
+      profilePic
     });
     const savedUser = await newUser.save();
     console.log(savedUser);
@@ -95,7 +99,6 @@ router.post("/tokenIsValid", async (req, res) => {
   }
 });
 
-
 //this route gets the user info
 router.get("/", auth, async (req, res) => {
   try {
@@ -110,5 +113,41 @@ router.get("/", auth, async (req, res) => {
     res.send(err);
   }
 });
+
+//this route gets the user profile info
+router.get("/profile", auth, async (req, res) => {
+  try {
+    const user = await db.User.findById(req.user).select("firstName lastName email displayName profilePic");
+    res.json({user});
+  } catch (err) {
+    res.json({msg: err});
+  }
+});
+
+//this route gets the user profile info
+router.patch("/profile/edit", auth, async (req, res) => {
+
+  let attr = req.body.attribute
+  let value = req.body.value
+
+  // db.User.findOneAndUpdate({_id: req.user}, {[attr]: value}, {new: true}, function(err, user){
+  //   if (err) {
+  //     return res.json({msg: err})
+  //   }
+  //   return res.json({user})
+  // })
+
+  try {
+    console.log(attr, value)
+    console.log(req.user)
+    const user = await db.User.findOneAndUpdate({_id: req.user}, {[attr]: value}, {new: true})
+    
+    res.json({user});
+  } catch (err) {
+    res.json({msg: err});
+
+  }
+});
+
 
 module.exports = router;

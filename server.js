@@ -18,13 +18,16 @@ const WeatherRoutes = require("./routes/weather-routes");
 const userRoutes = require("./routes/user-routes");
 const airRoutes = require("./routes/air-routes");
 const MapRoutes = require("./routes/map-routes");
+const feedRoutes = require("./routes/feed-routes");
+const fireRoutes = require("./routes/fire-routes");
+app.use(fireRoutes);
 app.use(CovidRoutes);
 app.use(WeatherRoutes);
 app.use(airRoutes);
 app.use(MapRoutes);
 app.use("/users", userRoutes);
-app.use("/feed", require("./routes/user-routes"));
-app.use("/earthquake", require("./routes/earthquake-routes"));
+app.use(feedRoutes);
+app.use(require("./routes/earthquake-routes"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

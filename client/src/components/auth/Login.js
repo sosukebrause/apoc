@@ -1,15 +1,15 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Input, Button } from '@material-ui/core';
+import { Input, Button } from "@material-ui/core";
 
 import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 
 const divStyle = {
-  marginLeft: '60px',
+  marginTop: "60px",
+  marginLeft: "60px",
 };
-
 
 export default function Login() {
   const [email, setEmail] = useState();
@@ -25,23 +25,19 @@ export default function Login() {
     e.preventDefault();
     try {
       const loginUser = { email, password };
-      const loginRes = await Axios.post(
-        "/users/login",
-        loginUser
-      );
+      const loginRes = await Axios.post("/users/login", loginUser);
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/");
+      history.push("/search");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }
   };
   return (
-    <div className="page" style = {divStyle}>
-   
+    <div className="page" style={divStyle}>
       <form className="form" onSubmit={submit}>
         <label htmlFor="login-email">Email</label>
         <Input
@@ -57,7 +53,9 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button variant="outlined" color="primary" type = "submit" value="Log in">Login</Button>
+        <Button variant="contained" color="primary" size = "small" type="submit" value="Log in">
+          Login
+        </Button>
       </form>
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />

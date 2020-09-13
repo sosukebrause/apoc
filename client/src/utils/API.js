@@ -30,19 +30,53 @@ export default {
     });
   },
 
-  getMapData: function (city, state_name, lat, lng) {
+  getMapData: function (city, state_name, county, lat, lng) {
     return axios({
       url: "/api/map",
+      method: "GET",
+      params: { city, state_name, county, lat, lng },
+    });
+  },
+
+  getEarthquakeData: function (city, state_name, lat, lng) {
+    return axios({
+      url: "/api/earthquake",
       method: "GET",
       params: { city, state_name, lat, lng },
     });
   },
 
-  getEarthquakeData: function () {
+  getFeedData: function (city, state_name, county) {
     return axios({
-      url: "/api/earthquake",
+      url: "/feed/city",
       method: "GET",
-      params: { city, state_name, lat, lng },
+      params: { city, state_name, county },
+      headers: { "x-auth-token": localStorage.getItem("auth-token") },
+    });
+  },
+
+  postFeedData: function (city, state_name, text) {
+    return axios({
+      url: "/feed/new",
+      method: "POST",
+      params: { city, state_name },
+      data: { text: text },
+      headers: { "x-auth-token": localStorage.getItem("auth-token") },
+    });
+  },
+  getFireData: function (city, state_name, zip, lat, lng) {
+    return axios({
+      url: "/api/fires",
+      method: "GET",
+      params: { city, state_name, zip, lat, lng },
+    });
+  },
+  editProfile: function (attribute, value) {
+    return axios({
+      url: "/users/profile/edit",
+      method: "PATCH",
+      data: { attribute, value },
+      headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
   },
 };

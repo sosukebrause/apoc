@@ -1,29 +1,27 @@
 import React from "react";
+import { Typography } from '@material-ui/core';
 import "./Header.css";
 // import Animation from "./Animation"
-
-import AuthButtons from "./auth/AuthButtons";
 
 import icon from "../images/virus.png";
 import warning from "../images/warning.png";
 
-const divStyle = {
-  // height: "80px",
-  // width: "55px"
-};
 
 const Header = () => {
   return (
-    <div className="container">
+    <div style={{ text: "center" }} >
       <header >
-<div id = "header">
-<h1 id="title" className="title">
-          Danger Danger!
-        </h1>
-        {/* <img id = "img" src={icon} />
-        <img id = "img2" src={warning} /> */}
-</div>
-        <AuthButtons />
+        <div id="header">
+        <Typography variant="h1" component="h1">
+          <span className="title">
+            APOCALYPSE
+        </span>
+          <span className="title blink">
+            . . . ?
+        </span>
+        </Typography>
+          {/* <img id = "img" src={icon} /> */}
+        </div>
       </header>
     </div>
   );

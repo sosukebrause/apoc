@@ -6,40 +6,47 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-//MAP COMPONENTS
-import MarkerMap from "./components/maps/MarkerMap";
-// import SimpleMap from "./components/maps/SimpleMap";
+import Profile from "./components/ProfilePage/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
 
 //chaning above line to the following line
 import { UserProvider } from "./components/context/UserContext";
 
-import Header from "./components/Header";
+import AuthButtons from "./components/auth/AuthButtons";
 import "./App.css";
+
+const NotFound = () => (
+  <div style={{ display: "flex", justifyContent: "center" }}>
+    <h1> 404: Invalid endpoint </h1>
+  </div>
+);
+
+const Landing = () => <div> landing </div>;
 
 function App() {
   return (
     // userProvider is now wrapping all logic for handling our state, updating state, and pushing out different values to all of our children.
 
-    <>
+    <div className="App">
       <UserProvider>
         <BrowserRouter>
-          <Header />
+        <AuthButtons  />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+              <Route exact path="/" component={Landing} />
+              <ProtectedRoute path="/search" component={Home} />
+              <ProtectedRoute path="/profile" component={Profile} />
+              {/* <PublicRoute path="/" component={Landing} /> */}
+              <PublicRoute path="/login" component={Login} />
+              <PublicRoute path="/register" component={Register} />
+              <Route path="/*" component={NotFound} />
             </Switch>
             <InputBase />
-            <div>
-              <MarkerMap />
-              <hr />
-              {/* <SimpleMap /> */}
-            </div>
           </div>
         </BrowserRouter>
       </UserProvider>
-    </>
+    </div>
   );
 }
 export default App;

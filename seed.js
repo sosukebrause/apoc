@@ -1,6 +1,9 @@
 let CityInfo = require("./models/city");
 let mongoose = require("mongoose");
-let Cities = require("./seedData/uscities.json")
+let Cities = require("./seedData/uscities.json");
+require("dotenv").config();
+let FeedList = require("./seedData/feed.json");
+let FeedModel = require("./models/feed");
 require("dotenv").config();
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Apocalypse", {
@@ -9,7 +12,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Apocalypse", {
   useFindAndModify: false,
   useCreateIndex: true,
 });
-
 
 // console.log(Cities)
 

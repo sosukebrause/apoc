@@ -1,0 +1,23 @@
+#good {
+color: green
+}
+
+#moderate {
+    color: rgba(116, 116, 27, 0.582);
+}
+
+#unhealthyForSensitive {
+    color: orange;
+}
+
+#unhealthy {
+    color: red;
+}
+
+#veryUnhealthy {
+    color: purple;
+}
+
+#hazardous{
+    color: maroon;
+}

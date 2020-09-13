@@ -2,7 +2,25 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-left: 10px;
-    margin-right: 10px;
-    /* flex-direction: column; */
+}
+
+.mapAndFeed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#loader {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 
+.page {
+    background-color: rgb(241, 241, 241);
+} */
+
+#cityName {
+    text-align: center;
 }

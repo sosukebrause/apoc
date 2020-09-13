@@ -8,7 +8,7 @@ const Form = (props) => {
     e.preventDefault();
     console.log(text);
     Axios.post(
-      "http://localhost:5000/feed",
+      "http://localhost:5000/api/feed",
       { title: text },
       {
         headers: {
