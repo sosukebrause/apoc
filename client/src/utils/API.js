@@ -30,11 +30,11 @@ export default {
     });
   },
 
-  getMapData: function (city, state_name, lat, lng) {
+  getMapData: function (city, state_name, county, lat, lng) {
     return axios({
       url: "/api/map",
       method: "GET",
-      params: { city, state_name, lat, lng },
+      params: { city, state_name, county, lat, lng },
     });
   },
 

@@ -4,14 +4,15 @@ const controller = require("../controllers");
 router.get("/api/map", async (req, res) => {
     var city = req.query.city;
     var state_name = req.query.state_name;
+    var county = req.query.county;
     var lat = req.query.lat;
     var lng = req.query.lng;
     if (!city || !state_name) {
         return res.status(400).json({ msg: "query string is empty" });
       }
-      if(lat && lng) {
+      if(county && lat && lng) {
           return res.json({data: [{
-              city, state_name, lat, lng
+              city, state_name, county, lat, lng
           }]});
         }
       controller.db.findInfoFromCity(city, state_name)

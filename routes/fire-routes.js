@@ -2,7 +2,7 @@ const router = require("express").Router();
 const controller = require("../controllers");
 const mongoose = require("mongoose");
 
-router.get("/api/fires", (req, res) => {
+router.get("/api/fires", async (req, res) => {
 const d = 1000
 const { city, state_name, lat, lng } = req.query;
 

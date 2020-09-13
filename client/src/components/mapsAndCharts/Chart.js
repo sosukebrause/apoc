@@ -65,15 +65,15 @@ export default (props) => {
   ];
   return (
     <>
-     <Typography variant="h5" component="h5">
-     <p style={titleStyle}>Covid Chart</p>
-     </Typography>
+      <Typography variant="h5" component="h5">
+        <p style={titleStyle}>Covid Chart</p>
+      </Typography>
       <div style={{ marginLeft: "50px" }}>
         <Button
           variant="contained"
           color="primary"
           size="small"
-          disabled={props.loadingInfo}
+
           style={buttonStyle}
           onClick={changeNumber}
           value={7}
@@ -84,7 +84,6 @@ export default (props) => {
           variant="contained"
           color="primary"
           size="small"
-          disabled={props.loadingInfo}
           style={buttonStyle}
           onClick={changeNumber}
           value={30}
@@ -95,7 +94,6 @@ export default (props) => {
           variant="contained"
           color="primary"
           size="small"
-          disabled={props.loadingInfo}
           style={buttonStyle}
           onClick={changeNumber}
           value={60}
@@ -108,7 +106,6 @@ export default (props) => {
             color="primary"
             size="small"
             style={{ marginRight: "10px" }}
-            disabled={props.loadingInfo}
             onClick={addArea}
             value="true"
           >
@@ -118,7 +115,6 @@ export default (props) => {
             variant="contained"
             color="primary"
             size="small"
-            disabled={props.loadingInfo}
             onClick={addArea}
             value="false"
           >
