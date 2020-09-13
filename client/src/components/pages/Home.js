@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Header from "../Header"
-import DangerChart from "../mapsAndCharts/DangerChart";
+import Header from "../Header";
+// import DangerChart from "../mapsAndCharts/DangerChart";
 import Search from "./Search";
 import Chart from "../mapsAndCharts/Chart";
 import BarChart from "../mapsAndCharts/BarChart";
@@ -41,29 +41,35 @@ const Home = () => {
   const [feedData, setFeed] = useState([]);
   const [eqData, setEqData] = useState([]);
   const [dangerData, setDangerData] = useState(null);
+  const [fireData, setFireData] = useState([]);
 
   React.useEffect(() => {
-    let mapStorage = localStorage.getItem("mapStorage")
+    let mapStorage = localStorage.getItem("mapStorage");
     if (mapStorage) {
-      mapStorage = JSON.parse(mapStorage)
-      console.log(mapStorage)
-      buttonSubmit(mapStorage.city, mapStorage.state_name, mapStorage.county, mapStorage.lat, mapStorage.lng);
+      mapStorage = JSON.parse(mapStorage);
+      console.log(mapStorage);
+      buttonSubmit(
+        mapStorage.city,
+        mapStorage.state_name,
+        mapStorage.county,
+        mapStorage.lat,
+        mapStorage.lng
+      );
     }
-  }, [])
-
+  }, []);
 
   React.useEffect(() => {
     if (covidData.data) {
-      dangerLevel()
+      dangerLevel();
     }
-  }, [covidData])
+  }, [covidData]);
 
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     buttonSubmit(
       value.city,
       value.state_name,
-      value.county,
+      value.coxunty,
       value.lat,
       value.lng
     );
@@ -75,7 +81,7 @@ const Home = () => {
       .then((res) => {
         // console.log(res.data);
         var mapObj = res.data.data[0];
-        localStorage.setItem("mapStorage", JSON.stringify(mapObj))
+        localStorage.setItem("mapStorage", JSON.stringify(mapObj));
         setMapInfo(mapObj);
       })
       .catch((err) => {
@@ -188,19 +194,10 @@ const Home = () => {
   };
 
   const dangerLevel = () => {
-    let danger = covidData.data
-    console.log(danger)
-    setDangerData(danger)
-  }
-
-  const buttonSubmit = ((city, state_name, county, lat, lng) => {
-    loadWeatherData(city, state_name, lat, lng);
-    loadAirData(city, state_name, lat, lng);
-    loadCovidData(city, state_name, county);
-    loadMapData(city, state_name, lat, lng);
-    loadEarthquakes(city, state_name, lat, lng);
-    loadFeedData(city, state_name, county);
-  })
+    let danger = covidData.data;
+    // console.log(danger);
+    setDangerData(danger);
+  };
 
   const loadFeedData = (city, state_name, county) => {
     API.getFeedData(city, state_name, county)
@@ -212,6 +209,28 @@ const Home = () => {
         console.log(err);
       });
   };
+
+  const loadFireData = (city, state_name, lat, lng) => {
+    API.getFireData(city, state_name, lat, lng)
+      .then((res) => {
+        console.log("fire", res.data);
+        // setFireData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const buttonSubmit = (city, state_name, county, lat, lng) => {
+    loadWeatherData(city, state_name, lat, lng);
+    loadAirData(city, state_name, lat, lng);
+    loadCovidData(city, state_name, county);
+    loadMapData(city, state_name, lat, lng);
+    loadEarthquakes(city, state_name, lat, lng);
+    loadFeedData(city, state_name, county);
+    loadFireData(city, state_name, lat, lng);
+  };
+
   return (
     <div className="page">
       <>
@@ -223,14 +242,17 @@ const Home = () => {
         />
 
         {suggestions ? (
-          <SuggestionsButton handleAuxButton={handleAuxButton} options={suggestions} />
+          <SuggestionsButton
+            handleAuxButton={handleAuxButton}
+            options={suggestions}
+          />
         ) : null}
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
-        {(!loadingInfo) ? (
+        {!loadingInfo ? (
           <>
             <div style={{ display: "flex", justifyContent: "center" }}>
               {mapInfo && <CityName id="cityName" mapObj={mapInfo} />}
-              <DangerChart danger= {dangerData}/>
+              {/* <DangerChart danger={dangerData} /> */}
             </div>
             <div className="mapAndFeed">
               <div style={{ width: "50%", marginLeft: "20px" }}>

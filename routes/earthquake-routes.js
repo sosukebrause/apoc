@@ -13,7 +13,7 @@ router.get("/api/earthquake", async (req, res) => {
     try {
       var data = (await controller.earthquake.findEqData(lat, lng, d)) || [];
 
-      console.log("earthquake route", data);
+      console.log("earthquake route");
       return res.json(data);
     } catch (error) {
       console.log("error", error);
