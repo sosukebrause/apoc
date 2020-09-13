@@ -63,4 +63,11 @@ export default {
       headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
   },
+  getFireData: function (city, state_name, zip, lat, lng) {
+    return axios({
+      url: "/api/fires",
+      method: "GET",
+      params: { city, state_name, zip, lat, lng },
+    });
+  },
 };
