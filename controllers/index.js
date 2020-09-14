@@ -6,4 +6,5 @@ module.exports = {
   map: require("./mapController"),
   earthquake: require("./earthquakeController"),
   feed: require("./feedController"),
+  fires: require("./fireController"),
 };

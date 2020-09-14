@@ -48,9 +48,6 @@ router.get("/feed/city", auth, async (req, res) => {
   } catch (error) {
     return res.status(500).json({ msg: "no data found" });
   }
-  //const cityMatch = await dbCityInfo.data[0].city;
-  //const stateMatch = await dbCityInfo.data[0].state_name;
-  //console.log("typeof:", typeof cityMatch, stateMatch);
   //return err if 1 not found
   if (dbCityInfo.data.length !== 1)
     return res.status(400).json({ data: dbCityInfo.data });
