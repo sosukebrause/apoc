@@ -6,9 +6,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Landing from "./components/pages/Landing";
 import Profile from "./components/ProfilePage/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+import ThemeProvider from "./components/ThemeProvider"
 
 //chaning above line to the following line
 import { UserProvider } from "./components/context/UserContext";
@@ -22,7 +24,6 @@ const NotFound = () => (
   </div>
 );
 
-const Landing = () => <div> landing </div>;
 
 function App() {
   return (

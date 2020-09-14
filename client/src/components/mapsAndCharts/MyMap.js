@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Map, Marker, Popup, TileLayer, CircleMarker } from "react-leaflet";
-import { Button, Slider } from "@material-ui/core";
+import { Button, Slider, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import "./MyMap.css";
@@ -113,7 +113,12 @@ const MyMap = (props) => {
 
   return (
     <>
-    <div style = {{display: "flex", justifyContent: "space-around"}}>
+    <div>
+      <Card id="mapCard">
+      <Typography variant="h4" component="h4">
+     <p style={{textAlign: "center" }}>Earthquakes</p>
+     </Typography>
+      <div style = {{display: "flex", justifyContent: "space-around"}}>
     <div className={classes.root}>
         <Typography id="discrete-slider-small-steps" gutterBottom>
           Earthquake Magnitude
@@ -158,6 +163,9 @@ const MyMap = (props) => {
           {markers}
         </Map>
       </div>
+      </Card>
+    </div>
+  
     </>
   );
 };

@@ -50,10 +50,11 @@ const Weather = (props) => {
     return (
         <>
             <div >
-            <Typography variant="h4" component="h4">
-                <p style={{ marginLeft: "50px" }}>Current Weather</p>
+            
+                <Card id = "card" style = {{width: "300px", height: "530px"}} variant="outlined" >
+                <Typography variant="h4" component="h4">
+                <p style={{textAlign: "center"}}>Current Weather</p>
                 </Typography>
-                <Card style = {{width: "200px"}} variant="outlined" >
                     <h4> Temp: {tempConversion(props.weatherObj.temp)}°F</h4>
                     <h4> UVI: {props.weatherObj.uvi}</h4>
                     <h4> Humidity: {props.weatherObj.humidity}</h4>
@@ -61,20 +62,6 @@ const Weather = (props) => {
                     <div>{weatherIcon(props.weatherObj.todayIcon)}</div>
                     <br></br>
                 </Card>
-            </div>
-            <div>
-                <Typography variant="h4" component="h4">
-                <p>5 Day Forecast</p>
-                </Typography>
-                <div id = "fiveDay">
-                <Typography variant="caption" component="h4" size = "1.3rem" color="textSecondary">
-                {convertDateFormat(new Date(props.weatherObj.day2))}: {tempConversion(props.weatherObj.weather2)}°F  {weatherIcon(props.weatherObj.main2)}
-                {convertDateFormat(new Date(props.weatherObj.day3))}: {tempConversion(props.weatherObj.weather3)}°F  {weatherIcon(props.weatherObj.main3)}
-                {convertDateFormat(new Date(props.weatherObj.day4))}: {tempConversion(props.weatherObj.weather4)}°F  {weatherIcon(props.weatherObj.main4)}
-                {convertDateFormat(new Date(props.weatherObj.day5))}: {tempConversion(props.weatherObj.weather5)}°F  {weatherIcon(props.weatherObj.main5)}        
-                {convertDateFormat(new Date(props.weatherObj.day6))}: {tempConversion(props.weatherObj.weather6)}°F {weatherIcon(props.weatherObj.main6)}
-                </Typography>
-                </div>
             </div>
         </>
     )

@@ -11,6 +11,9 @@ import green from '@material-ui/core/colors/green';
       main: green[500],
     },
   },
+  shape: {
+    borderRadius: 20,
+  }
 });
 
 export default createMuiTheme;
