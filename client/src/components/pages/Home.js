@@ -208,7 +208,7 @@ const Home = () => {
     else if (1000 < CovidDanger && CovidDanger < 2000) {
       scoreObj.covid = 50
     }
-    else if (4000 >  CovidDanger && CovidDanger >= 2000) {
+    else if (4000 > CovidDanger && CovidDanger >= 2000) {
       scoreObj.covid = 75
     }
     else if (CovidDanger >= 4000) {
@@ -218,10 +218,10 @@ const Home = () => {
     if (weatherDanger <= 273 || weatherDanger >= 313) {
       scoreObj.weather = 100
     }
-     else if (weatherDanger <= 295 && weatherDanger < 313) {
+    else if (weatherDanger <= 295 && weatherDanger < 313) {
       scoreObj.weather = 75
     }
-     else if (weatherDanger> 273 || weatherDanger < 295) {
+    else if (weatherDanger > 273 || weatherDanger < 295) {
       scoreObj.weather = 50
     }
     let eqDanger = allData.eq.length
@@ -238,16 +238,16 @@ const Home = () => {
       scoreObj.eq = 25
     }
     let airDanger = allData.air.aqi
-    if(airDanger >= 200) {
+    if (airDanger >= 200) {
       scoreObj.air = 100
     }
-    else if(airDanger >= 150 && airDanger < 200) {
+    else if (airDanger >= 150 && airDanger < 200) {
       scoreObj.air = 75
     }
-    else if(airDanger >= 75 && airDanger < 150) {
+    else if (airDanger >= 75 && airDanger < 150) {
       scoreObj.air = 50
     }
-    else if(airDanger < 75) {
+    else if (airDanger < 75) {
       scoreObj.air = 25
     }
     let danger = (scoreObj.covid * 0.3 + scoreObj.eq * 0.3 + scoreObj.weather * 0.1 + scoreObj.air * 0.3);
@@ -316,22 +316,22 @@ const Home = () => {
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {(!loadingInfo) ? (
           <>
-          <div style = {{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
-          <Card  id = "topItems">
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
-              {allData.mapp && <CityName id="cityName" mapObj={allData.mapp} />}
-              {dangerData && <DangerChart danger={dangerData} />}
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
+              <Card id="topItems">
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                  {allData.mapp && <CityName id="cityName" mapObj={allData.mapp} />}
+                  {dangerData && <DangerChart danger={dangerData} />}
+                </div>
+              </Card>
             </div>
-          </Card>
-          </div>
             <div className="mapAndFeed" style={{ marginTop: "60px" }}>
               <div style={{ width: "50%", marginLeft: "20px" }}>
                 {allData.mapp && <MyMap mapObj={allData.mapp} eqData={allData.eq} />}
               </div>
               {allData.mapp && <FeedList mapInfo={allData.mapp} feedData={allData.feed} />}
             </div>
-            
-            <div style = {{marginTop: "60px" }}>
+
+            <div style={{ marginTop: "60px" }}>
               {allData.mapp && < Chart
                 data={allData.covid}
               />}
