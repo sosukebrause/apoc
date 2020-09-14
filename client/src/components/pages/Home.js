@@ -56,7 +56,7 @@ const Home = () => {
       mapStorage = JSON.parse(mapStorage)
       console.log(mapStorage.length)
       if (mapStorage.length > 0)
-      buttonSubmit(mapStorage[0].city, mapStorage[0].state_name, mapStorage[0].county, mapStorage[0].lat, mapStorage[0].lng);
+        buttonSubmit(mapStorage[0].city, mapStorage[0].state_name, mapStorage[0].county, mapStorage[0].lat, mapStorage[0].lng);
     }
   }, [])
 
@@ -79,7 +79,7 @@ const Home = () => {
         .then((res) => {
           var mapObj = res.data.data[0];
           let recentSearches = localStorage.getItem("mapStorage")
-          recentSearches = recentSearches ? JSON.parse(recentSearches):[]
+          recentSearches = recentSearches ? JSON.parse(recentSearches) : []
           if (recentSearches.length === 0) {
             localStorage.setItem("mapStorage", JSON.stringify([mapObj]))
           }
@@ -87,7 +87,7 @@ const Home = () => {
             recentSearches.unshift(mapObj)
             localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
           }
-          else  {
+          else {
             recentSearches.unshift(mapObj)
             recentSearches.pop()
             localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
@@ -345,12 +345,12 @@ const Home = () => {
               {allData.mapp && <FeedList mapInfo={allData.mapp} feedData={allData.feed} />}
             </div>
 
-            <div style={{ marginTop: "60px" }}>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
               {allData.mapp && < Chart
                 data={allData.covid}
               />}
             </div>
-            <div className="weather" style={{ marginTop: "60px" }}>
+            <div className="weather" style={{ marginTop: "60px", marginBottom: "50px" }}>
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
               {allData.weather && (
                 <Weather
