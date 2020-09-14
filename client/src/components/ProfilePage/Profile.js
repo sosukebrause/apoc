@@ -138,9 +138,9 @@ const Profile = () => {
             <Fab onClick={changeImageUp} color="primary" aria-label="add">
               <AddIcon />
             </Fab>
-            <Fab onClick={changeImageDown} color="primary" aria-label="add">
+            {/* <Fab onClick={changeImageDown} color="primary" aria-label="add">
               <AddIcon />
-            </Fab>
+            </Fab> */}
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
               <p style={{ marginRight: "10px" }}>Display Name:</p>
               {edit ? <input value={profileInfo.displayName} name="displayName" onChange={handleChange} onBlur={saveChange} /> :
