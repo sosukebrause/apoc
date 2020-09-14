@@ -60,10 +60,11 @@ const FiveDay = (props) => {
 
   return (
     <>
-      <div>
-        <Card id="card" style={{ width: "520px", height: "530px" }} variant="outlined" >
-          <FormControlLabel control={<Checkbox onClick={showCard} checked = {show}  />} label="" />
-          {show && <CardContent>
+       <div style = {{height: "540px", width: "520px"}}>
+       <FormControlLabel control={<Checkbox onClick={showCard} checked = {show}  />}  />
+       {show &&  <Card id="card" style={{ width: "520px", height: "530px" }} variant="outlined" >
+         
+         <CardContent>
             <Typography variant="h4" component="h4">
               <p>5 Day Forecast</p>
             </Typography>
@@ -76,8 +77,8 @@ const FiveDay = (props) => {
                 {convertDateFormat(new Date(props.weatherObj.day6))}: {tempConversion(props.weatherObj.weather6)}°F {weatherIcon(props.weatherObj.main6)}
               </Typography>
             </div>
-          </CardContent>}
-        </Card>
+          </CardContent>
+        </Card>}
       </div>
     </>
   )

@@ -54,8 +54,9 @@ const Home = () => {
     let mapStorage = localStorage.getItem("mapStorage")
     if (mapStorage) {
       mapStorage = JSON.parse(mapStorage)
-      console.log(mapStorage)
-      buttonSubmit(mapStorage.city, mapStorage.state_name, mapStorage.county, mapStorage.lat, mapStorage.lng);
+      console.log(mapStorage.length)
+      if (mapStorage.length > 0)
+      buttonSubmit(mapStorage[0].city, mapStorage[0].state_name, mapStorage[0].county, mapStorage[0].lat, mapStorage[0].lng);
     }
   }, [])
 
@@ -77,7 +78,20 @@ const Home = () => {
       API.getMapData(city, state_name, county, lat, lng)
         .then((res) => {
           var mapObj = res.data.data[0];
-          localStorage.setItem("mapStorage", JSON.stringify(mapObj))
+          let recentSearches = localStorage.getItem("mapStorage")
+          recentSearches = recentSearches ? JSON.parse(recentSearches):[]
+          if (recentSearches.length === 0) {
+            localStorage.setItem("mapStorage", JSON.stringify([mapObj]))
+          }
+          else if (recentSearches.length < 5) {
+            recentSearches.unshift(mapObj)
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
+          }
+          else  {
+            recentSearches.unshift(mapObj)
+            recentSearches.pop()
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
+          }
           resolve(mapObj);
         })
         .catch((err) => {
