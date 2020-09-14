@@ -49,17 +49,16 @@ const FiveDay = (props) => {
 
   return (
     <>
-      <div>
-        <Card
-          id="card"
-          style={{ width: "520px", height: "530px" }}
-          variant="outlined"
-        >
-          <FormControlLabel
-            control={<Checkbox onClick={showCard} checked={show} />}
-            label=""
-          />
-          {show && (
+      <div style={{ height: "540px", width: "520px" }}>
+        <FormControlLabel
+          control={<Checkbox onClick={showCard} checked={show} />}
+        />
+        {show && (
+          <Card
+            id="card"
+            style={{ width: "520px", height: "530px" }}
+            variant="outlined"
+          >
             <CardContent>
               <Typography variant="h4" component="h4">
                 <p>5 Day Forecast</p>
@@ -89,8 +88,8 @@ const FiveDay = (props) => {
                 </Typography>
               </div>
             </CardContent>
-          )}
-        </Card>
+          </Card>
+        )}
       </div>
     </>
   );

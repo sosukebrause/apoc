@@ -56,14 +56,14 @@ const Home = () => {
     let mapStorage = localStorage.getItem("mapStorage");
     if (mapStorage) {
       mapStorage = JSON.parse(mapStorage);
-      console.log(mapStorage);
+      console.log(mapStorage.length);
       if (mapStorage.length > 0)
         buttonSubmit(
-          mapStorage.city[0],
-          mapStorage.state_name[0],
-          mapStorage.county[0],
-          mapStorage[0],
-          mapStorage[0]
+          mapStorage[0].city,
+          mapStorage[0].state_name,
+          mapStorage[0].county,
+          mapStorage[0].lat,
+          mapStorage[0].lng
         );
     }
   }, []);
@@ -84,10 +84,17 @@ const Home = () => {
         .then((res) => {
           var mapObj = res.data.data[0];
           let recentSearches = localStorage.getItem("mapStorage");
-          if (!recentSearches) {
+          recentSearches = recentSearches ? JSON.parse(recentSearches) : [];
+          if (recentSearches.length === 0) {
             localStorage.setItem("mapStorage", JSON.stringify([mapObj]));
+          } else if (recentSearches.length < 5) {
+            recentSearches.unshift(mapObj);
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+          } else {
+            recentSearches.unshift(mapObj);
+            recentSearches.pop();
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
           }
-          localStorage.setItem("mapStorage", JSON.stringify(mapObj));
           resolve(mapObj);
         })
         .catch((err) => {
@@ -355,9 +362,11 @@ const Home = () => {
                   <MyMap mapObj={allData.mapp} eqData={allData.eq} />
                 )}
               </div>
-              {allData.mapp && (
-                <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
-              )}
+              <div style={{ width: "50%", marginLeft: "20px" }}>
+                {allData.mapp && (
+                  <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
+                )}
+              </div>
             </div>
 
             <div style={{ marginTop: "60px" }}>
