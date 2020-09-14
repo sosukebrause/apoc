@@ -4,7 +4,7 @@ import DangerChart from "../mapsAndCharts/DangerChart";
 import Search from "./Search";
 import Chart from "../mapsAndCharts/Chart";
 import BarChart from "../mapsAndCharts/BarChart";
-import { Button } from "@material-ui/core";
+import { Button, Card } from "@material-ui/core";
 import Loading from "../Loading";
 import API from "../../utils/API";
 import FeedList from "../feed/FeedList";
@@ -316,10 +316,14 @@ const Home = () => {
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {(!loadingInfo) ? (
           <>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+          <div style = {{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
+          <Card  id = "topItems">
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
               {allData.mapp && <CityName id="cityName" mapObj={allData.mapp} />}
               {dangerData && <DangerChart danger={dangerData} />}
             </div>
+          </Card>
+          </div>
             <div className="mapAndFeed" style={{ marginTop: "60px" }}>
               <div style={{ width: "50%", marginLeft: "20px" }}>
                 {allData.mapp && <MyMap mapObj={allData.mapp} eqData={allData.eq} />}

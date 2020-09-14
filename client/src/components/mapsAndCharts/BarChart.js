@@ -30,7 +30,7 @@ export default (props) => {
      <p style={{textAlign: "center" }}>Air Quality Index</p>
      </Typography>
      
-      <div style = {{display: "flex"}}>
+      <div style = {{display: "flex", marginLeft: "20px"}}>
       <Modal />
       <Button
         variant="contained"

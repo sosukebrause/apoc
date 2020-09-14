@@ -12,7 +12,6 @@ const buttonStyle = {
 };
 
 const titleStyle = {
-  color: "orange",
   fontSize: "2rem",
   borderTop: "2px dashed light-red",
   marginLeft: "60px"
