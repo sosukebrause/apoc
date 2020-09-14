@@ -30,11 +30,11 @@ export default {
     });
   },
 
-  getMapData: function (city, state_name, lat, lng) {
+  getMapData: function (city, state_name, county, lat, lng) {
     return axios({
       url: "/api/map",
       method: "GET",
-      params: { city, state_name, lat, lng },
+      params: { city, state_name, county, lat, lng },
     });
   },
 
@@ -64,11 +64,11 @@ export default {
       headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
   },
-  getFireData: function (city, state_name, zip, lat, lng) {
+  getFireData: function (lat, lng, d) {
     return axios({
       url: "/api/fires",
       method: "GET",
-      params: { city, state_name, zip, lat, lng },
+      params: { lat, lng, d },
     });
   },
   editProfile: function (attribute, value) {
