@@ -50,7 +50,7 @@ const weatherIcon = (icon) => {
 const FiveDay = (props) => {
 
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(true)
 
 
   const showCard = () => {
@@ -62,7 +62,7 @@ const FiveDay = (props) => {
     <>
       <div>
         <Card id="card" style={{ width: "520px", height: "530px" }} variant="outlined" >
-          <FormControlLabel control={<Checkbox onClick={showCard} name="checkedC" />} label="" />
+          <FormControlLabel control={<Checkbox onClick={showCard} checked = {show}  />} label="" />
           {show && <CardContent>
             <Typography variant="h4" component="h4">
               <p>5 Day Forecast</p>
