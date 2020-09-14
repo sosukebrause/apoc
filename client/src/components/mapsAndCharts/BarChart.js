@@ -25,7 +25,7 @@ export default (props) => {
   return (
     <>
     <div>
-      <Card id = "barCard" style = {{width: "750px", height: "530px"}}>
+      <Card id = "barCard" style = {{width: "780px", height: "530px"}}>
       <Typography variant="h4" component="h4">
      <p style={{textAlign: "center" }}>Air Quality Index</p>
      </Typography>

@@ -320,14 +320,14 @@ const Home = () => {
               {allData.mapp && <CityName id="cityName" mapObj={allData.mapp} />}
               {dangerData && <DangerChart danger={dangerData} />}
             </div>
-            <div className="mapAndFeed">
+            <div className="mapAndFeed" style={{ marginTop: "60px" }}>
               <div style={{ width: "50%", marginLeft: "20px" }}>
                 {allData.mapp && <MyMap mapObj={allData.mapp} eqData={allData.eq} />}
               </div>
               {allData.mapp && <FeedList mapInfo={allData.mapp} feedData={allData.feed} />}
             </div>
-            <br></br>
-            <div>
+            
+            <div style = {{marginTop: "60px" }}>
               {allData.mapp && < Chart
                 data={allData.covid}
               />}
