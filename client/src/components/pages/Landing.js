@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import ParticlesBg from "particles-bg";
+import { Typography } from "@material-ui/core";
 // import "./style.css";
 
 const Landing = () => {
-  //   constructor() {
-  //     super();
-  //     this.state = {
-  //       name: "React"
-  //     };
-  //   }
-
   const [name, setName] = useState("React");
 
   let config = {
     num: [4, 7],
-    rps: 0.1,
+    rps: 0.5,
     radius: [5, 40],
     life: [1.5, 3],
     v: [2, 3],
@@ -22,7 +16,7 @@ const Landing = () => {
     alpha: [0.6, 0],
     scale: [0.1, 0.4],
     position: "all",
-    // body: "import some image"
+    // body: "import some image",
     color: ["random", "#ff0000"],
     cross: "dead",
     // emitter: "follow",
@@ -48,7 +42,11 @@ const Landing = () => {
 
   return (
     <div>
-      <h1>New Landing Page</h1>
+      <Typography variant="h1" component="h1">
+        <span className="title">APOCALYPSE</span>
+        <span className="title blink">. . . ?</span>
+      </Typography>
+
       <ParticlesBg type="custom" config={config} bg={true} />
     </div>
   );

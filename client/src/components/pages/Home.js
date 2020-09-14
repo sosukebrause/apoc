@@ -51,18 +51,20 @@ const Home = () => {
   const [eqData, setEqData] = useState([]);
   const [dangerData, setDangerData] = useState(null);
   const [allData, setAllData] = useState(initData);
+
   React.useEffect(() => {
     let mapStorage = localStorage.getItem("mapStorage");
     if (mapStorage) {
       mapStorage = JSON.parse(mapStorage);
       console.log(mapStorage);
-      buttonSubmit(
-        mapStorage.city,
-        mapStorage.state_name,
-        mapStorage.county,
-        mapStorage.lat,
-        mapStorage.lng
-      );
+      if (mapStorage.length > 0)
+        buttonSubmit(
+          mapStorage.city[0],
+          mapStorage.state_name[0],
+          mapStorage.county[0],
+          mapStorage[0],
+          mapStorage[0]
+        );
     }
   }, []);
   const handleAuxButton = (e) => {
@@ -81,6 +83,10 @@ const Home = () => {
       API.getMapData(city, state_name, county, lat, lng)
         .then((res) => {
           var mapObj = res.data.data[0];
+          let recentSearches = localStorage.getItem("mapStorage");
+          if (!recentSearches) {
+            localStorage.setItem("mapStorage", JSON.stringify([mapObj]));
+          }
           localStorage.setItem("mapStorage", JSON.stringify(mapObj));
           resolve(mapObj);
         })
@@ -209,6 +215,12 @@ const Home = () => {
       scoreObj.covid = 75;
     } else if (CovidDanger >= 4000) {
       scoreObj.covid = 100;
+    } else if (1000 < CovidDanger && CovidDanger < 2000) {
+      scoreObj.covid = 50;
+    } else if (4000 > CovidDanger && CovidDanger >= 2000) {
+      scoreObj.covid = 75;
+    } else if (CovidDanger >= 4000) {
+      scoreObj.covid = 100;
     }
     let weatherDanger = allData.weather.temp;
     if (weatherDanger <= 273 || weatherDanger >= 313) {
@@ -246,6 +258,7 @@ const Home = () => {
     console.log(danger);
     setDangerData(danger);
   };
+
   const buttonSubmit = (city, state_name, county, lat, lng) => {
     setLoadingInfo(true);
     setSuggestionsData(null);
