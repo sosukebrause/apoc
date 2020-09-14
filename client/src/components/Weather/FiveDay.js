@@ -44,28 +44,30 @@ const weatherIcon = (icon) => {
 
 
 
-const Weather = (props) => {
+const FiveDay = (props) => {
 
 
     return (
         <>
-            <div >
-            
-                <Card id = "card" style = {{width: "300px", height: "530px"}} variant="outlined" >
+            <div>
+            <Card id = "card" style = {{width: "520px", height: "530px"}} variant="outlined" >
                 <Typography variant="h4" component="h4">
-                <p style={{textAlign: "center"}}>Current Weather</p>
+                <p>5 Day Forecast</p>
                 </Typography>
-                    <h4> Temp: {tempConversion(props.weatherObj.temp)}°F</h4>
-                    <h4> UVI: {props.weatherObj.uvi}</h4>
-                    <h4> Humidity: {props.weatherObj.humidity}</h4>
-                    <h4> Wind_speed: {props.weatherObj.wind_speed}</h4>
-                    <div>{weatherIcon(props.weatherObj.todayIcon)}</div>
-                    <br></br>
+                <div id = "fiveDay">
+                <Typography variant="caption" component="h4" size = "1.3rem" color="textSecondary">
+                {convertDateFormat(new Date(props.weatherObj.day2))}: {tempConversion(props.weatherObj.weather2)}°F  {weatherIcon(props.weatherObj.main2)}
+                {convertDateFormat(new Date(props.weatherObj.day3))}: {tempConversion(props.weatherObj.weather3)}°F  {weatherIcon(props.weatherObj.main3)}
+                {convertDateFormat(new Date(props.weatherObj.day4))}: {tempConversion(props.weatherObj.weather4)}°F  {weatherIcon(props.weatherObj.main4)}
+                {convertDateFormat(new Date(props.weatherObj.day5))}: {tempConversion(props.weatherObj.weather5)}°F  {weatherIcon(props.weatherObj.main5)}        
+                {convertDateFormat(new Date(props.weatherObj.day6))}: {tempConversion(props.weatherObj.weather6)}°F {weatherIcon(props.weatherObj.main6)}
+                </Typography>
+                </div>
                 </Card>
             </div>
         </>
     )
 }
 
-export default Weather
+export default FiveDay
 

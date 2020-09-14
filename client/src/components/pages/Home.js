@@ -9,6 +9,7 @@ import Loading from "../Loading";
 import API from "../../utils/API";
 import FeedList from "../feed/FeedList";
 import Weather from "../Weather/Weather";
+import FiveDay from "../Weather/FiveDay"
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
 import ThemeProvider from "../ThemeProvider";
@@ -199,7 +200,58 @@ const Home = () => {
   };
 
   const dangerLevel = () => {
-    let danger = allData.covid[allData.covid.length - 1].totalDeaths
+    let scoreObj = { covid: 0, weather: 0, eq: 0, air: 0 };
+    let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths
+    if (CovidDanger <= 1000) {
+      scoreObj.covid = 25
+    }
+    else if (1000 < CovidDanger && CovidDanger < 2000) {
+      scoreObj.covid = 50
+    }
+    else if (4000 >  CovidDanger && CovidDanger >= 2000) {
+      scoreObj.covid = 75
+    }
+    else if (CovidDanger >= 4000) {
+      scoreObj.covid = 100
+    }
+    let weatherDanger = allData.weather.temp
+    if (weatherDanger <= 273 || weatherDanger >= 313) {
+      scoreObj.weather = 100
+    }
+     else if (weatherDanger <= 295 && weatherDanger < 313) {
+      scoreObj.weather = 75
+    }
+     else if (weatherDanger> 273 || weatherDanger < 295) {
+      scoreObj.weather = 50
+    }
+    let eqDanger = allData.eq.length
+    if (eqDanger >= 200) {
+      scoreObj.eq = 100
+    }
+    else if (eqDanger >= 100 && eqDanger < 200) {
+      scoreObj.eq = 75
+    }
+    else if (eqDanger >= 50 && eqDanger < 100) {
+      scoreObj.eq = 50
+    }
+    else if (eqDanger < 50) {
+      scoreObj.eq = 25
+    }
+    let airDanger = allData.air.aqi
+    if(airDanger >= 200) {
+      scoreObj.air = 100
+    }
+    else if(airDanger >= 150 && airDanger < 200) {
+      scoreObj.air = 75
+    }
+    else if(airDanger >= 75 && airDanger < 150) {
+      scoreObj.air = 50
+    }
+    else if(airDanger < 75) {
+      scoreObj.air = 25
+    }
+    let danger = (scoreObj.covid * 0.3 + scoreObj.eq * 0.3 + scoreObj.weather * 0.1 + scoreObj.air * 0.3);
+    console.log(danger)
     setDangerData(danger)
   }
 
@@ -209,7 +261,7 @@ const Home = () => {
     Promise.all([
       loadAirData(city, state_name, lat, lng),
       loadCovidData(city, state_name, county),
-      loadMapData(city, state_name, lat, lng),
+      loadMapData(city, state_name, county, lat, lng),
       loadEarthquakes(city, state_name, lat, lng),
       loadFeedData(city, state_name, county),
       loadWeatherData(city, state_name, lat, lng),
@@ -278,19 +330,23 @@ const Home = () => {
             <div>
               {allData.mapp && < Chart
                 data={allData.covid}
-                style={{ width: "100%" }}
               />}
             </div>
-            <br></br>
-            <div className="weather">
+            <div className="weather" style={{ marginTop: "60px" }}>
+              {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
               {allData.weather && (
                 <Weather
                   weatherObj={allData.weather}
-                  style={{ height: "350px", width: "50%" }}
                 />
               )}
+              {allData.weather && (
+                <FiveDay
+                  weatherObj={allData.weather}
+                />
+              )}
+              {/* </div> */}
               {allData.air && (
-                <div style={{ height: "350px", width: "50%" }}>
+                <div >
                   <BarChart airObj={allData.air} />
                 </div>
               )}

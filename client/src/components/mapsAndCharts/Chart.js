@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { Button } from "@material-ui/core";
+import { Button, Card } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import { shadows } from '@material-ui/system';
+import "./Chart.css"
 
 const maxDays = 60;
 
@@ -65,7 +67,9 @@ export default (props) => {
   ];
   return (
     <>
-      <Typography variant="h5" component="h5">
+    <div style = {{display: "flex", justifyContent: "center"}}>
+    <Card id = "chartCard" boxShadow = {10} >
+    <Typography variant="h5" component="h5">
         <p style={titleStyle}>Covid Chart</p>
       </Typography>
       <div style={{ marginLeft: "50px" }}>
@@ -195,6 +199,10 @@ export default (props) => {
           ]}
         />
       </div>
+    </Card>
+    </div>
+
+
     </>
   );
 };

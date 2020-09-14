@@ -46,7 +46,7 @@ export default function Register() {
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />
       )}
-      <form className="form" onSubmit={submit}>
+      <form className="form" onSubmit={submit} style = {{marginTop: "60px"}}>
         <label htmlFor="register-email">Email</label>
         <Input
           id="register-email"
@@ -71,7 +71,7 @@ export default function Register() {
           onChange={(e) => setDisplayName(e.target.value)}
         />
         <Button
-          variant="outlined"
+          variant="contained"
           color="primary"
           type="submit"
           value="Register"
