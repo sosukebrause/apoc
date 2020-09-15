@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Map, Marker, Popup, TileLayer, CircleMarker } from "react-leaflet";
-import { Button, Slider } from "@material-ui/core";
+import { Button, Slider, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import "./MyMap.css";
@@ -53,8 +53,6 @@ const marks2 = [
   },
 ];
 
-
-
 const MyMap = (props) => {
   const classes = useStyles();
   const [sliderValue, setSliderValue] = useState(0);
@@ -76,7 +74,7 @@ const MyMap = (props) => {
 
   const handleChangeRadius = (event, newValue) => {
     // let newValue = event.target.getAttribute("aria-valuenow");
-    const newRadiusValue = 200.0 + (8 * newValue)
+    const newRadiusValue = 200.0 + 8 * newValue;
     //(1/8 * newValue) - 25;;
     setRadius(newRadiusValue);
     setSliderValue2(newValue);
@@ -109,54 +107,60 @@ const MyMap = (props) => {
   });
 
   const position = [props.mapObj.lat, props.mapObj.lng];
-  
 
   return (
     <>
-    <div style = {{display: "flex", justifyContent: "space-around"}}>
-    <div className={classes.root}>
-        <Typography id="discrete-slider-small-steps" gutterBottom>
-          Earthquake Magnitude
-        </Typography>
-        <Slider
-          style={{ marginLeft: "20px" }}
-          color="primary"
-          value={sliderValue}
-          onChange={handleChangeMag}
-          marks={marks}
-          track="inverted"
-          aria-labelledby="continuous-slider"
-        />
-      </div>
-      <div className={classes.root}>
-        <Typography id="discrete-slider-small-steps" gutterBottom>
-          Earthquake Radius mi
-        </Typography>
-        <Slider
-          style={{ marginLeft: "50px" }}
-          color="primary"
-          value={sliderValue2}
-          onChange={handleChangeRadius}
-          marks={marks2}
-          aria-labelledby="continuous-slider"
-        />
-      </div>
-    </div>
-      <div className="leaflet-container">
-        Collapse
-        <Map center={position} zoom={mapData.zoom} >
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-          />
+      <div>
+        <Card id="mapCard">
+          <Typography variant="h4" component="h4">
+            <p style={{ textAlign: "center" }}>Earthquakes</p>
+          </Typography>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div className={classes.root}>
+              <Typography id="discrete-slider-small-steps" gutterBottom>
+                Earthquake Magnitude
+              </Typography>
+              <Slider
+                style={{ marginLeft: "20px" }}
+                color="primary"
+                value={sliderValue}
+                onChange={handleChangeMag}
+                marks={marks}
+                track="inverted"
+                aria-labelledby="continuous-slider"
+              />
+            </div>
+            <div className={classes.root}>
+              <Typography id="discrete-slider-small-steps" gutterBottom>
+                Earthquake Radius mi
+              </Typography>
+              <Slider
+                style={{ marginLeft: "50px" }}
+                color="primary"
+                value={sliderValue2}
+                onChange={handleChangeRadius}
+                marks={marks2}
+                aria-labelledby="continuous-slider"
+              />
+            </div>
+          </div>
+          <div className="leaflet-container">
+            Collapse
+            <Map center={position} zoom={mapData.zoom}>
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+              />
 
-          <Marker position={position}>
-            <Popup>
-              {props.mapObj.city}, {props.mapObj.state_name}
-            </Popup>
-          </Marker>
-          {markers}
-        </Map>
+              <Marker position={position}>
+                <Popup>
+                  {props.mapObj.city}, {props.mapObj.state_name}
+                </Popup>
+              </Marker>
+              {markers}
+            </Map>
+          </div>
+        </Card>
       </div>
     </>
   );

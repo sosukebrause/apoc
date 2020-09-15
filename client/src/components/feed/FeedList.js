@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Card } from "@material-ui/core";
+//import ShowCard from "./ShowCard";
+import CardContent from "@material-ui/core/CardContent";
+
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import API from "../../utils/API";
 
@@ -15,7 +21,7 @@ const styles = {
 
 const FeedList = (props) => {
   const [feedItems, setFeedItems] = useState([]);
-
+  const [show, setShow] = useState(true);
   const [text, setText] = useState("");
 
   useEffect(() => {
@@ -25,6 +31,9 @@ const FeedList = (props) => {
   function changeText(e) {
     setText(e.target.value);
   }
+  const showCard = () => {
+    setShow(!show);
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -60,19 +69,43 @@ const FeedList = (props) => {
   ));
 
   return (
-    <div style={{ border: "1px solid", height: "400px", width: "450px", overflow: "scroll" }}>
-      {titleArr}
-      <input
-        name="text"
-        type="text"
-        placeholder="add comment"
-        onChange={changeText}
-        value={text}
-      />
+    <div style={{ width: "90%", height: "400px" }}>
+      <FormControlLabel
+        control={<Checkbox id="checkbox" onClick={showCard} checked={show} />}
+      />{" "}
+      Feed
+      {show && (
+        <Card id="mapCard" variant="outlined">
+          <CardContent>
+            <div
+              style={
+                // { display: "flex", justifyContent: "space-around" }
+                {
+                  border: "1px solid",
+                  height: "400px",
+                  overflow: "scroll",
+                  // display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }
+              }
+            >
+              {titleArr}
+              <input
+                name="text"
+                type="text"
+                placeholder="add comment"
+                onChange={changeText}
+                value={text}
+              />
 
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
+              <button type="submit" onClick={handleSubmit}>
+                Submit
+              </button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };

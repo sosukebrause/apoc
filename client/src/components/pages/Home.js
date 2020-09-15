@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import Header from "../Header"
+import Header from "../Header";
 import DangerChart from "../mapsAndCharts/DangerChart";
 import Search from "./Search";
 import Chart from "../mapsAndCharts/Chart";
 import BarChart from "../mapsAndCharts/BarChart";
-import { Button } from "@material-ui/core";
+import { Button, Card } from "@material-ui/core";
 import Loading from "../Loading";
 import API from "../../utils/API";
 import FeedList from "../feed/FeedList";
 import Weather from "../Weather/Weather";
+import FiveDay from "../Weather/FiveDay";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
 import ThemeProvider from "../ThemeProvider";
-
 import "./Home.css";
 const maxDays = 60;
 const SuggestionsButton = (props) => {
@@ -32,11 +32,14 @@ const SuggestionsButton = (props) => {
   });
   return newItems;
 };
-
 const initData = {
-  air: null, covid: [], mapp: null, eq: [], feed: [], weather: null
+  air: null,
+  covid: [],
+  mapp: null,
+  eq: [],
+  feed: [],
+  weather: null,
 };
-
 const Home = () => {
   const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
@@ -50,15 +53,14 @@ const Home = () => {
   const [allData, setAllData] = useState(initData);
 
   React.useEffect(() => {
-    let mapStorage = localStorage.getItem("mapStorage")
+    let mapStorage = localStorage.getItem("mapStorage");
     if (mapStorage) {
-      mapStorage = JSON.parse(mapStorage)
-      console.log(mapStorage)
-      buttonSubmit(mapStorage.city, mapStorage.state_name, mapStorage.county, mapStorage.lat, mapStorage.lng);
+      mapStorage = JSON.parse(mapStorage);
+      console.log(mapStorage.length);
+      if (mapStorage.length > 0)
+        buttonSubmit(mapStorage[0].city, mapStorage[0].state_name, mapStorage[0].county, mapStorage[0].lat, mapStorage[0].lng);
     }
-  }, [])
-
-
+  }, []);
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     buttonSubmit(
@@ -69,21 +71,32 @@ const Home = () => {
       value.lng
     );
   };
-
   //map Data function
   const loadMapData = (city, state_name, county, lat, lng) => {
     return new Promise((resolve, reject) => {
       API.getMapData(city, state_name, county, lat, lng)
         .then((res) => {
           var mapObj = res.data.data[0];
-          localStorage.setItem("mapStorage", JSON.stringify(mapObj))
+          let recentSearches = localStorage.getItem("mapStorage")
+          recentSearches = recentSearches ? JSON.parse(recentSearches) : []
+          if (recentSearches.length === 0) {
+            localStorage.setItem("mapStorage", JSON.stringify([mapObj]))
+          }
+          else if (recentSearches.length < 5) {
+            recentSearches.unshift(mapObj)
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
+          }
+          else {
+            recentSearches.unshift(mapObj)
+            recentSearches.pop()
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
+          }
           resolve(mapObj);
         })
         .catch((err) => {
           reject(err.response);
         });
-    })
-
+    });
   };
   //covid function
   const loadCovidData = (city, state_name, county) => {
@@ -105,10 +118,8 @@ const Home = () => {
         })
         .catch((err) => {
           reject(err.response);
-
         });
-    })
-
+    });
   };
   //Weather function
   const loadWeatherData = (city, state_name, lat, lng) => {
@@ -143,21 +154,19 @@ const Home = () => {
         .catch((err) => {
           reject(err.response);
         });
-    })
+    });
   };
-
+  
   const loadEarthquakes = (city, state_name, lat, lng) => {
     return new Promise((resolve, reject) => {
       API.getEarthquakeData(city, state_name, lat, lng)
         .then((res) => {
-          // console.log(res.data);
           resolve(res.data);
         })
         .catch((err) => {
           reject(err.response);
         });
-    })
-
+    });
   };
   //Air Quality function
   const loadAirData = (city, state_name, lat, lng) => {
@@ -174,7 +183,9 @@ const Home = () => {
               co: data.data.data.iaqi.co ? data.data.data.iaqi.co.v : null,
               no2: data.data.data.iaqi.no2 ? data.data.data.iaqi.no2.v : null,
               o3: data.data.data.iaqi.o3 ? data.data.data.iaqi.o3.v : null,
-              pm25: data.data.data.iaqi.pm25 ? data.data.data.iaqi.pm25.v : null,
+              pm25: data.data.data.iaqi.pm25
+                ? data.data.data.iaqi.pm25.v
+                : null,
             };
             resolve(airObj);
           }
@@ -182,9 +193,8 @@ const Home = () => {
         .catch((err) => {
           reject(err.response);
         });
-    })
+    });
   };
-
   const loadFeedData = (city, state_name, county) => {
     return new Promise((resolve, reject) => {
       API.getFeedData(city, state_name, county)
@@ -195,58 +205,110 @@ const Home = () => {
         .catch((err) => {
           reject(err.response);
         });
-    })
+    });
+  };
+  const dangerLevel = () => {
+    let scoreObj = { covid: 0, weather: 0, eq: 0, air: 0 };
+    let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths;
+    if (CovidDanger <= 1000) {
+      scoreObj.covid = 25;
+    } else if (1000 < CovidDanger && CovidDanger < 2000) {
+      scoreObj.covid = 50;
+    } else if (4000 > CovidDanger && CovidDanger >= 2000) {
+      scoreObj.covid = 75;
+    } else if (CovidDanger >= 4000) {
+      scoreObj.covid = 100;
+    } else if (1000 < CovidDanger && CovidDanger < 2000) {
+      scoreObj.covid = 50;
+    } else if (4000 > CovidDanger && CovidDanger >= 2000) {
+      scoreObj.covid = 75;
+    } else if (CovidDanger >= 4000) {
+      scoreObj.covid = 100;
+    }
+    let weatherDanger = allData.weather.temp;
+    if (weatherDanger <= 273 || weatherDanger >= 313) {
+      scoreObj.weather = 100;
+    } else if (weatherDanger <= 295 && weatherDanger < 313) {
+      scoreObj.weather = 75;
+    } else if (weatherDanger > 273 || weatherDanger < 295) {
+      scoreObj.weather = 50;
+    }
+    let eqDanger = allData.eq.length;
+    if (eqDanger >= 200) {
+      scoreObj.eq = 100;
+    } else if (eqDanger >= 100 && eqDanger < 200) {
+      scoreObj.eq = 75;
+    } else if (eqDanger >= 50 && eqDanger < 100) {
+      scoreObj.eq = 50;
+    } else if (eqDanger < 50) {
+      scoreObj.eq = 25;
+    }
+    let airDanger = allData.air.aqi;
+    if (airDanger >= 200) {
+      scoreObj.air = 100;
+    } else if (airDanger >= 150 && airDanger < 200) {
+      scoreObj.air = 75;
+    } else if (airDanger >= 75 && airDanger < 150) {
+      scoreObj.air = 50;
+    } else if (airDanger < 75) {
+      scoreObj.air = 25;
+    }
+    let danger =
+      scoreObj.covid * 0.3 +
+      scoreObj.eq * 0.3 +
+      scoreObj.weather * 0.1 +
+      scoreObj.air * 0.3;
+    setDangerData(danger);
   };
 
-  const dangerLevel = () => {
-    let danger = allData.covid[allData.covid.length - 1].totalDeaths
-    setDangerData(danger)
-  }
-
   const buttonSubmit = (city, state_name, county, lat, lng) => {
-    setLoadingInfo(true)
-    setSuggestionsData(null)
-    Promise.all([
-      loadAirData(city, state_name, lat, lng),
-      loadCovidData(city, state_name, county),
-      loadMapData(city, state_name, lat, lng),
-      loadEarthquakes(city, state_name, lat, lng),
-      loadFeedData(city, state_name, county),
-      loadWeatherData(city, state_name, lat, lng),
-    ].map(promise => promise
-      .then(ok => { return { "success": true, "data": ok } })
-      .catch(err => {
-        return { "success": false, "message": err }
-      }))
-    ).then((values) => {
-      console.log(values)
-      if (values.length !== 6) {
+    setLoadingInfo(true);
+    setSuggestionsData(null);
+    Promise.all(
+      [
+        loadAirData(city, state_name, lat, lng),
+        loadCovidData(city, state_name, county),
+        loadMapData(city, state_name, county, lat, lng),
+        loadEarthquakes(city, state_name, lat, lng),
+        loadFeedData(city, state_name, county),
+        loadWeatherData(city, state_name, lat, lng),
+      ].map((promise) =>
+        promise
+          .then((ok) => {
+            return { success: true, data: ok };
+          })
+          .catch((err) => {
+            return { success: false, message: err };
+          })
+      )
+    )
+      .then((values) => {
+        if (values.length !== 6) {
+          setLoadingInfo(false);
+          return;
+        }
+        if (!values[0].success && values[0].message && values[0].message.data) {
+          setLoadingInfo(false);
+          setSuggestionsData(values[0].message.data.data);
+          return;
+        }
+        let dataObj = initData;
+        if (values[0].success) dataObj.air = values[0].data;
+        if (values[1].success) dataObj.covid = values[1].data;
+        if (values[2].success) dataObj.mapp = values[2].data;
+        if (values[3].success) dataObj.eq = values[3].data;
+        if (values[4].success) dataObj.feed = values[4].data;
+        if (values[5].success) dataObj.weather = values[5].data;
+        setAllData(dataObj);
+        dangerLevel();
         setLoadingInfo(false);
-        return;
-      }
-      if (!values[0].success && values[0].message && values[0].message.data) {
+      })
+      .catch((err) => {
+        console.log(err);
         setLoadingInfo(false);
-        setSuggestionsData(values[0].message.data.data);
-        return;
-      }
-      let dataObj = initData;
-      if (values[0].success) dataObj.air = values[0].data;
-      if (values[1].success) dataObj.covid = values[1].data;
-      if (values[2].success) dataObj.mapp = values[2].data;
-      if (values[3].success) dataObj.eq = values[3].data;
-      if (values[4].success) dataObj.feed = values[4].data;
-      if (values[5].success) dataObj.weather = values[5].data;
-      setAllData(dataObj);
-      dangerLevel();
-      setLoadingInfo(false);
-    }).catch((err) => {
-      console.log(err)
-      setLoadingInfo(false)
-    })
-  }
-
-
-  console.log("danger", dangerData)
+      });
+  };
+  
   return (
     <div className="page">
       <>
@@ -257,40 +319,62 @@ const Home = () => {
           buttonSubmit={buttonSubmit}
           loadingInfo={loadingInfo}
         />
-
         {suggestions ? (
-          <SuggestionsButton handleAuxButton={handleAuxButton} options={suggestions} />
+          <SuggestionsButton
+            handleAuxButton={handleAuxButton}
+            options={suggestions}
+          />
         ) : null}
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
-        {(!loadingInfo) ? (
+        {!loadingInfo ? (
           <>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              {allData.mapp && <CityName id="cityName" mapObj={allData.mapp} />}
-              {dangerData && <DangerChart danger={dangerData} />}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "60px",
+              }}
+            >
+              <Card id="topItems">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {allData.mapp && (
+                    <CityName id="cityName" mapObj={allData.mapp} />
+                  )}
+                  {dangerData && <DangerChart danger={dangerData} />}
+                </div>
+              </Card>
             </div>
-            <div className="mapAndFeed">
-              <div style={{ width: "50%", marginLeft: "20px" }}>
-                {allData.mapp && <MyMap mapObj={allData.mapp} eqData={allData.eq} />}
+            <div className="mapAndFeed" style={{ marginTop: "60px" }}>
+              <div style={{ width: "50%", marginLeft: "35px" }}>
+                {allData.mapp && (
+                  <MyMap mapObj={allData.mapp} eqData={allData.eq} />
+                )}
               </div>
-              {allData.mapp && <FeedList mapInfo={allData.mapp} feedData={allData.feed} />}
+              <div style={{ width: "45%"}}>
+                {allData.mapp && (
+                  <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
+                )}
+              </div>
             </div>
-            <br></br>
-            <div>
+
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
               {allData.mapp && < Chart
                 data={allData.covid}
-                style={{ width: "100%" }}
               />}
             </div>
-            <br></br>
-            <div className="weather">
-              {allData.weather && (
-                <Weather
-                  weatherObj={allData.weather}
-                  style={{ height: "350px", width: "50%" }}
-                />
-              )}
+            <div className="weather" style={{ marginTop: "60px", marginBottom: "50px" }}>
+              {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
+              {allData.weather && <Weather weatherObj={allData.weather} />}
+              {allData.weather && <FiveDay weatherObj={allData.weather} />}
+              {/* </div> */}
               {allData.air && (
-                <div style={{ height: "350px", width: "50%" }}>
+                <div>
                   <BarChart airObj={allData.air} />
                 </div>
               )}

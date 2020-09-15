@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Button } from "@material-ui/core";
+import { Button, Fab } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 import "./Modal.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,11 +35,11 @@ export default function TransitionsModal() {
 
   return (
     <div>
-      <Button variant="contained"
+      <Fab 
         color="primary"
         size="small" onClick={handleOpen}>
-        AQI Index
-      </Button>
+        <AddIcon />
+      </Fab>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
